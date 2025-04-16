@@ -81,4 +81,9 @@
       color: $grayscale-600;
     }
   }
+
+  .Card-Footer {
+    @include font-12-regular;
+    color: $grayscale-400;
+  }
 }
