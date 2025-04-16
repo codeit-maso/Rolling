@@ -1,0 +1,28 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.Badge {
+  display: inline-block;
+  @include font-14-regular;
+  padding: 0 8px;
+  border-radius: 4px;
+
+  &.acquaintance {
+    background-color: $beige-100;
+    color: $beige-500;
+  }
+
+  &.colleague {
+    background-color: $purple-100;
+    color: $purple-600;
+  }
+
+  &.family {
+    background-color: $green-100;
+    color: $green-500;
+  }
+
+  &.friend {
+    background-color: $blue-100;
+    color: blue-500;
+  }
+}
