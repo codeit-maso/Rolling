@@ -82,6 +82,7 @@
       overflow: hidden;
       -webkit-line-clamp: 3;
       line-clamp: 3;
+      word-break: break-word;
       @include font-18-regular;
       color: $grayscale-600;
     }
