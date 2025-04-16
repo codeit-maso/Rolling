@@ -1,8 +1,17 @@
+import { BrowserRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from "./components/common/Header";
+import "./base.css";
+
 function App() {
   return (
-    <div className="app">
-      <h1>롤링 페이퍼 프로젝트</h1>
-    </div>
+    <BrowserRouter>
+      <div className="app">
+        <Header></Header>
+      </div>
+      <Link to="/list"><div>구경해보기</div></Link> 
+    </BrowserRouter>
+    
   );
 }
 

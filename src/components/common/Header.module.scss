@@ -1,0 +1,24 @@
+@import '../../assets/styles/variables.scss';
+
+.header{
+    width:100%;
+    max-width: 1207px;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.logo{
+    width: 106px;
+    margin: 16px 0;
+}
+
+.button{
+    @include font-16-regular;
+    border: 1px solid $grayscale-300;
+    border-radius: 6px;
+    padding: 7px 16px;
+    background-color: white;
+}
