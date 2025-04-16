@@ -77,6 +77,11 @@
     padding: 16px 0;
 
     .content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
       @include font-18-regular;
       color: $grayscale-600;
     }
