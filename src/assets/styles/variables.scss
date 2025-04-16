@@ -1,0 +1,129 @@
+// 색상
+$purple-100: #f8f0ff;
+$purple-200: #ecd9ff;
+$purple-300: #dcb9ff;
+$purple-400: #c894fd;
+$purple-500: #ab57ff;
+$purple-600: #9935ff;
+$purple-700: #861dee;
+$purple-800: #6e0ad1;
+$purple-900: #5603a7;
+
+$beige-100: #fff0d6;
+$beige-200: #ffe2ad;
+$beige-300: #ffc583;
+$beige-400: #ffae65;
+$beige-500: #ff8832;
+
+$blue-100: #e2f5ff;
+$blue-200: #b1e4ff;
+$blue-300: #7cd2ff;
+$blue-400: #34b9ff;
+$blue-500: #00a2fe;
+
+$green-100: #e4fbdc;
+$green-200: #d0f5c3;
+$green-300: #9be282;
+$green-400: #60cf37;
+$green-500: #2ba600;
+
+$grayscale-100: #f6f6f6;
+$grayscale-200: #eeeeee;
+$grayscale-300: #cccccc;
+$grayscale-400: #999999;
+$grayscale-500: #555555;
+$grayscale-600: #4a4a4a;
+$grayscale-700: #3a3a3a;
+$grayscale-800: #2b2b2b;
+$grayscale-900: #181818;
+
+// 기본 색상
+$white: #ffffff;
+$black: #000000;
+$error: #dc3a3a;
+$surface: #f6f8ff;
+
+// 폰트 사이즈
+$font-size-10: 1rem;
+$font-size-12: 1.2rem;
+$font-size-14: 1.4rem;
+$font-size-16: 1.6rem;
+$font-size-18: 1.8rem;
+$font-size-20: 2rem;
+$font-size-22: 2.2rem;
+$font-size-24: 2.4rem;
+$font-size-26: 2.6rem;
+$font-size-28: 2.8rem;
+
+// 폰트 두께
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+@mixin font-28-bold {
+  font-size: $font-size-28;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-24-bold {
+  font-size: $font-size-24;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-24-regular {
+  font-size: $font-size-24;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-20-bold {
+  font-size: $font-size-20;
+  font-weight: $font-weight-bold;
+}
+@mixin font-20-regular {
+  font-size: $font-size-20;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-18-bold {
+  font-size: $font-size-18;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-18-regular {
+  font-size: $font-size-18;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-16-bold {
+  font-size: $font-size-16;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-16-regular {
+  font-size: $font-size-16;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-15-regular {
+  font-size: $font-size-15;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-15-bold {
+  font-size: $font-size-15;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-14-regular {
+  font-size: $font-size-14;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-14-bold {
+  font-size: $font-size-14;
+  font-weight: $font-weight-bold;
+}
+
+@mixin font-12-regular {
+  font-size: $font-size-12;
+  font-weight: $font-weight-regular;
+}
