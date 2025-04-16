@@ -2,9 +2,9 @@
 
 .Badge {
   display: inline-block;
-  @include font-14-regular;
   padding: 0 8px;
   border-radius: 4px;
+  @include font-14-regular;
 
   &.acquaintance {
     background-color: $beige-100;
