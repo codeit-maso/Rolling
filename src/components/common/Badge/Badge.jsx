@@ -1,4 +1,4 @@
-import './Badge.scss';
+import styles from './Badge.module.scss';
 
 const relationship = {
   acquaintance: '지인',
@@ -8,5 +8,9 @@ const relationship = {
 };
 
 export default function Badge({ relation }) {
-  return <div className={`Badge ${relation}`}>{relationship[relation]}</div>;
+  return (
+    <div className={`${styles.Badge} ${styles[relation]}`}>
+      {relationship[relation]}
+    </div>
+  );
 }
