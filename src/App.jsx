@@ -1,3 +1,5 @@
+import './base.scss';
+
 function App() {
   return (
     <div className="app">
