@@ -9,42 +9,42 @@ export default function Card({
   relationship,
   content,
   createdAt,
-  empty,
+  empty = 'false',
 }) {
   return (
-    <article className={`${styles.Card} ${empty ? styles['empty-card'] : ''}`}>
+    <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
       {empty ? (
-        <div className={styles.empty}>
+        <div>
           <img src={plus} alt="추가하기" />
         </div>
       ) : (
         <>
-          <header className={styles['Card-Header']}>
-            <div className={styles['profile-img']}>
+          <header className={styles['card__header']}>
+            <div className={styles['card__profile-img']}>
               <img src={image} alt="프로필 이미지" />
             </div>
-            <div className={styles['user-info']}>
-              <div className={styles['profile-name']}>
+            <div className={styles['card__user-info']}>
+              <div className={styles['card__profile-name']}>
                 <p>
                   From. <span>{sender}</span>
                 </p>
               </div>
-              <div className={styles['relation-badge']}>
+              <div className={styles['card__relation-badge']}>
                 <Badge relation={relationship} />
               </div>
             </div>
-            <div className={styles['delete-button']}>
+            <div className={styles['card__delete-button']}>
               <button>
                 <img src={deleteIcon} alt="쓰레기통 아이콘" />
               </button>
             </div>
           </header>
-          <div className={styles['Card-Body']}>
-            <div className={styles.content}>
+          <div className={styles['card__body']}>
+            <div className={styles['card__content']}>
               <p>{content}</p>
             </div>
           </div>
-          <footer className={styles['Card-Footer']}>{createdAt}</footer>
+          <footer className={styles['card__footer']}>{createdAt}</footer>
         </>
       )}
     </article>
