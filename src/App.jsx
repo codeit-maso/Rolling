@@ -1,17 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Header from "./components/common/Header";
 import "./base.css";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/common/Header/Header";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Header></Header>
-      </div>
-      <Link to="/list"><div>구경해보기</div></Link> 
-    </BrowserRouter>
-    
+    <>
+      <Header></Header>
+      <Routes>
+        <Route></Route>
+      </Routes>
+    </>
   );
 }
 
