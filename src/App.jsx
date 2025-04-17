@@ -3,15 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/layout/Header/Header";
 import Test from './pages/List-page/Test';
 
-function App() {
+export default function App() {
   return (
     <>
-      <Header></Header>
+      <Header/>
       <Routes>
         <Route path="/" element={<Test/>}/>
       </Routes>
     </>
   );
 }
-
-export default App;

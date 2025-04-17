@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styles from "./Header.module.scss"; 
 import logo from "../../../assets/images/rolling-logo.svg";
 
-function Header(){    
+export default function Header(){    
     const location = useLocation();
     const showButton = ['/', '/list'];
     const isLocation = showButton.includes(location.pathname);
@@ -21,4 +21,3 @@ function Header(){
     )       
 }
 
-export default Header;
