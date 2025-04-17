@@ -6,6 +6,9 @@ on:
       - main
       - develop
 
+permissions:
+  contents: write
+
 jobs:
   sync-fork:
     runs-on: ubuntu-latest
@@ -21,4 +24,3 @@ jobs:
           github_token: ${{ secrets.FORK_TOKEN }}
           repository: LeeCh0129/Rolling
           branch: ${{ github.ref_name }}
-          force: false
