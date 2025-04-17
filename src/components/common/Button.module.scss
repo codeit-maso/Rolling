@@ -7,17 +7,15 @@
   background-color: var.$purple-600;
   @include var.font-18-bold;
   color: var.$white;
-  font-family: 'Pretendard';
-  cursor: pointer;
 
   &:disabled {
-    background-color: var.$grayscale-300;
+    background-color: var.$gray-300;
     cursor: not-allowed;
 
     &:hover,
     &:active,
     &:focus {
-      background-color: var.$grayscale-300;
+      background-color: var.$gray-300;
     }
   }
 
