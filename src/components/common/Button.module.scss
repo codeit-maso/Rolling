@@ -1,5 +1,4 @@
-@import '../../assets/styles/variables.scss';
-@import '../../assets/styles/base.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .button {
   padding: 1.4rem 2.4rem;

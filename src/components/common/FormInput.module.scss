@@ -1,5 +1,4 @@
-@import '../../assets/styles/variables.scss';
-@import '../../assets/styles/base.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .formGroup {
   display: flex;
@@ -47,7 +46,7 @@ input {
 
   &:focus {
     border: 2px solid $gray-500;
-    color: var.$gray-900;
+    color: $gray-900;
   }
 }
 
