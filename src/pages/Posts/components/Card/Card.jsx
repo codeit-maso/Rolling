@@ -1,5 +1,5 @@
-import deleteIcon from '../../../assets/images/delete.svg';
-import plus from '../../../assets/images/plus.svg';
+import deleteIcon from '../../../../assets/images/delete.svg';
+import plus from '../../../../assets/images/plus.svg';
 import Badge from '../Badge/Badge';
 import styles from './Card.module.scss';
 
@@ -9,7 +9,7 @@ export default function Card({
   relationship,
   content,
   createdAt,
-  empty = 'false',
+  empty = false,
 }) {
   return (
     <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
