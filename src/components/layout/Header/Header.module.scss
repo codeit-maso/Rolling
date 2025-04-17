@@ -1,28 +1,28 @@
-@import '../../../assets/styles/variables.scss';
+@use '../../../assets/styles/variables.scss' as *;
 
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width:100%;
-    max-width: 1207px;
-    margin:0 auto;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1207px;
+  margin: 0 auto;
 }
 
-.underline{
-    height: 1px;
-    background-color: #EDEDED;
+.underline {
+  height: 1px;
+  background-color: #ededed;
 }
 
-.logo{
-    width: 106px;
-    margin: 16px 0;
+.logo {
+  width: 106px;
+  margin: 16px 0;
 }
 
-.button{
-    @include font-16-regular;
-    padding: 7px 16px;
-    border: 1px solid $gray-300;
-    border-radius: 6px;
-    white-space: nowrap;
+.button {
+  @include font-16-regular;
+  padding: 7px 16px;
+  border: 1px solid $gray-300;
+  border-radius: 6px;
+  white-space: nowrap;
 }
