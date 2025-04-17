@@ -1,9 +1,16 @@
 import deleteIcon from '../../../assets/images/delete.svg';
-import plus from '../../../assets/images/plus.png';
+import plus from '../../../assets/images/plus.svg';
 import Badge from '../Badge/Badge';
 import styles from './Card.module.scss';
 
-export default function Card({ image, name, relation, content, date, empty }) {
+export default function Card({
+  image,
+  sender,
+  relationship,
+  content,
+  createdAt,
+  empty,
+}) {
   return (
     <article className={`${styles.Card} ${empty ? styles['empty-card'] : ''}`}>
       {empty ? (
@@ -19,11 +26,11 @@ export default function Card({ image, name, relation, content, date, empty }) {
             <div className={styles['user-info']}>
               <div className={styles['profile-name']}>
                 <p>
-                  From. <span>{name}</span>
+                  From. <span>{sender}</span>
                 </p>
               </div>
               <div className={styles['relation-badge']}>
-                <Badge relation={relation} />
+                <Badge relation={relationship} />
               </div>
             </div>
             <div className={styles['delete-button']}>
@@ -37,7 +44,7 @@ export default function Card({ image, name, relation, content, date, empty }) {
               <p>{content}</p>
             </div>
           </div>
-          <footer className={styles['Card-Footer']}>{date}</footer>
+          <footer className={styles['Card-Footer']}>{createdAt}</footer>
         </>
       )}
     </article>
