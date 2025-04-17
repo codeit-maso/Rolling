@@ -11,8 +11,8 @@ export default function FormInput({
 }) {
   const id = useId();
   return (
-    <div className={styles.formGroup}>
-      <label htmlFor={id} className={styles.label}>
+    <div className={styles['form-input']}>
+      <label htmlFor={id} className={styles['form-input__label']}>
         {label}
       </label>
       <input
@@ -22,9 +22,13 @@ export default function FormInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className={`${styles.input} ${isError ? styles.error : ''}`}
+        className={`${styles['form-input__input']} ${isError ? styles['form-input__input--error'] : ''}`}
       />
-      {isError && <p className={styles.errorMessage}>값을 입력해 주세요.</p>}
+      {isError && (
+        <p className={styles['form-input__error-message']}>
+          값을 입력해 주세요.
+        </p>
+      )}
     </div>
   );
 }
