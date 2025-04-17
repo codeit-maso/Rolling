@@ -32,30 +32,30 @@
     border: 2px solid $purple-900;
     background-color: $purple-800;
   }
-}
 
-.primary {
-  width: 28rem;
-  height: 5.6rem;
-}
+  &--primary {
+    width: 28rem;
+    height: 5.6rem;
+  }
 
-.create {
-  width: 72rem;
-  height: 5.6rem;
-}
+  &--create {
+    width: 72rem;
+    height: 5.6rem;
+  }
 
-.confirm {
-  width: 12rem;
-  height: 4rem;
-  padding: 0.7rem 1.6rem;
-  border-radius: 6px;
-  @include font-16-regular;
-}
+  &--confirm {
+    width: 12rem;
+    height: 4rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 6px;
+    @include font-16-regular;
+  }
 
-.delete {
-  width: 9.2rem;
-  height: 3.9rem;
-  padding: 0.7rem 1.6rem;
-  border-radius: 6px;
-  @include font-16-regular;
+  &--delete {
+    width: 9.2rem;
+    height: 3.9rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 6px;
+    @include font-16-regular;
+  }
 }

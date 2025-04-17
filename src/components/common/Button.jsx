@@ -5,7 +5,7 @@ export default function Button({ text, type = 'primary', onClick, disabled }) {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${styles.button} ${styles[type]}`}
+      className={`${styles.button} ${styles[`button--${type}`]}`}
     >
       {text}
     </button>
