@@ -1,7 +1,7 @@
 import styles from './FormInput.module.scss';
+import { useId } from 'react';
 
 export default function FormInput({
-  id,
   label,
   placeholder,
   value,
@@ -9,6 +9,7 @@ export default function FormInput({
   onBlur,
   isError,
 }) {
+  const id = useId();
   return (
     <div className={styles.formGroup}>
       <label htmlFor={id} className={styles.label}>
