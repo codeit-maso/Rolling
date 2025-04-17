@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styles from "./Header.module.scss"; 
-import logo from "../../../assets/images/rolling-logo.png";
+import logo from "../../../assets/images/rolling-logo.svg";
 
 function Header(){    
     const location = useLocation();
