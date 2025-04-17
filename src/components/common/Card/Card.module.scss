@@ -1,0 +1,95 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  width: 384px;
+  height: 280px;
+  padding: 28px 24px;
+  border-radius: 16px;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  background: $white;
+  gap: 16px;
+
+  &.empty-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .Card-Header {
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $grayscale-200;
+
+    .profile-img {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      border: 1px solid $grayscale-200;
+      border-radius: 100px;
+      overflow: hidden;
+
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 6px;
+
+      .profile-name {
+        @include font-20-regular;
+
+        span {
+          @include font-20-bold;
+        }
+      }
+    }
+
+    .delete-button {
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border: 1px solid $grayscale-300;
+        border-radius: 6px;
+        background-color: $white;
+      }
+    }
+  }
+
+  .Card-Body {
+    padding: 16px 0;
+
+    .content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      word-break: break-word;
+      @include font-18-regular;
+      color: $grayscale-600;
+    }
+  }
+
+  .Card-Footer {
+    @include font-12-regular;
+    color: $grayscale-400;
+  }
+}
