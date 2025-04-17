@@ -27,13 +27,13 @@
     gap: 14px;
     justify-content: space-between;
     padding-bottom: 16px;
-    border-bottom: 1px solid $grayscale-200;
+    border-bottom: 1px solid $gray-200;
 
     .profile-img {
       position: relative;
       width: 56px;
       height: 56px;
-      border: 1px solid $grayscale-200;
+      border: 1px solid $gray-200;
       border-radius: 100px;
       overflow: hidden;
 
@@ -66,7 +66,7 @@
         justify-content: center;
         align-items: center;
         padding: 8px;
-        border: 1px solid $grayscale-300;
+        border: 1px solid $gray-300;
         border-radius: 6px;
         background-color: $white;
       }
@@ -84,12 +84,12 @@
       line-clamp: 3;
       word-break: break-word;
       @include font-18-regular;
-      color: $grayscale-600;
+      color: $gray-600;
     }
   }
 
   .Card-Footer {
     @include font-12-regular;
-    color: $grayscale-400;
+    color: $gray-400;
   }
 }
