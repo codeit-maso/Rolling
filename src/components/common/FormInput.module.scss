@@ -1,0 +1,61 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    @include font-24-bold;
+    color: $gray-900;
+  }
+
+  &__input {
+    width: 72rem;
+    height: 5rem;
+    margin: 1.2rem 0 0.4rem;
+    padding: 1.2rem 1.6rem;
+    border: 1px solid $gray-300;
+    border-radius: 8px;
+    background-color: $white;
+    @include font-16-regular;
+    color: $gray-500;
+
+    &:disabled {
+      border: 1px solid $gray-300;
+      background-color: $gray-100;
+      color: $gray-400;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border: 1px solid $gray-300;
+        background-color: $gray-100;
+        color: $gray-400;
+      }
+    }
+
+    &:active {
+      border: 2px solid $gray-700;
+      color: $gray-900;
+    }
+
+    &:hover {
+      border: 1px solid $gray-500;
+    }
+
+    &:focus {
+      border: 2px solid $gray-500;
+      color: $gray-900;
+    }
+
+    &--error {
+      border: 1px solid $error;
+      color: $gray-900;
+    }
+  }
+
+  &__error-message {
+    @include font-12-regular;
+    color: $error;
+  }
+}
