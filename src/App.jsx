@@ -1,6 +1,5 @@
-import { Value } from 'sass';
 import './assets/styles/variables.scss';
-import Button from './components/common/Button';
+import './assets/styles/base.scss';
 
 export default function App() {
   return (
