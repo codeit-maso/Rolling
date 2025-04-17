@@ -1,4 +1,4 @@
-import './base.scss';
+import './assets/styles/base.scss';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
 import Test from './pages/List-page/Test';
