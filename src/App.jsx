@@ -1,13 +1,14 @@
 import "./base.css";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/common/Header/Header";
+import Header from "./components/layout/Header/Header";
+import Test from './pages/List-page/Test';
 
 function App() {
   return (
     <>
       <Header></Header>
       <Routes>
-        <Route></Route>
+        <Route path="/" element={<Test/>}/>
       </Routes>
     </>
   );
