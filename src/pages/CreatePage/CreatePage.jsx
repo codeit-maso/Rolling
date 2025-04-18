@@ -5,12 +5,15 @@ import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
 import checked from '../../assets/images/checked.svg';
 
+const colors = ['beige', 'purple', 'blue', 'green'];
+
 export default function CreatePage() {
   const [selectedType, setSelectedType] = useState('color');
   const [data, setData] = useState(null);
   const [value, setValue] = useState('');
   const [isError, setIsError] = useState(false);
   const [selectedColor, setSelectedColor] = useState('beige');
+  const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(function () {
     async function fetch() {
@@ -39,6 +42,10 @@ export default function CreatePage() {
 
   function handleColorClick(color) {
     setSelectedColor(color);
+  }
+
+  function handleImageClick(index) {
+    setSelectedImage(index);
   }
 
   return (
@@ -80,55 +87,46 @@ export default function CreatePage() {
         </div>
         {selectedType === 'color' && (
           <ul className={styles['color-list']}>
-            <li
-              className={styles.beige}
-              onClick={() => handleColorClick('beige')}
-            >
-              {selectedColor === 'beige' && (
-                <img src={checked} alt="선택됨" className={styles.checkIcon} />
-              )}
-            </li>
-            <li
-              className={styles.purple}
-              onClick={() => handleColorClick('purple')}
-            >
-              {selectedColor === 'purple' && (
-                <img src={checked} alt="선택됨" className={styles.checkIcon} />
-              )}
-            </li>
-            <li
-              className={styles.blue}
-              onClick={() => handleColorClick('blue')}
-            >
-              {selectedColor === 'blue' && (
-                <img src={checked} alt="선택됨" className={styles.checkIcon} />
-              )}
-            </li>
-            <li
-              className={styles.green}
-              onClick={() => handleColorClick('green')}
-            >
-              {selectedColor === 'green' && (
-                <img src={checked} alt="선택됨" className={styles.checkIcon} />
-              )}
-            </li>
+            {colors.map((color) => (
+              <li
+                key={color}
+                className={`${styles[color]} ${selectedColor === color ? styles.selected : ''}`}
+                onClick={() => handleColorClick(color)}
+              >
+                {selectedColor === color && (
+                  <img
+                    src={checked}
+                    alt="선택됨"
+                    className={styles.checkIcon}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         )}
 
         {selectedType === 'image' && (
           <ul className={styles['image-list']}>
-            <li className={styles.image1}>
-              <img src={data.imageUrls[0]} alt="배경이미지1" />
-            </li>
-            <li className={styles.image2}>
-              <img src={data.imageUrls[1]} alt="배경이미지2" />
-            </li>
-            <li className={styles.image3}>
-              <img src={data.imageUrls[2]} alt="배경이미지3" />
-            </li>
-            <li className={styles.image4}>
-              <img src={data.imageUrls[3]} alt="배경이미지4" />
-            </li>
+            {data.imageUrls.map((url, index) => (
+              <li
+                key={index}
+                className={`${styles[`image${index + 1}`]} ${selectedImage === index ? styles.selected : ''}`}
+                onClick={() => handleImageClick(index)}
+              >
+                <img
+                  src={url}
+                  alt={`배경이미지${index + 1}`}
+                  className={styles['background-img']}
+                />
+                {selectedImage === index && (
+                  <img
+                    src={checked}
+                    alt="선택됨"
+                    className={styles.checkIcon}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         )}
       </div>
