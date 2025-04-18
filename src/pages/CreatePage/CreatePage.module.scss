@@ -1,10 +1,10 @@
 @use '../../assets/styles/variables.scss' as *;
 
 .create-page {
-  max-width: 720px;
-  margin: 57px auto;
   display: flex;
   flex-direction: column;
+  margin: 57px auto;
+  max-width: 720px;
   gap: 50px;
 
   &__background-select {
@@ -29,12 +29,12 @@
 
   &__toggle-button {
     button {
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: none;
-      @include font-16-regular;
       width: 122px;
       height: 40px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      @include font-16-regular;
       color: $gray-900;
     }
 
@@ -42,14 +42,14 @@
     .create-page__select-image--active {
       border: 2px solid $purple-600;
       background-color: $white;
-      color: $purple-700;
       @include font-16-bold;
+      color: $purple-700;
     }
   }
 
   &__color-list {
-    margin: 20px 0;
     display: flex;
+    margin: 20px 0;
     gap: 16px;
 
     .create-page__color--beige,
@@ -59,8 +59,8 @@
       position: relative;
       width: 168px;
       height: 168px;
-      border-radius: 16px;
       border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
       list-style: none;
       flex-shrink: 0;
       cursor: pointer;
@@ -95,8 +95,8 @@
   }
 
   &__image-list {
-    margin: 20px 0;
     display: flex;
+    margin: 20px 0;
     gap: 16px;
 
     .create-page__image--1,
