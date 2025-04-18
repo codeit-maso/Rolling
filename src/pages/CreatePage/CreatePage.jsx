@@ -66,8 +66,8 @@ export default function CreatePage() {
   }
 
   return (
-    <div className={styles.CreatePage}>
-      <div className={styles['input-section']}>
+    <div className={styles['create-page']}>
+      <div className={styles['create-page__input-section']}>
         <FormInput
           label="To."
           placeholder="받는 사람 이름을 입력해 주세요"
@@ -77,25 +77,29 @@ export default function CreatePage() {
           isError={isError}
         />
       </div>
-      <div className={styles['background-select']}>
-        <div className={styles['text-section']}>
+      <div className={styles['create-page__background-select']}>
+        <div className={styles['create-page__text-section']}>
           <p>
             <span>배경화면을 선택해 주세요.</span>
           </p>
           <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
         </div>
-        <div className={styles['toggle-button']}>
+        <div className={styles['create-page__toggle-button']}>
           <button
-            className={`${styles['select-color']} ${
-              selectedType === 'color' ? styles['active'] : ''
+            className={`${styles['create-page__select-color']} ${
+              selectedType === 'color'
+                ? styles['create-page__select-color--active']
+                : ''
             }`}
             onClick={() => setSelectedType('color')}
           >
             컬러
           </button>
           <button
-            className={`${styles['select-image']} ${
-              selectedType === 'image' ? styles['active'] : ''
+            className={`${styles['create-page__select-image']} ${
+              selectedType === 'image'
+                ? styles['create-page__select-image--active']
+                : ''
             }`}
             onClick={() => setSelectedType('image')}
           >
@@ -103,18 +107,22 @@ export default function CreatePage() {
           </button>
         </div>
         {selectedType === 'color' && (
-          <ul className={styles['color-list']}>
+          <ul className={styles['create-page__color-list']}>
             {colors.map((color) => (
               <li
                 key={color}
-                className={`${styles[color]} ${selectedColor === color ? styles.selected : ''}`}
+                className={`${styles[`create-page__color--${color}`]} ${
+                  selectedColor === color
+                    ? styles['create-page__color--selected']
+                    : ''
+                }`}
                 onClick={() => handleColorClick(color)}
               >
                 {selectedColor === color && (
                   <img
                     src={checked}
                     alt="선택됨"
-                    className={styles.checkIcon}
+                    className={styles['create-page__check-icon']}
                   />
                 )}
               </li>
@@ -123,23 +131,27 @@ export default function CreatePage() {
         )}
 
         {selectedType === 'image' && (
-          <ul className={styles['image-list']}>
+          <ul className={styles['create-page__image-list']}>
             {data.imageUrls.map((url, index) => (
               <li
                 key={index}
-                className={`${styles[`image${index + 1}`]} ${selectedImage === index ? styles.selected : ''}`}
+                className={`${styles[`create-page__image--${index + 1}`]} ${
+                  selectedImage === index
+                    ? styles['create-page__image--selected']
+                    : ''
+                }`}
                 onClick={() => handleImageClick(index)}
               >
                 <img
                   src={url}
                   alt={`배경이미지${index + 1}`}
-                  className={styles['background-img']}
+                  className={styles['create-page__background-img']}
                 />
                 {selectedImage === index && (
                   <img
                     src={checked}
                     alt="선택됨"
-                    className={styles.checkIcon}
+                    className={styles['create-page__check-icon']}
                   />
                 )}
               </li>
