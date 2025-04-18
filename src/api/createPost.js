@@ -16,5 +16,5 @@ export default async function createPost({
     },
   );
 
-  return response.data.id; // 응답 구조에 따라 조정
+  return response.data.id;
 }
