@@ -97,7 +97,7 @@ export default function CreatePage() {
           </ul>
         )}
       </div>
-      <Button text="생성하기" type="create" />
+      <Button text="생성하기" type="create" disabled={!value.trim()} />
     </div>
   );
 }
