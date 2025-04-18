@@ -7,6 +7,8 @@ import getBackgroundImage from '../../api/getBackgroundImage';
 export default function CreatePage() {
   const [selectedType, setSelectedType] = useState('color');
   const [data, setData] = useState(null);
+  const [value, setValue] = useState('');
+  const [isError, setIsError] = useState(false);
 
   useEffect(function () {
     async function fetch() {
@@ -20,10 +22,29 @@ export default function CreatePage() {
 
     fetch();
   }, []);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  function handleBlur() {
+    if (!value) {
+      setIsError(true);
+    } else {
+      setIsError(false);
+    }
+  }
   return (
     <div className={styles.CreatePage}>
       <div className={styles['input-section']}>
-        <FormInput label="To." placeholder="받는 사람 이름을 입력해 주세요" />
+        <FormInput
+          label="To."
+          placeholder="받는 사람 이름을 입력해 주세요"
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          isError={isError}
+        />
       </div>
       <div className={styles['background-select']}>
         <div className={styles['text-section']}>
