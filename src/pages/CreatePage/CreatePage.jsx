@@ -3,6 +3,7 @@ import styles from './CreatePage.module.scss';
 import FormInput from '../../components/common/FormInput';
 import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
+import checked from '../../assets/images/checked.svg';
 
 export default function CreatePage() {
   const [selectedType, setSelectedType] = useState('color');
@@ -82,19 +83,35 @@ export default function CreatePage() {
             <li
               className={styles.beige}
               onClick={() => handleColorClick('beige')}
-            ></li>
+            >
+              {selectedColor === 'beige' && (
+                <img src={checked} alt="선택됨" className={styles.checkIcon} />
+              )}
+            </li>
             <li
               className={styles.purple}
               onClick={() => handleColorClick('purple')}
-            ></li>
+            >
+              {selectedColor === 'purple' && (
+                <img src={checked} alt="선택됨" className={styles.checkIcon} />
+              )}
+            </li>
             <li
               className={styles.blue}
               onClick={() => handleColorClick('blue')}
-            ></li>
+            >
+              {selectedColor === 'blue' && (
+                <img src={checked} alt="선택됨" className={styles.checkIcon} />
+              )}
+            </li>
             <li
               className={styles.green}
               onClick={() => handleColorClick('green')}
-            ></li>
+            >
+              {selectedColor === 'green' && (
+                <img src={checked} alt="선택됨" className={styles.checkIcon} />
+              )}
+            </li>
           </ul>
         )}
 
