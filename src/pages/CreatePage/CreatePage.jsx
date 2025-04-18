@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from './CreatePage.module.scss';
+import FormInput from '../../components/common/FormInput';
+import Button from '../../components/common/Button';
 
 export default function CreatePage() {
   const [selectedType, setSelectedType] = useState('color');
@@ -7,8 +9,7 @@ export default function CreatePage() {
   return (
     <div className={styles.CreatePage}>
       <div className={styles['input-section']}>
-        <p>To.</p>
-        <input type="text" />
+        <FormInput label="To." placeholder="받는 사람 이름을 입력해 주세요" />
       </div>
       <div className={styles['background-select']}>
         <div className={styles['text-section']}>
@@ -61,7 +62,7 @@ export default function CreatePage() {
           </ul>
         )}
       </div>
-      <button>생성하기</button>
+      <Button text="생성하기" type="create" />
     </div>
   );
 }
