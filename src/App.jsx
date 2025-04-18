@@ -1,14 +1,22 @@
 import '../src/assets/styles/base.scss';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
-import Test from './pages/List-page/Test';
+import Home from './pages/Home/Home';
+import RecipientList from './pages/RecipientList/RecipientList';
+import CreatePage from './pages/CreatePage/CreatePage';
+import Posts from './pages/Posts/Posts';
+import MessageForm from './pages/MessageForm/MessageForm';
 
 export default function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Test />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/list" element={<RecipientList />} />
+        <Route path="/post" element={<CreatePage />} />
+        <Route path="/post/:id" element={<Posts />} />
+        <Route path="/post/:id/message" element={<MessageForm />} />
       </Routes>
     </>
   );
