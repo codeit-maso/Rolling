@@ -9,6 +9,7 @@ export default function CreatePage() {
   const [data, setData] = useState(null);
   const [value, setValue] = useState('');
   const [isError, setIsError] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('beige');
 
   useEffect(function () {
     async function fetch() {
@@ -34,6 +35,11 @@ export default function CreatePage() {
       setIsError(false);
     }
   }
+
+  function handleColorClick(color) {
+    setSelectedColor(color);
+  }
+
   return (
     <div className={styles.CreatePage}>
       <div className={styles['input-section']}>
@@ -73,10 +79,22 @@ export default function CreatePage() {
         </div>
         {selectedType === 'color' && (
           <ul className={styles['color-list']}>
-            <li className={styles.beige}></li>
-            <li className={styles.purple}></li>
-            <li className={styles.blue}></li>
-            <li className={styles.green}></li>
+            <li
+              className={styles.beige}
+              onClick={() => handleColorClick('beige')}
+            ></li>
+            <li
+              className={styles.purple}
+              onClick={() => handleColorClick('purple')}
+            ></li>
+            <li
+              className={styles.blue}
+              onClick={() => handleColorClick('blue')}
+            ></li>
+            <li
+              className={styles.green}
+              onClick={() => handleColorClick('green')}
+            ></li>
           </ul>
         )}
 
