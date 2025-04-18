@@ -1,6 +1,6 @@
-@use '../../../assets/styles/variables.scss' as *;
+@use '../../../../assets/styles/variables.scss' as *;
 
-.Card {
+.card {
   display: flex;
   flex-direction: column;
   width: 384px;
@@ -11,7 +11,7 @@
   background: $white;
   gap: 16px;
 
-  &.empty-card {
+  &.card--empty {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,14 +22,14 @@
     }
   }
 
-  .Card-Header {
+  &__header {
     display: flex;
     gap: 14px;
     justify-content: space-between;
     padding-bottom: 16px;
     border-bottom: 1px solid $gray-200;
 
-    .profile-img {
+    .card__profile-img {
       position: relative;
       width: 56px;
       height: 56px;
@@ -45,13 +45,13 @@
       }
     }
 
-    .user-info {
+    .card__user-info {
       display: flex;
       flex: 1;
       flex-direction: column;
       gap: 6px;
 
-      .profile-name {
+      .card__profile-name {
         @include font-20-regular;
 
         span {
@@ -60,7 +60,7 @@
       }
     }
 
-    .delete-button {
+    .card__delete-button {
       button {
         display: flex;
         justify-content: center;
@@ -73,10 +73,11 @@
     }
   }
 
-  .Card-Body {
+  &__body {
+    height: 280px;
     padding: 16px 0;
 
-    .content {
+    .card__content {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -88,7 +89,7 @@
     }
   }
 
-  .Card-Footer {
+  &__footer {
     @include font-12-regular;
     color: $gray-400;
   }

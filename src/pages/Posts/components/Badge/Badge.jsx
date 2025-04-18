@@ -9,7 +9,7 @@ const relationship = {
 
 export default function Badge({ relation }) {
   return (
-    <div className={`${styles.Badge} ${styles[relation]}`}>
+    <div className={`${styles.badge} ${styles[relation]}`}>
       {relationship[relation]}
     </div>
   );
