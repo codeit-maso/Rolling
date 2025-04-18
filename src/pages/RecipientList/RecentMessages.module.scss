@@ -1,0 +1,43 @@
+@use '../../assets/styles/variables.scss' as *;
+// 순서 반영 완료~~
+//RecentMessages
+.messages {
+  display: flex;
+  margin-left: 16px;
+}
+.img {
+  width: 28px;
+  height: 28px;
+  margin-left: -16px;
+  border-radius: 30px;
+  border: solid 1.5px white;
+}
+.count {
+  @include font-12-regular;
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 28px;
+  margin-left: -16px;
+  border-radius: 30px;
+  background-color: white;
+  color: $gray-500;
+  line-height: 18px;
+}
+
+//TopReactions
+.reactions {
+  display: flex;
+  gap: 8px;
+}
+.reaction {
+  @include font-16-regular;
+  display: flex;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.54);
+  color: white;
+  line-height: 20px;
+  z-index: 1;
+}

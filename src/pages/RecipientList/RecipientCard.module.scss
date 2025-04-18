@@ -1,0 +1,76 @@
+@use '../../assets/styles/variables.scss' as *;
+
+// .card__card {
+//   background-color: aqua;
+//   width: 275px;
+//   height: 280px;
+//   border-radius: 16px;
+//   padding: 20px 24px;
+//   // background-image: ;
+//   &.purple {
+//     background-color: $purple-200;
+//   }
+//   &.beige {
+//     background-color: $beige-200;
+//   }
+//   &.blue {
+//     background-color: $blue-200;
+//   }
+//   &.green {
+//     background-color: $green-200;
+//   }
+// }
+
+.cardset__card {
+  position: relative;
+  overflow: hidden; // 넘치는 도형 잘리게
+  // 카드 기본 스타일
+  min-width: 275px;
+  height: 280px;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #e0e0ff; //디폴트 배경색으로 가정
+  background-size: cover;
+  background-repeat: no-repeat;
+  //백그라운드 이미지 받았으면: 검정필터 얹어저 어둡게하고, 폰트컬러는 화이트로 하는 작업 추가해야함
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transform: translate(30%, 30%);
+  }
+  &.purple {
+    background: rgba(217, 167, 245, 0.876);
+  }
+  &.purple::after {
+    background: rgba(255, 255, 255, 0.3);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  &.beige {
+    background-color: rgb(237, 169, 33);
+  }
+  &.beige::after {
+    background: rgba(209, 0, 0, 0.2);
+  }
+  &.blue {
+    background-color: aqua;
+  }
+  &.blue::after {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(20%, 40%) scale(1.2);
+  }
+  &.green {
+    background-color: rgb(147, 243, 178);
+  }
+  &.green::after {
+    background: rgba(23, 113, 44, 0.2);
+    transform: translate(20%, 40%) scale(1.2);
+  }
+}
