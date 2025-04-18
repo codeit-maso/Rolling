@@ -18,15 +18,15 @@ export default function CreatePage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(function () {
-    async function fetch() {
+  useEffect(() => {
+    const fetch = async () => {
       try {
         const result = await getBackgroundImage();
         setData(result);
       } catch (error) {
         console.error('데이터 로딩 실패:', error);
       }
-    }
+    };
 
     fetch();
   }, []);
