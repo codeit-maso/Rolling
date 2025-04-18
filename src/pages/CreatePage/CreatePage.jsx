@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './CreatePage.module.scss';
 import FormInput from '../../components/common/FormInput';
 import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
 import checked from '../../assets/images/checked.svg';
+import createPost from '../../api/createPost';
 
 const colors = ['beige', 'purple', 'blue', 'green'];
 
@@ -14,6 +16,7 @@ export default function CreatePage() {
   const [isError, setIsError] = useState(false);
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(function () {
     async function fetch() {
@@ -46,6 +49,20 @@ export default function CreatePage() {
 
   function handleImageClick(index) {
     setSelectedImage(index);
+  }
+
+  async function handleClick() {
+    try {
+      const id = await createPost({
+        team: '15-7',
+        name: value,
+        backgroundColor: selectedColor,
+        backgroundImageURL: data.imageUrls[selectedImage] ?? null,
+      });
+      navigate(`/post/${id}`);
+    } catch (error) {
+      console.error('페이지 생성 중 오류:', error.response.data);
+    }
   }
 
   return (
@@ -130,7 +147,12 @@ export default function CreatePage() {
           </ul>
         )}
       </div>
-      <Button text="생성하기" type="create" disabled={!value.trim()} />
+      <Button
+        text="생성하기"
+        type="create"
+        onClick={handleClick}
+        disabled={!value.trim()}
+      />
     </div>
   );
 }
