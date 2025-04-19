@@ -57,7 +57,7 @@ export default function CreatePage() {
         team: '15-7',
         name: value,
         backgroundColor: selectedColor,
-        backgroundImageURL: data.imageUrls[selectedImage] ?? null,
+        backgroundImageURL: data[selectedImage] ?? null,
       });
       navigate(`/post/${id}`);
     } catch (error) {
@@ -132,7 +132,7 @@ export default function CreatePage() {
 
         {selectedType === 'image' && (
           <ul className={styles['create-page__image-list']}>
-            {data.imageUrls.map((url, index) => (
+            {data.map((url, index) => (
               <li
                 key={index}
                 className={`${styles[`create-page__image--${index + 1}`]} ${
@@ -159,12 +159,9 @@ export default function CreatePage() {
           </ul>
         )}
       </div>
-      <Button
-        text="생성하기"
-        type="create"
-        onClick={handleClick}
-        disabled={!value.trim()}
-      />
+      <Button type="create" onClick={handleClick} disabled={!value.trim()}>
+        생성하기
+      </Button>
     </div>
   );
 }

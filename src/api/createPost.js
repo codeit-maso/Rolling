@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from './api';
 
 export default async function createPost({
   team,
@@ -6,15 +6,11 @@ export default async function createPost({
   backgroundColor,
   backgroundImageURL,
 }) {
-  const response = await axios.post(
-    'https://rolling-api.vercel.app/13-2/recipients/',
-    {
-      team,
-      name,
-      backgroundColor,
-      backgroundImageURL,
-    },
-  );
-
-  return response.data.id;
+  const res = await api.post('/15-7/recipients/', {
+    team,
+    name,
+    backgroundColor,
+    backgroundImageURL,
+  });
+  return res.data.id;
 }
