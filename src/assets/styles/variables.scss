@@ -62,68 +62,96 @@ $font-weight-bold: 700;
 @mixin font-28-bold {
   font-size: $font-size-28;
   font-weight: $font-weight-bold;
+  line-height: 4.2rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-24-bold {
   font-size: $font-size-24;
   font-weight: $font-weight-bold;
+  line-height: 3.6rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-24-regular {
   font-size: $font-size-24;
   font-weight: $font-weight-regular;
+  line-height: 3.6rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-20-bold {
   font-size: $font-size-20;
   font-weight: $font-weight-bold;
+  line-height: 3rem;
+  letter-spacing: -0.01em;
 }
 @mixin font-20-regular {
   font-size: $font-size-20;
   font-weight: $font-weight-regular;
+  line-height: 3rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-18-bold {
   font-size: $font-size-18;
   font-weight: $font-weight-bold;
+  line-height: 2.8rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-18-regular {
   font-size: $font-size-18;
   font-weight: $font-weight-regular;
+  line-height: 2.8rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-16-bold {
   font-size: $font-size-16;
   font-weight: $font-weight-bold;
+  line-height: 2.6rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-16-regular {
   font-size: $font-size-16;
   font-weight: $font-weight-regular;
+  line-height: 2.6rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-15-regular {
   font-size: $font-size-15;
   font-weight: $font-weight-regular;
+  line-height: 2.2rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-15-bold {
   font-size: $font-size-15;
   font-weight: $font-weight-bold;
+  line-height: 2.2rem;
+  letter-spacing: -0.01em;
 }
 
 @mixin font-14-regular {
   font-size: $font-size-14;
   font-weight: $font-weight-regular;
+  line-height: 2rem;
+  letter-spacing: -0.005em;
 }
 
 @mixin font-14-bold {
   font-size: $font-size-14;
   font-weight: $font-weight-bold;
+  line-height: 2rem;
+  letter-spacing: -0.005em;
 }
 
 @mixin font-12-regular {
   font-size: $font-size-12;
   font-weight: $font-weight-regular;
+  line-height: 1.8rem;
+  letter-spacing: -0.005em;
 }
