@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import './RecipientList.module.scss';
-import getList from './Myapi';
 import Carousel from './Carousel';
 import getRecipients from '../../api/getRecipients';
-
-// API수정하기
 
 //인기순 정렬
 function sortByPopularity(array) {
@@ -17,16 +14,19 @@ export default function RecipientList() {
   const [popularity, setPopularity] = useState([]);
   const [recently, setRecently] = useState([]);
 
-  //데이터 받아옴
+  //데이터 받아옴, 상태 업데이트
   useEffect(() => {
-    const fetchList = async () => {
-      const { results } = await getRecipients();
-      // const { results } = await getList();
-      const sortedArray = sortByPopularity(results);
-      setRecently(results);
-      setPopularity(sortedArray);
+    const getAndSet = async () => {
+      try {
+        const { results } = await getRecipients();
+        const sortedArray = sortByPopularity(results);
+        setRecently(results);
+        setPopularity(sortedArray);
+      } catch (error) {
+        console.error(`in '/list' page:: 데이터 불러오기 실패:`, error);
+      }
     };
-    fetchList();
+    getAndSet();
   }, []);
 
   return (
