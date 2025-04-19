@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './CreatePage.module.scss';
+import styles from './CreateRecipient.module.scss';
 import FormInput from '../../components/common/FormInput';
 import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
 import checked from '../../assets/images/checked.svg';
-import createPost from '../../api/createPost';
+import postRecipient from '../../api/postRecipient';
 
 const colors = ['beige', 'purple', 'blue', 'green'];
 
-export default function CreatePage() {
+export default function CreateRecipient() {
   const [data, setData] = useState(null);
   const [value, setValue] = useState('');
   const [isError, setIsError] = useState(false);
@@ -53,7 +53,7 @@ export default function CreatePage() {
 
   async function handleButtonClick() {
     try {
-      const id = await createPost({
+      const id = await postRecipient({
         team: '15-7',
         name: value,
         backgroundColor: selectedColor,
