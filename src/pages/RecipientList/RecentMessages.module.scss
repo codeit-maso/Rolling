@@ -1,7 +1,6 @@
 @use '../../assets/styles/variables.scss' as *;
-// 순서 반영 완료~~
-//RecentMessages
-.messages {
+
+.card__recent-messages {
   display: flex;
   margin-left: 16px;
 }
@@ -23,21 +22,4 @@
   background-color: white;
   color: $gray-500;
   line-height: 18px;
-}
-
-//TopReactions
-.reactions {
-  display: flex;
-  gap: 8px;
-}
-.reaction {
-  @include font-16-regular;
-  display: flex;
-  gap: 2px;
-  padding: 8px 12px;
-  border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.54);
-  color: white;
-  line-height: 20px;
-  z-index: 1;
 }

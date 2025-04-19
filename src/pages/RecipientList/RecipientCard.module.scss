@@ -1,27 +1,10 @@
 @use '../../assets/styles/variables.scss' as *;
 
-// .card__card {
-//   background-color: aqua;
-//   width: 275px;
-//   height: 280px;
-//   border-radius: 16px;
-//   padding: 20px 24px;
-//   // background-image: ;
-//   &.purple {
-//     background-color: $purple-200;
-//   }
-//   &.beige {
-//     background-color: $beige-200;
-//   }
-//   &.blue {
-//     background-color: $blue-200;
-//   }
-//   &.green {
-//     background-color: $green-200;
-//   }
-// }
+//아직 작업중
 
 .cardset__card {
+  @include font-24-bold;
+
   position: relative;
   overflow: hidden; // 넘치는 도형 잘리게
   // 카드 기본 스타일
@@ -32,7 +15,6 @@
   background-color: #e0e0ff; //디폴트 배경색으로 가정
   background-size: cover;
   background-repeat: no-repeat;
-  //백그라운드 이미지 받았으면: 검정필터 얹어저 어둡게하고, 폰트컬러는 화이트로 하는 작업 추가해야함
 
   &::after {
     content: '';

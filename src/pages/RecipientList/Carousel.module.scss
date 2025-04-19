@@ -1,0 +1,53 @@
+@use '../../assets/styles/variables.scss' as *;
+
+//캐러셀 레이아웃
+.carousel {
+  position: relative;
+  max-width: 1160px;
+}
+.carousel__cardset-wrapper {
+  overflow: hidden;
+  max-width: 1160px;
+}
+.carousel__cardset {
+  display: flex;
+  gap: 20px;
+}
+
+//캐러셀 버튼
+.carousel__direction-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 1120px;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  border: solid 1px $gray-300;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-image: url(../../assets/images/next.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40% 40%;
+  transform: translateY(-50%);
+
+  -webkit-filter: drop-shadow(0px 4px 8px #00000014);
+  filter: drop-shadow(0px 4px 8px #00000014);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+
+  &.back {
+    transform: scaleX(-1) translateY(-50%);
+    left: 0;
+    margin-left: -20px;
+  }
+}
+
+//<<태블릿, 모바일에서: 스크롤 스타일 None 적용하기>>
+//  -ms-overflow-style: none;
+// .carousel__cardset::-webkit-scrollbar {
+//   display: none;
+// }
