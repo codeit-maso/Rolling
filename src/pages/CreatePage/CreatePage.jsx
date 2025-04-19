@@ -10,12 +10,12 @@ import createPost from '../../api/createPost';
 const colors = ['beige', 'purple', 'blue', 'green'];
 
 export default function CreatePage() {
-  const [selectedType, setSelectedType] = useState('color');
   const [data, setData] = useState(null);
   const [value, setValue] = useState('');
   const [isError, setIsError] = useState(false);
+  const [selectedType, setSelectedType] = useState('color');
   const [selectedColor, setSelectedColor] = useState('beige');
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(-1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function CreatePage() {
     fetch();
   }, []);
 
-  function handleChange(e) {
+  function handleInputChange(e) {
     setValue(e.target.value);
   }
 
@@ -51,7 +51,7 @@ export default function CreatePage() {
     setSelectedImage(index);
   }
 
-  async function handleClick() {
+  async function handleButtonClick() {
     try {
       const id = await createPost({
         team: '15-7',
@@ -72,7 +72,7 @@ export default function CreatePage() {
           label="To."
           placeholder="받는 사람 이름을 입력해 주세요"
           value={value}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onBlur={handleBlur}
           isError={isError}
         />
@@ -91,7 +91,10 @@ export default function CreatePage() {
                 ? styles['create-page__select-color--active']
                 : ''
             }`}
-            onClick={() => setSelectedType('color')}
+            onClick={() => {
+              setSelectedType('color');
+              setSelectedImage(-1);
+            }}
           >
             컬러
           </button>
@@ -101,7 +104,10 @@ export default function CreatePage() {
                 ? styles['create-page__select-image--active']
                 : ''
             }`}
-            onClick={() => setSelectedType('image')}
+            onClick={() => {
+              setSelectedType('image');
+              setSelectedImage(0);
+            }}
           >
             이미지
           </button>
@@ -159,7 +165,11 @@ export default function CreatePage() {
           </ul>
         )}
       </div>
-      <Button type="create" onClick={handleClick} disabled={!value.trim()}>
+      <Button
+        type="create"
+        onClick={handleButtonClick}
+        disabled={!value.trim()}
+      >
         생성하기
       </Button>
     </div>
