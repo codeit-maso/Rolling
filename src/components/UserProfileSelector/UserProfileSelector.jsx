@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import fetchProfileImages from '../../api/fetchProfileImages.js';
+import fetchProfileImages from '../../api/fetchProfileImages.js.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
-import styles from './UserProFileSelector.module.scss';
+import styles from './UserProfileSelector.module.scss';
 
 export default function UserProfileSelector({ onSelect }) {
   const [profileImages, setProfileImages] = useState([]);
