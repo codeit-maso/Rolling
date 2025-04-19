@@ -9,12 +9,8 @@ export default function UserProfileSelector({ onSelect }) {
 
   useEffect(() => {
     const loadImages = async () => {
-      try {
-        const images = await fetchProfileImages();
-        setProfileImages(images);
-      } catch (_) {
-        setProfileImages([]);
-      }
+      const images = await fetchProfileImages();
+      setProfileImages(images);
     };
     loadImages();
   }, []);
