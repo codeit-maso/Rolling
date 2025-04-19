@@ -4,7 +4,7 @@ import Header from './components/layout/Header/Header';
 import Home from './pages/Home/Home';
 import RecipientList from './pages/RecipientList/RecipientList';
 import CreateRecipient from './pages/CreateRecipient/CreateRecipient';
-import Posts from './pages/Posts/Posts';
+import Recipient from './pages/Recipient/Recipient';
 import MessageForm from './pages/MessageForm/MessageForm';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<RecipientList />} />
         <Route path="/post" element={<CreateRecipient />} />
-        <Route path="/post/:id" element={<Posts />} />
+        <Route path="/post/:id" element={<Recipient />} />
         <Route path="/post/:id/message" element={<MessageForm />} />
       </Routes>
     </>
