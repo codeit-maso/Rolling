@@ -5,9 +5,7 @@ on:
     branches:
       - main
       - develop
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
   sync-fork:
@@ -17,10 +15,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-       
-      - name: Push to fork
-        uses: ad-m/github-push-action@master
+          
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
         with:
-          github_token: ${{ secrets.FORK_TOKEN }}
-          repository: LeeCh0129/Rolling
-          branch: ${{ github.ref_name }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Add known hosts
+        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+          
+      - name: Push to fork
+        run: |
+          git remote add fork git@github.com:LeeCh0129/Rolling.git
+          git push fork ${GITHUB_REF#refs/heads/}

@@ -46,13 +46,13 @@ const config = [
       'import/no-anonymous-default-export': [
         'error',
         {
-          allowArrowFunction: false,
+          allowArrowFunction: true,
           allowAnonymousFunction: false,
           allowAnonymousClass: false,
         },
       ],
 
-      'func-style': ['warn', 'declaration', { allowArrowFunctions: false }],
+      'func-style': ['warn', 'declaration', { allowArrowFunctions: true }],
     },
     settings: {
       react: {

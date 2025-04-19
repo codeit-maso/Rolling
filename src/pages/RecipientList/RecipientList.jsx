@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './RecipientList.module.scss';
 import getList from './Myapi';
 import Carousel from './Carousel';
+import getRecipients from '../../api/getRecipients';
 
 // API수정하기
 
@@ -19,7 +20,8 @@ export default function RecipientList() {
   //데이터 받아옴
   useEffect(() => {
     const fetchList = async () => {
-      const { results } = await getList();
+      const { results } = await getRecipients();
+      // const { results } = await getList();
       const sortedArray = sortByPopularity(results);
       setRecently(results);
       setPopularity(sortedArray);
