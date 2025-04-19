@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import fetchProfileImages from '../../api/fetchProfileImages.js.js';
+import fetchProfileImages from '../../api/fetchProfileImages.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
 import styles from './UserProfileSelector.module.scss';
 
