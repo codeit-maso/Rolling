@@ -1,0 +1,59 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.profile-select {
+  display: flex;
+  flex-direction: column;
+  width: 71.7rem;
+  height: 14.2rem;
+  gap: 12px;
+
+  &__title {
+    width: 12.9rem;
+    height: 3.6rem;
+    margin: 0;
+    @include font-24-bold;
+    color: $gray-900;
+    white-space: nowrap;
+  }
+
+  &__selected-image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 9.4rem;
+    gap: 32px;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    width: 60.5rem;
+    gap: 12px;
+  }
+
+  &__description {
+    width: 19rem;
+    height: 2.6rem;
+    @include font-16-regular;
+    color: $gray-500;
+
+    white-space: nowrap;
+  }
+  &__image-list {
+    display: flex;
+    height: 5.6rem;
+    gap: 4px;
+  }
+
+  &__image {
+    width: 5.6rem;
+    height: 5.6rem;
+    border: 1px solid $gray-200;
+    border-radius: 100px;
+  }
+}
