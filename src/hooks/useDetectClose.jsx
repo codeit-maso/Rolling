@@ -6,7 +6,7 @@ export default function useDetectClose(ref) {
   useEffect(() => {
     const handleClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
-        setIsOpen(!isOpen);
+        setIsOpen(false);
       }
     };
     if (isOpen) {
