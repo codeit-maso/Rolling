@@ -33,11 +33,11 @@ export default function RecipientList() {
     <>
       <section>
         <h2>인기 롤링 페이퍼 🔥</h2>
-        <Carousel prop={popularity} />
+        <Carousel recipients={popularity} />
       </section>
       <section>
         <h2>최근에 만든 롤링 페이퍼 ⭐️</h2>
-        <Carousel prop={recently} />
+        <Carousel recipients={recently} />
       </section>
     </>
   );

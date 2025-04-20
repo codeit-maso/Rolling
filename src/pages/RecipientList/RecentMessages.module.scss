@@ -2,12 +2,12 @@
 
 .card__recent-messages {
   display: flex;
-  margin-left: 16px;
+  margin: 12px 0 12px 13px;
 }
 .img {
   width: 28px;
   height: 28px;
-  margin-left: -16px;
+  margin-left: -13px;
   border-radius: 30px;
   border: solid 1.5px white;
 }
@@ -17,7 +17,7 @@
   place-items: center;
   width: 33px;
   height: 28px;
-  margin-left: -16px;
+  margin-left: -13px;
   border-radius: 30px;
   background-color: white;
   color: $gray-500;

@@ -2,7 +2,7 @@ import styles from './RecipientCard.module.scss';
 import RecentMessages from './recentMessages';
 import TopReactions from './TopReactions';
 
-//아직 작업중
+//캐러셀 내부 요소 - 카드 컴포넌트
 export default function RecipientCard({ Recipient }) {
   const {
     name,
@@ -16,7 +16,7 @@ export default function RecipientCard({ Recipient }) {
 
   return (
     <div
-      className={`${styles.cardset__card} ${backgroundImageURL ? '' : styles[backgroundColor]}`}
+      className={`${styles.card} ${backgroundImageURL ? '' : styles[backgroundColor]}`}
       style={
         backgroundImageURL
           ? {
@@ -31,12 +31,12 @@ export default function RecipientCard({ Recipient }) {
         messages={recentMessages}
         count={messageCount}
       ></RecentMessages>
-      <span>{messageCount}</span>
-      <span>명이 작성했어요!</span>
-      <hr></hr>
+      <div className={styles['writer-count']}>
+        <span className={styles.count}>{messageCount}</span>
+        <span>명이 작성했어요!</span>
+      </div>
+      <div className={styles['card__centerline']}></div>
       <TopReactions reactions={topReactions}></TopReactions>
-
-      <h2>{createdAt}</h2>
     </div>
   );
 }

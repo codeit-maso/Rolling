@@ -3,15 +3,36 @@
 //캐러셀 레이아웃
 .carousel {
   position: relative;
-  max-width: 1160px;
+  width: 1208px;
 }
 .carousel__cardset-wrapper {
   overflow: hidden;
-  max-width: 1160px;
+  width: 1200px;
+  padding: 16px 20px;
 }
 .carousel__cardset {
   display: flex;
   gap: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.carousel::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+}
+.carousel::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
 }
 
 //캐러셀 버튼
@@ -24,7 +45,8 @@
   left: 100%;
   width: 40px;
   height: 40px;
-  margin-left: -20px;
+  margin-left: -40px;
+  z-index: 9999;
   border: solid 1px $gray-300;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.9);
@@ -41,8 +63,7 @@
 
   &.back {
     transform: scaleX(-1) translateY(-50%);
-    left: 0;
-    margin-left: -20px;
+    left: 40px;
   }
 }
 

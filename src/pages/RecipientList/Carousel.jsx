@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './Carousel.module.scss';
 import RecipientCard from './RecipientCard';
 
-export default function Carousel({ prop }) {
+export default function Carousel({ recipients }) {
   const [index, setIndex] = useState(0);
   const [offsetX, setOffsetX] = useState({}); // x좌표
 
@@ -10,7 +10,6 @@ export default function Carousel({ prop }) {
   useEffect(() => {
     setOffsetX({
       transform: `translateX(-${index * 295}px)`,
-      transition: 'transform 0.5s ease-in-out',
     });
   }, [index]);
 
@@ -22,11 +21,20 @@ export default function Carousel({ prop }) {
     }
   }
 
+  //shadow.....
+  function makeShadow() {
+    const shadows = [];
+    for (let i = 0; i < 7; i++) {
+      shadows.push(<div key={i} className={styles.shadow}></div>);
+    }
+    return shadows;
+  }
+
   return (
     <div className={styles.carousel}>
       <div className={styles['carousel__cardset-wrapper']}>
         <div className={styles['carousel__cardset']} style={offsetX}>
-          {prop.map((it) => (
+          {recipients.map((it) => (
             <RecipientCard Recipient={it} key={it.id}></RecipientCard>
           ))}
         </div>
