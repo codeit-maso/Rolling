@@ -23,6 +23,7 @@ export default function Dropdown({ defaultValue = '지인', onChange }) {
       </label>
       <div ref={dropdownRef} className={styles['dropdown-body']}>
         <button
+          id={id}
           type="button"
           className={styles['dropdown__button']}
           onClick={() => setIsOpen((prev) => !prev)}
