@@ -7,7 +7,7 @@ export default function Card({
   image,
   sender,
   relationship,
-  content,
+  children,
   createdAt,
   empty = false,
 }) {
@@ -41,7 +41,7 @@ export default function Card({
           </header>
           <div className={styles['card__body']}>
             <div className={styles['card__content']}>
-              <p>{content}</p>
+              <p>{children}</p>
             </div>
           </div>
           <footer className={styles['card__footer']}>{createdAt}</footer>
