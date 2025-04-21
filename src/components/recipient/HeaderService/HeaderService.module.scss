@@ -1,0 +1,77 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.header-service {
+  width: 100%;
+  background-color: $white;
+  border-bottom: 1px solid $gray-200;
+  padding: 24px 0;
+
+  &__container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 1200px) {
+      padding: 0 24px;
+    }
+  }
+
+  &__recipient-name {
+    @include font-28-bold;
+    color: $gray-800;
+    margin: 0;
+  }
+
+  &__profile-section {
+    display: flex;
+    align-items: center;
+  }
+
+  &__message-count {
+    @include font-16-regular;
+    color: $gray-500;
+  }
+
+  &__divider {
+    width: 1px;
+    height: 28px;
+    background-color: $gray-200;
+    margin: 0 28px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__emojis {
+    display: flex;
+    background-color: $gray-200;
+    border-radius: 32px;
+    padding: 8px 12px;
+    @include font-16-regular;
+    margin-right: 8px;
+  }
+
+  &__add-button,
+  &__share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid $gray-300;
+    background-color: $white;
+    @include font-16-regular;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gray-100;
+    }
+  }
+}
