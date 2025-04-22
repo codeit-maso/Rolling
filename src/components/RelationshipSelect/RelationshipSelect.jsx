@@ -1,10 +1,13 @@
 import { useState, useRef, useId } from 'react';
 import useDetectClose from '../../hooks/useDetectClose';
-import styles from './Dropdown.module.scss';
+import styles from './RelationshipSelect.module.scss';
 
 const OPTIONS = ['친구', '지인', '동료', '가족'];
 
-export default function Dropdown({ defaultValue = '지인', onChange }) {
+export default function RelationshipSelect({
+  defaultValue = '지인',
+  onChange,
+}) {
   const dropdownRef = useRef(null);
   const id = useId();
   const [selected, setSelected] = useState(defaultValue);
