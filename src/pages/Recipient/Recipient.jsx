@@ -89,7 +89,7 @@ export default function Recipient() {
             image={msg.profileImageURL}
             sender={msg.sender}
             relationship={msg.relationship}
-            createdAt={msg.createdAt.slice(0, 10)}
+            createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
           >
             {msg.content}
           </Card>
