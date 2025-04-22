@@ -1,0 +1,16 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.card__reactions {
+  display: flex;
+  gap: 8px;
+}
+.card__reactions__reaction {
+  @include font-16-regular;
+  display: flex;
+  gap: 2px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.54);
+  color: white;
+  z-index: 1;
+}

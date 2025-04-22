@@ -1,0 +1,25 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.card__recent-messages {
+  display: flex;
+  margin: 12px 0 12px 13px;
+}
+.img {
+  width: 28px;
+  height: 28px;
+  margin-left: -13px;
+  border-radius: 30px;
+  border: solid 1.5px white;
+}
+.count {
+  @include font-12-regular;
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 28px;
+  margin-left: -13px;
+  border-radius: 30px;
+  background-color: white;
+  color: $gray-500;
+  line-height: 18px;
+}

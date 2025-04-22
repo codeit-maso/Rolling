@@ -1,0 +1,138 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.create-page {
+  display: flex;
+  flex-direction: column;
+  margin: 57px auto;
+  max-width: 720px;
+  gap: 50px;
+
+  &__background-select {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  &__text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    p {
+      @include font-16-regular;
+
+      span {
+        @include font-24-bold;
+      }
+    }
+  }
+
+  &__toggle-button {
+    button {
+      width: 122px;
+      height: 40px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      @include font-16-regular;
+      color: $gray-900;
+    }
+
+    .create-page__select-color--active,
+    .create-page__select-image--active {
+      border: 2px solid $purple-600;
+      background-color: $white;
+      @include font-16-bold;
+      color: $purple-700;
+    }
+  }
+
+  &__color-list {
+    display: flex;
+    margin: 20px 0;
+    gap: 16px;
+
+    .create-page__color--beige,
+    .create-page__color--purple,
+    .create-page__color--blue,
+    .create-page__color--green {
+      position: relative;
+      width: 168px;
+      height: 168px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      list-style: none;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .create-page__color--selected {
+      cursor: default;
+    }
+
+    .create-page__color--beige {
+      background-color: $beige-200;
+    }
+    .create-page__color--purple {
+      background-color: $purple-200;
+    }
+    .create-page__color--blue {
+      background-color: $blue-200;
+    }
+    .create-page__color--green {
+      background-color: $green-200;
+    }
+
+    .create-page__check-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+  }
+
+  &__image-list {
+    display: flex;
+    margin: 20px 0;
+    gap: 16px;
+
+    .create-page__image--1,
+    .create-page__image--2,
+    .create-page__image--3,
+    .create-page__image--4 {
+      position: relative;
+      width: 168px;
+      height: 168px;
+      border-radius: 16px;
+      list-style: none;
+      overflow: hidden;
+      flex-shrink: 0;
+      cursor: pointer;
+
+      .create-page__background-img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .create-page__image--selected .create-page__background-img {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .create-page__check-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+  }
+}
