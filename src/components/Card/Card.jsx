@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
 import deleteIcon from '../../assets/images/delete.svg';
 import plus from '../../assets/images/plus.svg';
@@ -14,6 +15,7 @@ export default function Card({
   empty = false,
 }) {
   const navigate = useNavigate();
+  const sanitizedHTML = DOMPurify.sanitize(children);
 
   function handleClick() {
     navigate(`/post/${recipientId}/message/`);
@@ -49,7 +51,7 @@ export default function Card({
           </header>
           <div className={styles['card__body']}>
             <div className={styles['card__content']}>
-              <div dangerouslySetInnerHTML={{ __html: children }} />
+              <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
             </div>
           </div>
           <footer className={styles['card__footer']}>{createdAt}</footer>
