@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import fetchProfileImages from '../../api/fetchProfileImages.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
-import styles from './UserProFileSelector.module.scss';
+import styles from './UserProfileSelector.module.scss';
 
 export default function UserProfileSelector({ onSelect }) {
   const [profileImages, setProfileImages] = useState([]);
@@ -9,12 +9,8 @@ export default function UserProfileSelector({ onSelect }) {
 
   useEffect(() => {
     const loadImages = async () => {
-      try {
-        const images = await fetchProfileImages();
-        setProfileImages(images);
-      } catch (_) {
-        setProfileImages([]);
-      }
+      const images = await fetchProfileImages();
+      setProfileImages(images);
     };
     loadImages();
   }, []);

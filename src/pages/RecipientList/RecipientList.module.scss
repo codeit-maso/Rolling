@@ -1,0 +1,13 @@
+@use '../../assets/styles/variables.scss' as *;
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+h2 {
+  @include font-24-bold;
+  min-width: 1160px;
+  margin: 0 auto;
+}
