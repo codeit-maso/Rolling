@@ -63,7 +63,7 @@ export default function Recipient() {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [hasNextMessage, loading]);
+  }, [observerRef.current, hasNextMessage, loading]);
 
   const loadMoreMessages = () => {
     const limit = offset === 0 ? 8 : 9;
