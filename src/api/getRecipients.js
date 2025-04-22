@@ -1,4 +1,4 @@
-import api from './api';
+import { api } from './api';
 
 const teamId = import.meta.env.VITE_TEAM_ID;
 
