@@ -1,8 +1,8 @@
 import './assets/styles/base.scss';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
-import Home from './pages/Home/Home';
 import RecipientList from './pages/RecipientList/RecipientList';
+import Home from './pages/Home/Home';
 import CreateRecipient from './pages/CreateRecipient/CreateRecipient';
 import Recipient from './pages/Recipient/Recipient';
 import MessageForm from './pages/MessageForm/MessageForm';
