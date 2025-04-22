@@ -53,6 +53,9 @@
       gap: 6px;
 
       .card__profile-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         @include font-20-regular;
 
         span {
