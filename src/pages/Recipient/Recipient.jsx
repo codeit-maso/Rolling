@@ -1,30 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import HeaderService from '../../components/recipient/HeaderService/HeaderService';
-import checkedSvg from '../../assets/images/checked.svg';
+import fetchRecipient from '../../api/fetchRecipient';
 
 export default function Recipient() {
-  // 임시 목데이터 : 프로필 UI 확인용 기능 구현 후 삭제예정
-  const mockRecipient = {
-    name: 'Chan Ho',
-    messageCount: 6,
-    recentMessages: [
-      {
-        id: 1,
-        profileImageURL: checkedSvg,
-      },
-      {
-        id: 2,
-        profileImageURL: checkedSvg,
-      },
-      {
-        id: 3,
-        profileImageURL: checkedSvg,
-      },
-    ],
-  };
+  const [recipient, setRecipient] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!id) {
+      console.error('Recipient ID가 제공되지 않았습니다');
+      return;
+    }
+
+    async function loadData() {
+      try {
+        const recipientData = await fetchRecipient(id);
+
+        setRecipient(recipientData);
+      } catch (error) {
+        console.error('데이터 가져오기 실패:', error);
+      }
+    }
+
+    loadData();
+  }, [id]);
 
   return (
     <div>
-      <HeaderService recipient={mockRecipient} />
+      <HeaderService recipient={recipient} />
     </div>
   );
 }
