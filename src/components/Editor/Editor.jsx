@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from './Editor.module.scss';
@@ -14,7 +14,7 @@ const formats = [
   'background',
 ];
 
-export default function Editor({ value, onChange }) {
+export default function Editor({ value, onChange, font }) {
   const modules = useMemo(() => {
     return {
       toolbar: [
@@ -27,9 +27,18 @@ export default function Editor({ value, onChange }) {
     };
   }, []);
 
+  useEffect(() => {
+    const editorElement = document.querySelector('.ql-editor');
+    if (editorElement) {
+      editorElement.style.fontFamily = font;
+      editorElement.style.fontSize = '18px';
+    }
+  }, [font]);
+
   return (
     <div className={styled['editor']}>
       <h2 className={styled['editor__title']}>내용을 입력해 주세요</h2>
+
       <div className={styled['editor__box']}>
         <ReactQuill
           theme="snow"
