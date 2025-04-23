@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './HeaderService.module.scss';
 import emojiAdd from '../../../assets/images/emoji-add.svg';
-import shareIcon from '../../../assets/images/share.svg';
 import chevronDown from '../../../assets/images/chevron-down.svg';
 import { fetchReactions, addReaction } from '../../../api/emojiReactions';
+import ShareButton from './Share/ShareButton';
 
 export default function HeaderService({ recipient }) {
   const [reactions, setReactions] = useState([]);
@@ -217,9 +217,7 @@ export default function HeaderService({ recipient }) {
               )}
             </div>
             <div className={styles['header-service__divider--right']}></div>
-            <button className={styles['header-service__share-button']}>
-              <img src={shareIcon} alt="공유" />
-            </button>
+            <ShareButton recipient={recipient} />
           </div>
         </div>
       </div>
