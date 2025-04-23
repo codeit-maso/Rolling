@@ -1,0 +1,24 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  width: 72rem;
+  margin: 40px auto 36px;
+  gap: 62px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 94.4rem;
+    gap: 50px;
+  }
+
+  &__relationship-select {
+    z-index: 1;
+  }
+
+  &__font-select {
+    z-index: 1;
+  }
+}
