@@ -1,8 +1,13 @@
 import { api } from './api';
 
 export default async function getMessages(id, offset, limit) {
-  const res = await api.get(
-    `/13-2/recipients/${id}/messages/?limit=${limit}&offset=${offset}`,
-  );
-  return res.data;
+  try {
+    const teamId = import.meta.env.VITE_TEAM_ID;
+    const res = await api.get(
+      `/${teamId}/recipients/${id}/messages/?limit=${limit}&offset=${offset}`,
+    );
+    return res.data;
+  } catch {
+    return null;
+  }
 }

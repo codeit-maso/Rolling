@@ -6,11 +6,16 @@ export default async function createPost({
   backgroundColor,
   backgroundImageURL,
 }) {
-  const res = await api.post('/15-7/recipients/', {
-    team,
-    name,
-    backgroundColor,
-    backgroundImageURL,
-  });
-  return res.data.id;
+  try {
+    const teamId = import.meta.env.VITE_TEAM_ID;
+    const res = await api.get(`/${teamId}/recipients/`, {
+      team,
+      name,
+      backgroundColor,
+      backgroundImageURL,
+    });
+    return res.data;
+  } catch {
+    return null;
+  }
 }
