@@ -14,3 +14,8 @@
   color: white;
   z-index: 1;
 }
+@media (min-width: 0px) and (max-width: 360px) {
+  .card__reactions__reaction {
+    @include font-14-regular;
+  }
+}
