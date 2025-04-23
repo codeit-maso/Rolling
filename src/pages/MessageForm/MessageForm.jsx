@@ -69,7 +69,7 @@ export default function MessageForm() {
 
       localStorage.removeItem('quill-content');
       setMessage('');
-      navigate(`/post/${res.id}`);
+      navigate(`/post/${id}`);
     } catch (error) {
       console.error('메세지 전송 실패', error);
     }
@@ -80,7 +80,7 @@ export default function MessageForm() {
       <div className={styles['message-form__content']}>
         <div className={styles['message-form__input']}>
           <FormInput
-            label="Form."
+            label="From."
             placeholder="이름을 입력해 주세요."
             value={sender}
             onChange={handleInputChange}
