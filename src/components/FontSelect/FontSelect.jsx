@@ -2,19 +2,14 @@ import { useState, useRef, useId } from 'react';
 import useDetectClose from '../../hooks/useDetectClose';
 import styles from './FontSelect.module.scss';
 
-const FONTS = ['Noto Sans', 'Pretendard', 'NanumMyeongjo', 'NanumSonPyeonjiCe'];
+const FONTS = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
 
 const fontClassMap = {
-  NotoSans: styles['font-noto'],
+  'Noto Sans': styles['font-noto'],
   Pretendard: styles['font-pretendard'],
-  NanumMyeongjo: styles['font-nanum-myeongjo'],
-  NanumSonPyeonjiCe: styles['font-naunm-hand'],
+  나눔명조: styles['font-nanum-myeongjo'],
+  '나눔손글씨 손편지체': styles['font-naunm-hand'],
 };
-
-const formatFontName = (font) =>
-  font
-    .replace('NanumMyeongjo', '나눔명조')
-    .replace('NanumSonPyeonjiCe', '나눔손글씨 손편지체');
 
 export default function FontSelect({ defaultValue = 'Noto Sans', onChange }) {
   const dropdownRef = useRef(null);
@@ -40,7 +35,7 @@ export default function FontSelect({ defaultValue = 'Noto Sans', onChange }) {
           className={`${styles['dropdown__button']} ${fontClassMap[selected]}`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          {formatFontName(selected)}
+          {selected}
           <span
             className={`${styles.dropdown__arrow} ${isOpen ? styles.open : ''}`}
           />
@@ -53,7 +48,7 @@ export default function FontSelect({ defaultValue = 'Noto Sans', onChange }) {
                 className={`${styles['dropdown__item']} ${fontClassMap[font]}`}
                 onClick={() => handleSelect(font)}
               >
-                {formatFontName(font)}
+                {font}
               </li>
             ))}
           </ul>
