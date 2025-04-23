@@ -1,8 +1,11 @@
 import './assets/styles/base.scss';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
-import Test from './pages/List-page/Test';
+import RecipientList from './pages/RecipientList/RecipientList';
 import Home from './pages/Home/Home';
+import CreateRecipient from './pages/CreateRecipient/CreateRecipient';
+import Recipient from './pages/Recipient/Recipient';
+import MessageForm from './pages/MessageForm/MessageForm';
 
 export default function App() {
   return (
@@ -10,7 +13,10 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Test />} />
+        <Route path="/list" element={<RecipientList />} />
+        <Route path="/post" element={<CreateRecipient />} />
+        <Route path="/post/:id" element={<Recipient />} />
+        <Route path="/post/:id/message" element={<MessageForm />} />
       </Routes>
     </>
   );

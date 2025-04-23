@@ -1,0 +1,34 @@
+@use '../../assets/styles/variables.scss' as *;
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 20px 0px 20px;
+}
+h2 {
+  @include font-24-bold;
+  min-width: 1160px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+.section-group {
+  margin-bottom: 64px;
+}
+
+@media (min-width: 361px) and (max-width: 768px) {
+  .section-group {
+    margin-bottom: 156px;
+  }
+}
+@media (min-width: 0px) and (max-width: 360px) {
+  section {
+    margin-top: 40px;
+  }
+  .section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    margin-bottom: 66px;
+  }
+}
