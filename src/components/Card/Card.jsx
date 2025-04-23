@@ -6,6 +6,7 @@ import Badge from '../Badge/Badge';
 import styles from './Card.module.scss';
 
 export default function Card({
+  id,
   image,
   recipientId,
   sender,
@@ -13,18 +14,25 @@ export default function Card({
   children,
   createdAt,
   empty = false,
+  onDelete,
 }) {
   const navigate = useNavigate();
   const sanitizedHTML = DOMPurify.sanitize(children);
 
-  function handleClick() {
+  function clickPost() {
     navigate(`/post/${recipientId}/message/`);
+  }
+
+  function clickDelete() {
+    if (confirm('정말 삭제하시겠어요?')) {
+      onDelete?.(id);
+    }
   }
 
   return (
     <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
       {empty ? (
-        <div onClick={handleClick}>
+        <div onClick={clickPost}>
           <img src={plus} alt="추가하기" />
         </div>
       ) : (
@@ -44,7 +52,7 @@ export default function Card({
               </div>
             </div>
             <div className={styles['card__delete-button']}>
-              <button>
+              <button onClick={clickDelete}>
                 <img src={deleteIcon} alt="쓰레기통 아이콘" />
               </button>
             </div>

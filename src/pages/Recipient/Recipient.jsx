@@ -2,6 +2,7 @@ import { useParams } from 'react-router';
 import { useEffect, useState, useRef } from 'react';
 import getRecipient from '../../api/getRecipient';
 import getMessages from '../../api/getMessages';
+import deleteMessage from '../../api/deleteMessage';
 import HeaderService from '../../components/recipient/HeaderService/HeaderService';
 import Card from '../../components/Card/Card';
 import styles from './Recipient.module.scss';
@@ -71,6 +72,17 @@ export default function Recipient() {
     setOffset((prev) => prev + limit);
   };
 
+  async function handleDeleteMessage(id) {
+    try {
+      await deleteMessage(id);
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== id),
+      );
+    } catch (error) {
+      console.error('삭제 실패:', error);
+    }
+  }
+
   if (!postData || messages.length < 0) return <div>Loading...</div>;
 
   return (
@@ -89,10 +101,12 @@ export default function Recipient() {
           {messages.map((msg) => (
             <Card
               key={msg.id}
+              id={msg.id}
               image={msg.profileImageURL}
               sender={msg.sender}
               relationship={msg.relationship}
               createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
+              onDelete={handleDeleteMessage}
             >
               {msg.content}
             </Card>
