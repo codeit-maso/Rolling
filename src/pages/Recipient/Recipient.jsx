@@ -93,6 +93,7 @@ export default function Recipient() {
               sender={msg.sender}
               relationship={msg.relationship}
               createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
+              font={msg.font}
             >
               {msg.content}
             </Card>

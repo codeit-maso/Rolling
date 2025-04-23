@@ -74,6 +74,7 @@ export default function CreateRecipient() {
           value={value}
           onChange={handleInputChange}
           onBlur={handleBlur}
+          maxLength={40}
           isError={isError}
         />
       </div>
