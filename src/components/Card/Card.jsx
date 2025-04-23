@@ -12,6 +12,7 @@ export default function Card({
   relationship,
   children,
   createdAt,
+  font,
   empty = false,
 }) {
   const navigate = useNavigate();
@@ -20,6 +21,13 @@ export default function Card({
   function handleClick() {
     navigate(`/post/${recipientId}/message/`);
   }
+
+  const fontFamilyMap = {
+    'Noto Sans': '"Noto Sans", sans-serif',
+    Pretendard: '"Pretendard", sans-serif',
+    나눔명조: '"Nanum Myeongjo", serif',
+    '나눔손글씨 손편지체': '"Nanum Sonpyeonji Ce", cursive',
+  };
 
   return (
     <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
@@ -51,7 +59,10 @@ export default function Card({
           </header>
           <div className={styles['card__body']}>
             <div className={styles['card__content']}>
-              <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
+              <div
+                style={{ fontFamily: fontFamilyMap[font] }}
+                dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+              />
             </div>
           </div>
           <footer className={styles['card__footer']}>{createdAt}</footer>
