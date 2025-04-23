@@ -69,7 +69,7 @@ export default function MessageForm() {
 
       localStorage.removeItem('quill-content');
       setMessage('');
-      navigate(`/post/${res.id}`);
+      navigate(`/post/${id}`);
     } catch (error) {
       console.error('메세지 전송 실패', error);
     }
