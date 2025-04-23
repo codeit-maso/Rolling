@@ -85,6 +85,7 @@ export default function MessageForm() {
             value={sender}
             onChange={handleInputChange}
             onBlur={handleBlur}
+            maxLength={40}
             isError={isError}
           />
         </div>
