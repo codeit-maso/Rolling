@@ -2,6 +2,7 @@ import { useParams } from 'react-router';
 import { useEffect, useState, useRef } from 'react';
 import getRecipient from '../../api/getRecipient';
 import getMessages from '../../api/getMessages';
+import HeaderService from '../../components/recipient/HeaderService/HeaderService';
 import Card from '../../components/Card/Card';
 import styles from './Recipient.module.scss';
 
@@ -73,29 +74,32 @@ export default function Recipient() {
   if (!postData || messages.length === 0) return <div>Loading...</div>;
 
   return (
-    <div
-      className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''}`}
-      style={
-        postData.backgroundImageURL
-          ? { backgroundImage: `url(${postData.backgroundImageURL})` }
-          : {}
-      }
-    >
-      <div className={styles['card-container']}>
-        <Card recipientId={messages[0].recipientId} empty={true} />
-        {messages.map((msg) => (
-          <Card
-            key={msg.id}
-            image={msg.profileImageURL}
-            sender={msg.sender}
-            relationship={msg.relationship}
-            createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
-          >
-            {msg.content}
-          </Card>
-        ))}
+    <>
+      <HeaderService />
+      <div
+        className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''}`}
+        style={
+          postData.backgroundImageURL
+            ? { backgroundImage: `url(${postData.backgroundImageURL})` }
+            : {}
+        }
+      >
+        <div className={styles['card-container']}>
+          <Card recipientId={messages[0].recipientId} empty={true} />
+          {messages.map((msg) => (
+            <Card
+              key={msg.id}
+              image={msg.profileImageURL}
+              sender={msg.sender}
+              relationship={msg.relationship}
+              createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
+            >
+              {msg.content}
+            </Card>
+          ))}
+        </div>
+        {hasNextMessage && <div ref={observerRef} className="load"></div>}
       </div>
-      {hasNextMessage && <div ref={observerRef} className="load"></div>}
-    </div>
+    </>
   );
 }
