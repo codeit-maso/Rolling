@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import './RecipientList.module.scss';
+import { useNavigate } from 'react-router-dom';
+import styles from './RecipientList.module.scss';
 import Carousel from './Carousel';
 import getRecipients from '../../api/getRecipients';
+import Button from '../../components/common/Button';
 
 //인기순 정렬
 function sortByPopularity(array) {
@@ -13,6 +15,7 @@ function sortByPopularity(array) {
 export default function RecipientList() {
   const [popularity, setPopularity] = useState([]);
   const [recently, setRecently] = useState([]);
+  const navigate = useNavigate();
 
   //데이터 받아옴, 상태 업데이트
   useEffect(() => {
@@ -31,14 +34,17 @@ export default function RecipientList() {
 
   return (
     <>
-      <section>
-        <h2>인기 롤링 페이퍼 🔥</h2>
-        <Carousel recipients={popularity} />
-      </section>
-      <section>
-        <h2>최근에 만든 롤링 페이퍼 ⭐️</h2>
-        <Carousel recipients={recently} />
-      </section>
+      <div className={styles['section-group']}>
+        <section>
+          <h2>인기 롤링 페이퍼 🔥</h2>
+          <Carousel recipients={popularity} />
+        </section>
+        <section>
+          <h2>최근에 만든 롤링 페이퍼 ⭐️</h2>
+          <Carousel recipients={recently} />
+        </section>
+      </div>
+      <Button children="나도 만들어보기" onClick={() => navigate('/post')} />
     </>
   );
 }

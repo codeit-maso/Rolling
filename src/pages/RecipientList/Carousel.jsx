@@ -21,15 +21,6 @@ export default function Carousel({ recipients }) {
     }
   }
 
-  //shadow.....
-  function makeShadow() {
-    const shadows = [];
-    for (let i = 0; i < 7; i++) {
-      shadows.push(<div key={i} className={styles.shadow}></div>);
-    }
-    return shadows;
-  }
-
   return (
     <div className={styles.carousel}>
       <div className={styles['carousel__cardset-wrapper']}>
@@ -45,12 +36,13 @@ export default function Carousel({ recipients }) {
           className={`${styles['carousel__direction-button']} ${styles.back}`}
         ></button>
       )}
-      {index !== 4 && ( // 캐러셀 끝에 도달하기 전까지
-        <button
-          onClick={() => settingIndex('next')}
-          className={`${styles['carousel__direction-button']}`}
-        ></button>
-      )}
+      {recipients.length > 4 &&
+        index !== 4 && ( // 캐러셀 끝에 도달하기 전까지
+          <button
+            onClick={() => settingIndex('next')}
+            className={`${styles['carousel__direction-button']}`}
+          ></button>
+        )}
     </div>
   );
 }
