@@ -1,5 +1,5 @@
 import styles from './RecipientCard.module.scss';
-import RecentMessages from './recentMessages';
+import RecentMessages from './RecentMessages';
 import TopReactions from './TopReactions';
 import { useNavigate } from 'react-router-dom';
 
