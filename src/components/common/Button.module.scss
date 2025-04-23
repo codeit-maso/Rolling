@@ -34,8 +34,10 @@
   }
 
   &--primary {
+    display: block;
     width: 28rem;
     height: 5.6rem;
+    margin: 0 auto;
   }
 
   &--create {
@@ -57,5 +59,18 @@
     padding: 0.7rem 1.6rem;
     border-radius: 6px;
     @include font-16-regular;
+  }
+
+  @media (min-width: 361px) and (max-width: 768px) {
+    &--primary {
+      width: 93.75vw;
+      margin: 24px;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 768px) {
+    &--primary {
+      width: 88.9vw;
+      margin: 24px 20px;
+    }
   }
 }

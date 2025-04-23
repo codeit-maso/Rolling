@@ -1,6 +1,7 @@
 import { api } from './api';
 
 export default async function getRecipients() {
-  const res = await api.get('/13-5/recipients/');
+  const teamId = import.meta.env.VITE_TEAM_ID;
+  const res = await api.get(`/${teamId}/recipients/`);
   return res.data;
 }
