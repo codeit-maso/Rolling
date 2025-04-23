@@ -75,7 +75,7 @@ export default function Recipient() {
 
   return (
     <>
-      <HeaderService />
+      <HeaderService recipient={postData} />
       <div
         className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''}`}
         style={
