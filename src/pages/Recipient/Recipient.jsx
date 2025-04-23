@@ -1,10 +1,12 @@
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState, useRef } from 'react';
 import getRecipient from '../../api/getRecipient';
 import getMessages from '../../api/getMessages';
-import deleteMessage from '../../api/deleteMessage';
+import deleteMessage from '../../api/deleteMessage.js';
+import deleteRecipient from '../../api/deleteRecipient.js';
 import HeaderService from '../../components/recipient/HeaderService/HeaderService';
 import Card from '../../components/Card/Card';
+import Button from '../../components/common/Button';
 import styles from './Recipient.module.scss';
 
 export default function Recipient() {
@@ -15,6 +17,7 @@ export default function Recipient() {
   const [loading, setLoading] = useState(false);
   const [hasNextMessage, setHasNextMessage] = useState(false);
   const observerRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipient = async () => {
@@ -83,6 +86,17 @@ export default function Recipient() {
     }
   }
 
+  async function handleDeleteRecipient(id) {
+    try {
+      if (confirm('정말 이 페이지를 삭제하시겠어요??')) {
+        await deleteRecipient(id);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('삭제 실패:', error);
+    }
+  }
+
   if (!postData || messages.length < 0) return <div>Loading...</div>;
 
   return (
@@ -96,6 +110,15 @@ export default function Recipient() {
             : {}
         }
       >
+        <div className={styles['button-container']}>
+          <Button
+            className={styles['delete-button']}
+            type="delete"
+            onClick={() => handleDeleteRecipient(id)}
+          >
+            삭제하기
+          </Button>
+        </div>
         <div className={styles['card-container']}>
           <Card recipientId={id} empty={true} />
           {messages.map((msg) => (
