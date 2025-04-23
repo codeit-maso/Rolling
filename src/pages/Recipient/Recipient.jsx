@@ -71,7 +71,7 @@ export default function Recipient() {
     setOffset((prev) => prev + limit);
   };
 
-  if (!postData || messages.length === 0) return <div>Loading...</div>;
+  if (!postData || messages.length < 0) return <div>Loading...</div>;
 
   return (
     <>
@@ -85,7 +85,7 @@ export default function Recipient() {
         }
       >
         <div className={styles['card-container']}>
-          <Card recipientId={messages[0].recipientId} empty={true} />
+          <Card recipientId={id} empty={true} />
           {messages.map((msg) => (
             <Card
               key={msg.id}
