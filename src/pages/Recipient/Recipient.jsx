@@ -1,34 +1,105 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
+import { useEffect, useState, useRef } from 'react';
+import getRecipient from '../../api/getRecipient';
+import getMessages from '../../api/getMessages';
 import HeaderService from '../../components/recipient/HeaderService/HeaderService';
-import fetchRecipient from '../../api/fetchRecipient';
+import Card from '../../components/Card/Card';
+import styles from './Recipient.module.scss';
 
 export default function Recipient() {
-  const [recipient, setRecipient] = useState(null);
   const { id } = useParams();
+  const [postData, setPostData] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [hasNextMessage, setHasNextMessage] = useState(false);
+  const observerRef = useRef();
 
   useEffect(() => {
-    if (!id) {
-      console.error('Recipient ID가 제공되지 않았습니다');
-      return;
-    }
-
-    async function loadData() {
+    const fetchRecipient = async () => {
       try {
-        const recipientData = await fetchRecipient(id);
-
-        setRecipient(recipientData);
+        const recipient = await getRecipient(id);
+        setPostData(recipient);
+        setHasNextMessage(recipient.messageCount > 0);
+        setLoading(false);
       } catch (error) {
-        console.error('데이터 가져오기 실패:', error);
+        console.error('데이터 로딩 실패:', error.response.data);
       }
-    }
+    };
 
-    loadData();
+    fetchRecipient();
   }, [id]);
 
+  useEffect(() => {
+    setLoading(true);
+    const fetchMessages = async () => {
+      try {
+        const limit = offset === 0 ? 8 : 9;
+        const newMessages = await getMessages(id, offset, limit);
+        offset === 0
+          ? setMessages(newMessages.results)
+          : setMessages((prev) => [...prev, ...newMessages.results]);
+        if (!postData) return;
+        setHasNextMessage(offset < postData.messageCount);
+        setLoading(false);
+      } catch (error) {
+        console.error(
+          '데이터 로딩 실패:',
+          error.response?.data || error.message,
+        );
+      }
+    };
+
+    fetchMessages();
+  }, [id, offset]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const firstEntry = entries[0];
+      if (firstEntry.isIntersecting && hasNextMessage && !loading) {
+        loadMoreMessages();
+      }
+    });
+    if (observerRef.current) observer.observe(observerRef.current);
+    return () => {
+      if (observerRef.current) observer.unobserve(observerRef.current);
+    };
+  }, [observerRef.current, hasNextMessage, loading]);
+
+  const loadMoreMessages = () => {
+    const limit = offset === 0 ? 8 : 9;
+    setOffset((prev) => prev + limit);
+  };
+
+  if (!postData || messages.length < 0) return <div>Loading...</div>;
+
   return (
-    <div>
-      <HeaderService recipient={recipient} />
-    </div>
+    <>
+      <HeaderService />
+      <div
+        className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''}`}
+        style={
+          postData.backgroundImageURL
+            ? { backgroundImage: `url(${postData.backgroundImageURL})` }
+            : {}
+        }
+      >
+        <div className={styles['card-container']}>
+          <Card recipientId={id} empty={true} />
+          {messages.map((msg) => (
+            <Card
+              key={msg.id}
+              image={msg.profileImageURL}
+              sender={msg.sender}
+              relationship={msg.relationship}
+              createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
+            >
+              {msg.content}
+            </Card>
+          ))}
+        </div>
+        {hasNextMessage && <div ref={observerRef} className="load"></div>}
+      </div>
+    </>
   );
 }

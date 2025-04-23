@@ -1,0 +1,104 @@
+.homeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 80px 0;
+}
+
+.sectionBox {
+  display: flex;
+  align-items: center;
+  background-color: #f6f8ff;
+  border-radius: 16px;
+  width: 1200px;
+  height: 324px;
+  padding: 40px 60px;
+  box-sizing: border-box;
+}
+
+.leftImage {
+  flex-direction: row;
+}
+
+.rightImage {
+  flex-direction: row-reverse;
+}
+
+.sectionImage {
+  width: 720px;
+  height: 204px;
+  object-fit: contain;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 360px;
+}
+
+.pointBadge {
+  background-color: #9935ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #181818;
+}
+
+.subtext {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #555;
+}
+
+.buttonWrapper {
+  margin-top: 40px;
+}
+
+@media (max-width: 1247px) {
+  .sectionBox {
+    width: 100%;
+    padding: 40px 32px;
+  }
+  .homeWrapper {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .homeWrapper {
+    padding: 40px 0;
+    padding-inline: 24px;
+  }
+
+  .sectionBox {
+    flex-direction: column;
+    height: auto;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+
+  .sectionImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .textBox {
+    width: 100%;
+  }
+
+  .buttonWrapper {
+    width: 100%;
+  }
+}

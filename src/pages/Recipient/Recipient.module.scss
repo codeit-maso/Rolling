@@ -1,0 +1,37 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.post-container {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 113px 0;
+}
+
+.with-image {
+  background-repeat: no-repeat;
+}
+
+.background--beige {
+  background-color: $beige-200;
+}
+
+.background--blue {
+  background-color: $blue-200;
+}
+
+.background--green {
+  background-color: $green-200;
+}
+
+.background--purple {
+  background-color: $purple-200;
+}
+
+.card-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 24px;
+}
