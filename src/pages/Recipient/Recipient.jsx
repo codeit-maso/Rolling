@@ -88,10 +88,14 @@ export default function Recipient() {
 
   async function handleDeleteRecipient(id) {
     try {
-      if (confirm('정말 이 페이지를 삭제하시겠어요??')) {
-        await deleteRecipient(id);
-        navigate('/');
-      }
+      const firstConfirm = confirm('정말 이 페이지를 삭제하시겠어요?');
+      if (!firstConfirm) return;
+      const secondConfirm = confirm(
+        '정말 정말 삭제하시겠어요? 되돌릴 수 없어요!',
+      );
+      if (!secondConfirm) return;
+      await deleteRecipient(id);
+      navigate('/');
     } catch (error) {
       console.error('삭제 실패:', error);
     }
