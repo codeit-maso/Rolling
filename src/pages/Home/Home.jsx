@@ -42,7 +42,9 @@ export default function Home() {
       </section>
 
       <div className={styles.buttonWrapper}>
-        <Button onClick={() => navigate('/list')}>구경해보기</Button>
+        <Button type="primary" onClick={() => navigate('/list')}>
+          구경해보기
+        </Button>
       </div>
     </div>
   );
