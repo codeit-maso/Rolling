@@ -18,6 +18,7 @@ export default function MessageForm() {
   const [relationship, setRelationship] = useState('지인');
   const [message, setMessage] = useState('');
   const [font, setFont] = useState('Noto Sans');
+  const [isRestored, setIsRestored] = useState(false);
 
   const stripHtml = (html) => html.replace(/<[^>]+>/g, '').trim();
   const isValid = sender.trim() !== '' && stripHtml(message) !== '';
@@ -32,17 +33,37 @@ export default function MessageForm() {
     setIsError(sender.trim() === '');
   }
 
+  function resetForm() {
+    setSender('');
+    setProfileImage(DEFAULT_PROFILE_IMAGE);
+    setRelationship('지인');
+    setMessage('');
+    setFont('Noto Sans');
+  }
+
   useEffect(() => {
-    const saved = localStorage.getItem('quill-content');
-    if (saved) {
-      setMessage(saved);
+    try {
+      const saved = localStorage.getItem('message-form');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setSender(parsed.sender || '');
+        setProfileImage(parsed.profileImage || DEFAULT_PROFILE_IMAGE);
+        setRelationship(parsed.relationship || '지인');
+        setMessage(parsed.message || '');
+        setFont(parsed.font || 'Noto Sans');
+      }
+    } catch (err) {
+      console.error('복원 중 에러 발생', err);
+      localStorage.removeItem('message-form');
+    } finally {
+      setIsRestored(true);
     }
   }, []);
 
   useEffect(() => {
     const timeout = setTimeout(
       () => {
-        localStorage.removeItem('quill-content');
+        localStorage.removeItem('message-form');
         console.log('하루 뒤 자동 삭제');
       },
       1000 * 60 * 60 * 24,
@@ -52,8 +73,17 @@ export default function MessageForm() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('quill-content', message);
-  }, [message]);
+    if (!isRestored) return;
+
+    const formData = {
+      sender,
+      profileImage,
+      relationship,
+      message,
+      font,
+    };
+    localStorage.setItem('message-form', JSON.stringify(formData));
+  }, [sender, profileImage, relationship, message, font]);
 
   async function handleSubmit() {
     if (sender.trim() === '' || stripHtml(message) === '') {
@@ -72,8 +102,8 @@ export default function MessageForm() {
         font,
       });
 
-      localStorage.removeItem('quill-content');
-      setMessage('');
+      localStorage.removeItem('message-form');
+      resetForm();
       navigate(`/post/${id}`);
     } catch (error) {
       console.error('메세지 전송 실패', error);
@@ -95,13 +125,13 @@ export default function MessageForm() {
           />
         </div>
         <div className={styles['message-form__profile-selector']}>
-          <UserProfileSelector onSelect={setProfileImage} />
+          <UserProfileSelector
+            value={profileImage}
+            onSelect={setProfileImage}
+          />
         </div>
         <div className={styles['message-form__relationship-select']}>
-          <RelationshipSelect
-            defaultValue={relationship}
-            onChange={setRelationship}
-          />
+          <RelationshipSelect value={relationship} onChange={setRelationship} />
         </div>
         <div className={styles['message-form__editor']}>
           <Editor value={message} onChange={setMessage} font={font} />

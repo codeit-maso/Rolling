@@ -3,9 +3,11 @@ import fetchProfileImages from '../../api/fetchProfileImages.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
 import styles from './UserProfileSelector.module.scss';
 
-export default function UserProfileSelector({ onSelect }) {
+export default function UserProfileSelector({
+  value = DEFAULT_PROFILE_IMAGE,
+  onSelect,
+}) {
   const [profileImages, setProfileImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(DEFAULT_PROFILE_IMAGE);
 
   useEffect(() => {
     const loadImages = async () => {
@@ -15,17 +17,12 @@ export default function UserProfileSelector({ onSelect }) {
     loadImages();
   }, []);
 
-  const handleSelect = (url) => {
-    setSelectedImage(url);
-    onSelect?.(url);
-  };
-
   return (
     <div className={styles['profile-select']}>
       <h2 className={styles['profile-select__title']}>프로필 이미지</h2>
       <div className={styles['profile-select__content']}>
         <img
-          src={selectedImage}
+          src={value}
           alt="선택된 프로필"
           className={styles['profile-select__selected-image']}
         />
@@ -40,11 +37,9 @@ export default function UserProfileSelector({ onSelect }) {
                 src={url}
                 alt={`profile-${idx}`}
                 className={`${styles['profile-select__image']} ${
-                  selectedImage === url
-                    ? styles['profile-select__image--selected']
-                    : ''
+                  value === url ? styles['profile-select__image--selected'] : ''
                 }`}
-                onClick={() => handleSelect(url)}
+                onClick={() => onSelect?.(url)}
               />
             ))}
           </div>
