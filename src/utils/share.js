@@ -3,7 +3,6 @@ export const initializeKakaoSDK = () => {
     return;
   }
 
-  // 카카오 SDK 로드
   const script = document.createElement('script');
   script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js';
   script.async = true;
@@ -46,4 +45,14 @@ export const shareKakao = (recipient, url) => {
       },
     ],
   });
+};
+
+export const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (err) {
+    console.error('클립보드 복사 실패:', err);
+    return false;
+  }
 };
