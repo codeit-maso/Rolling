@@ -6,6 +6,7 @@ import Badge from '../Badge/Badge';
 import styles from './Card.module.scss';
 
 export default function Card({
+  id,
   image,
   recipientId,
   sender,
@@ -14,14 +15,22 @@ export default function Card({
   createdAt,
   font,
   empty = false,
+  onDelete,
+  onClick,
 }) {
   const navigate = useNavigate();
   const sanitizedHTML = DOMPurify.sanitize(children);
 
-  function handleClick() {
+  function clickPost() {
     navigate(`/post/${recipientId}/message/`);
   }
 
+  function clickDelete(e) {
+    e.stopPropagation();
+    if (confirm('정말 삭제하시겠어요?')) {
+      onDelete?.(id);
+    }
+  }
   const fontFamilyMap = {
     'Noto Sans': '"Noto Sans", sans-serif',
     Pretendard: '"Pretendard", sans-serif',
@@ -30,9 +39,12 @@ export default function Card({
   };
 
   return (
-    <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
+    <article
+      className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}
+      onClick={() => !empty && onClick?.(id)}
+    >
       {empty ? (
-        <div onClick={handleClick}>
+        <div onClick={clickPost}>
           <img src={plus} alt="추가하기" />
         </div>
       ) : (
@@ -52,7 +64,7 @@ export default function Card({
               </div>
             </div>
             <div className={styles['card__delete-button']}>
-              <button>
+              <button onClick={clickDelete}>
                 <img src={deleteIcon} alt="쓰레기통 아이콘" />
               </button>
             </div>

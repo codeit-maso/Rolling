@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 113px 0;
+  padding: 63px 0;
 }
 
 .with-image {
@@ -34,4 +34,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px 24px;
+}
+
+.button-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 11px;
 }
