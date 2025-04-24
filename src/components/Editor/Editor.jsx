@@ -14,6 +14,13 @@ const formats = [
   'background',
 ];
 
+const fontFamilyMap = {
+  나눔명조: '"Nanum Myeongjo", serif',
+  '나눔손글씨 손편지체': '"Nanum Sonpyeonji Ce", cursive',
+  Pretendard: '"Pretendard", sans-serif',
+  'Noto Sans': '"Noto Sans", sans-serif',
+};
+
 export default function Editor({ value, onChange, font }) {
   const modules = useMemo(() => {
     return {
@@ -30,7 +37,7 @@ export default function Editor({ value, onChange, font }) {
   useEffect(() => {
     const editorElement = document.querySelector('.ql-editor');
     if (editorElement) {
-      editorElement.style.fontFamily = font;
+      editorElement.style.fontFamily = fontFamilyMap[font];
       editorElement.style.fontSize = '18px';
     }
   }, [font]);

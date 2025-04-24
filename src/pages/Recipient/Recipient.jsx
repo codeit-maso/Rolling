@@ -147,6 +147,7 @@ export default function Recipient() {
               createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
               onDelete={handleDeleteMessage}
               onClick={() => handleOpenModal(msg.id)}
+              font={msg.font}
             >
               {msg.content}
             </Card>

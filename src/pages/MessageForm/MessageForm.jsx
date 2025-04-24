@@ -80,11 +80,12 @@ export default function MessageForm() {
       <div className={styles['message-form__content']}>
         <div className={styles['message-form__input']}>
           <FormInput
-            label="Form."
+            label="From."
             placeholder="이름을 입력해 주세요."
             value={sender}
             onChange={handleInputChange}
             onBlur={handleBlur}
+            maxLength={40}
             isError={isError}
           />
         </div>
