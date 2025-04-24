@@ -7,7 +7,7 @@ import RelationshipSelect from '../../components/RelationshipSelect/Relationship
 import Editor from '../../components/Editor/Editor';
 import FontSelect from '../../components/FontSelect/FontSelect';
 import Button from '../../components/common/Button';
-import createMessage from '../../api/createMessage';
+import postMessage from '../../api/postMessage';
 import styles from './MessageForm.module.scss';
 
 export default function MessageForm() {
@@ -57,7 +57,7 @@ export default function MessageForm() {
 
   async function handleSubmit() {
     try {
-      const res = await createMessage({
+      await postMessage({
         team: '15-7',
         recipientId: Number(id),
         sender,
