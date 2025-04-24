@@ -7,6 +7,7 @@ import deleteRecipient from '../../api/deleteRecipient.js';
 import HeaderService from '../../components/recipient/HeaderService/HeaderService';
 import Card from '../../components/Card/Card';
 import Button from '../../components/common/Button';
+import Modal from '../../components/Modal/Modal.jsx';
 import styles from './Recipient.module.scss';
 
 export default function Recipient() {
@@ -16,6 +17,7 @@ export default function Recipient() {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasNextMessage, setHasNextMessage] = useState(false);
+  const [selectedCardId, setSelectedCardId] = useState(null);
   const observerRef = useRef();
   const navigate = useNavigate();
 
@@ -101,6 +103,16 @@ export default function Recipient() {
     }
   }
 
+  function handleOpenModal(id) {
+    setSelectedCardId(id);
+  }
+
+  function handleCloseModal() {
+    setSelectedCardId(null);
+  }
+
+  const selectedCard = messages.find((card) => card.id === selectedCardId);
+
   if (!postData || messages.length < 0) return <div>Loading...</div>;
 
   return (
@@ -134,10 +146,26 @@ export default function Recipient() {
               relationship={msg.relationship}
               createdAt={msg.createdAt.slice(0, 10).split('-').join('.')}
               onDelete={handleDeleteMessage}
+              onClick={() => handleOpenModal(msg.id)}
             >
               {msg.content}
             </Card>
           ))}
+          {selectedCardId && (
+            <Modal
+              key={selectedCard.id}
+              image={selectedCard.profileImageURL}
+              sender={selectedCard.sender}
+              relationship={selectedCard.relationship}
+              createdAt={selectedCard.createdAt
+                .slice(0, 10)
+                .split('-')
+                .join('.')}
+              onClose={handleCloseModal}
+            >
+              {selectedCard.content}
+            </Modal>
+          )}
         </div>
         {hasNextMessage && <div ref={observerRef} className="load"></div>}
       </div>

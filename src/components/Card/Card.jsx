@@ -15,6 +15,7 @@ export default function Card({
   createdAt,
   empty = false,
   onDelete,
+  onClick,
 }) {
   const navigate = useNavigate();
   const sanitizedHTML = DOMPurify.sanitize(children);
@@ -30,7 +31,10 @@ export default function Card({
   }
 
   return (
-    <article className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}>
+    <article
+      className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}
+      onClick={() => !empty && onClick?.(id)}
+    >
       {empty ? (
         <div onClick={clickPost}>
           <img src={plus} alt="추가하기" />
