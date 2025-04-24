@@ -56,6 +56,11 @@ export default function MessageForm() {
   }, [message]);
 
   async function handleSubmit() {
+    if (sender.trim() === '' || stripHtml(message) === '') {
+      alert('이름과 메시지를 모두 입력해주세요.');
+      return;
+    }
+
     try {
       await postMessage({
         team: '15-7',
@@ -105,7 +110,7 @@ export default function MessageForm() {
           <FontSelect value={font} onChange={setFont} />
         </div>
       </div>
-      <Button type="create" onClick={handleSubmit} disabled={!isValid}>
+      <Button type="button" onClick={handleSubmit} disabled={!isValid}>
         생성하기
       </Button>
     </div>
