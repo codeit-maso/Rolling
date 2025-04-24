@@ -1,50 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './RecipientList.module.scss';
-import Carousel from './Carousel';
 import getRecipients from '../../api/getRecipients';
 import Button from '../../components/common/Button';
+import React from 'react';
+// import Carousel from './Carousel';
+const Carousel = React.lazy(() => import('../../components/Carousel/Carousel'));
 
-//인기순 정렬
-function sortByPopularity(array) {
-  return [...array].sort(
-    (a, b) =>
-      b.messageCount + b.reactionCount - (a.messageCount + a.reactionCount),
-  );
-}
+////스켈레톤 구현중..
+import { createContext } from 'react';
+////
+
 export default function RecipientList() {
   const [popularity, setPopularity] = useState([]);
   const [recently, setRecently] = useState([]);
+  const [isFetched, setIsFetched] = useState(false); //
   const navigate = useNavigate();
+
+  ////스켈레톤 구현중..
+  // const [isLoading, setIsLoading] = useState(false);
+  // const ImageLoadContext = createContext();
+  ////스켈레톤 구현중..
 
   //데이터 받아옴, 상태 업데이트
   useEffect(() => {
-    const getAndSet = async () => {
+    const fetchData = async () => {
       try {
-        const { results } = await getRecipients();
-        const sortedArray = sortByPopularity(results);
-        setRecently(results);
-        setPopularity(sortedArray);
+        const [dateRes, likedRes] = await Promise.all([
+          getRecipients(),
+          getRecipients('like'),
+        ]);
+        setRecently(dateRes.results);
+        setPopularity(likedRes.results);
+        setIsFetched(true); //
       } catch (error) {
-        console.error(`in '/list' page:: 데이터 불러오기 실패:`, error);
+        console.error('데이터 불러오기 실패', error);
       }
     };
-    getAndSet();
+    fetchData();
   }, []);
+  console.log(recently); //
+  console.log(popularity); //
 
   return (
     <>
+      {/* <ImageLoadContext.Provider value={{isLoading,setIsLoading}}> */}
+
       <div className={styles['section-group']}>
         <section>
           <h2>인기 롤링 페이퍼 🔥</h2>
-          <Carousel recipients={popularity} />
+          <Suspense fallback={<div className={styles.loading}></div>}>
+            <Carousel recipients={popularity} />
+          </Suspense>
         </section>
         <section>
           <h2>최근에 만든 롤링 페이퍼 ⭐️</h2>
-          <Carousel recipients={recently} />
+          <Suspense fallback={<div className={styles.loading}></div>}>
+            <Carousel recipients={recently} />
+          </Suspense>
         </section>
       </div>
       <Button children="나도 만들어보기" onClick={() => navigate('/post')} />
+      {/* </ImageLoadContext.Provider> */}
     </>
   );
 }

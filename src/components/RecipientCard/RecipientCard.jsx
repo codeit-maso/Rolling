@@ -1,6 +1,6 @@
 import styles from './RecipientCard.module.scss';
-import RecentMessages from './RecentMessages';
-import TopReactions from './TopReactions';
+import RecentMessages from '../RecentMessages/RecentMessages';
+import TopReactions from '../TopReactions/TopReactions';
 import { useNavigate } from 'react-router-dom';
 
 //캐러셀 내부 요소 - 카드 컴포넌트

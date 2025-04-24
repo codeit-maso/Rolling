@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Carousel.module.scss';
-import RecipientCard from './RecipientCard';
+import RecipientCard from '../RecipientCard/RecipientCard';
 
 export default function Carousel({ recipients }) {
   const [index, setIndex] = useState(0);
@@ -15,7 +15,7 @@ export default function Carousel({ recipients }) {
 
   function settingIndex(direction) {
     if (direction === 'next') {
-      setIndex((prev) => (prev + 1) % 8);
+      setIndex((prev) => prev + 1);
     } else if (direction === 'back') {
       setIndex((prev) => prev - 1);
     }

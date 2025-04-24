@@ -1,5 +1,11 @@
 @use '../../assets/styles/variables.scss' as *;
 
+.loading {
+  width: 1160px;
+  height: 260px;
+  background-color: yellow;
+}
+
 section {
   display: flex;
   flex-direction: column;
