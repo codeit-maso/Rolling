@@ -24,7 +24,8 @@ export default function Card({
     navigate(`/post/${recipientId}/message/`);
   }
 
-  function clickDelete() {
+  function clickDelete(e) {
+    e.stopPropagation();
     if (confirm('정말 삭제하시겠어요?')) {
       onDelete?.(id);
     }
