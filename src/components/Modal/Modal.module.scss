@@ -81,7 +81,6 @@
   }
 
   &__body {
-    width: 520px;
     height: 240px;
     overflow-y: auto;
   }
@@ -108,5 +107,11 @@
 
   &__button {
     align-self: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: calc(100% - 48px);
   }
 }
