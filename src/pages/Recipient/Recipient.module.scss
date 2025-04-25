@@ -1,5 +1,9 @@
 @use '../../assets/styles/variables.scss' as *;
 
+.loading-message {
+  @include font-20-regular;
+}
+
 .post-container {
   min-height: 100vh;
   background-size: cover;
