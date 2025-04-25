@@ -1,26 +1,17 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './RecipientList.module.scss';
 import getRecipients from '../../api/getRecipients';
 import Button from '../../components/common/Button';
-import React from 'react';
-// import Carousel from './Carousel';
-const Carousel = React.lazy(() => import('../../components/Carousel/Carousel'));
-
-////스켈레톤 구현중..
-import { createContext } from 'react';
-////
+import Carousel from '../../components/Carousel/Carousel';
+import { useImagePreloader } from '../../hooks/useImagePreloader';
+import CarouselSkeleton from '../../components/CarouselSkeleton/CarouselSkeleton';
 
 export default function RecipientList() {
   const [popularity, setPopularity] = useState([]);
   const [recently, setRecently] = useState([]);
-  const [isFetched, setIsFetched] = useState(false); //
+  const [isFetched, setIsFetched] = useState(false);
   const navigate = useNavigate();
-
-  ////스켈레톤 구현중..
-  // const [isLoading, setIsLoading] = useState(false);
-  // const ImageLoadContext = createContext();
-  ////스켈레톤 구현중..
 
   //데이터 받아옴, 상태 업데이트
   useEffect(() => {
@@ -32,36 +23,37 @@ export default function RecipientList() {
         ]);
         setRecently(dateRes.results);
         setPopularity(likedRes.results);
-        setIsFetched(true); //
+        setIsFetched(true);
       } catch (error) {
         console.error('데이터 불러오기 실패', error);
       }
     };
     fetchData();
   }, []);
-  console.log(recently); //
-  console.log(popularity); //
+
+  const isLoadingImages = useImagePreloader(isFetched ? recently : []);
 
   return (
     <>
-      {/* <ImageLoadContext.Provider value={{isLoading,setIsLoading}}> */}
-
       <div className={styles['section-group']}>
-        <section>
-          <h2>인기 롤링 페이퍼 🔥</h2>
-          <Suspense fallback={<div className={styles.loading}></div>}>
+        <section className={styles['section-listpage']}>
+          <h2 className={styles['section__h2']}>인기 롤링 페이퍼 🔥</h2>
+          {isLoadingImages ? (
+            <CarouselSkeleton className={styles['skeleton-liked']} />
+          ) : (
             <Carousel recipients={popularity} />
-          </Suspense>
+          )}
         </section>
-        <section>
-          <h2>최근에 만든 롤링 페이퍼 ⭐️</h2>
-          <Suspense fallback={<div className={styles.loading}></div>}>
+        <section className={styles['section-listpage']}>
+          <h2 className={styles['section__h2']}>최근에 만든 롤링 페이퍼 ⭐️</h2>
+          {isLoadingImages ? (
+            <CarouselSkeleton className={styles['skeleton-recently']} />
+          ) : (
             <Carousel recipients={recently} />
-          </Suspense>
+          )}
         </section>
       </div>
       <Button children="나도 만들어보기" onClick={() => navigate('/post')} />
-      {/* </ImageLoadContext.Provider> */}
     </>
   );
 }

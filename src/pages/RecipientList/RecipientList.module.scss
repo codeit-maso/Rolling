@@ -1,40 +1,58 @@
 @use '../../assets/styles/variables.scss' as *;
 
-.loading {
-  width: 1160px;
-  height: 260px;
-  background-color: yellow;
+// .skeleton-group {
+//   // position: absolute;
+//   // top: 52px;
+//   z-index: 1;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 102px;
+// }
+.skeleton-liked {
+  margin-bottom: 102px;
 }
 
-section {
+.section-listpage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 20px 0px 20px;
+  position: relative;
+  width: 100%;
+  margin: 50px auto;
+  padding: 0 12px;
 }
-h2 {
+.section__h2 {
   @include font-24-bold;
-  min-width: 1160px;
-  margin: 0 auto;
+  width: 1160px;
   margin-bottom: 16px;
 }
 .section-group {
   margin-bottom: 64px;
 }
 
-@media (min-width: 361px) and (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-listpage {
+    padding: 0 24px;
+  }
   .section-group {
     margin-bottom: 156px;
+    background-color: aqua;
+  }
+  .section__h2 {
+    max-width: 100%;
   }
 }
-@media (min-width: 0px) and (max-width: 360px) {
-  section {
-    margin-top: 40px;
+@media (max-width: 768px) {
+  .section-listpage {
+    padding: 0 20px;
+    margin: 40px auto;
   }
   .section-group {
-    display: flex;
-    flex-direction: column;
     gap: 34px;
     margin-bottom: 66px;
+    background-color: blueviolet;
+  }
+  .section__h2 {
+    width: 100%;
   }
 }

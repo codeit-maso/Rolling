@@ -29,15 +29,17 @@ export default function RecipientCard({ Recipient }) {
       onClick={() => navigate(`/post/${id}`)}
     >
       {backgroundColor === 'blue' && <div className={styles.triangle} />}
-      <h3 className={backgroundImageURL && styles.white}>{`To. ${name}`}</h3>
+      <h3
+        className={`${styles['card__h3']} ${backgroundImageURL ? styles.white : ''}`}
+      >{`To. ${name}`}</h3>
       <RecentMessages
         messages={recentMessages}
         count={messageCount}
       ></RecentMessages>
       <div
-        className={`${styles['writer-count']} ${backgroundImageURL && styles.white}`}
+        className={`${styles['card__writer-count']} ${backgroundImageURL && styles.white}`}
       >
-        <span className={styles.count}>{messageCount}</span>
+        <span className={styles['card__count']}>{messageCount}</span>
         <span>명이 작성했어요!</span>
       </div>
       <div className={styles['card__centerline']}></div>

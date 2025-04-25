@@ -1,14 +1,14 @@
 @use '../../assets/styles/variables.scss' as *;
 
-h3 {
+.card__h3 {
   @include font-24-bold;
   color: $gray-900;
 }
-.writer-count {
+.card__writer-count {
   @include font-16-regular;
   color: $gray-700;
 }
-.count {
+.card__count {
   @include font-16-bold;
 }
 .card__centerline {
@@ -108,7 +108,7 @@ h3 {
   }
 }
 
-@media (min-width: 0px) and (max-width: 360px) {
+@media (max-width: 767px) {
   .card {
     min-width: 208px;
     height: 232px;

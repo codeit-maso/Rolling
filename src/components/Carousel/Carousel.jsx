@@ -30,14 +30,14 @@ export default function Carousel({ recipients }) {
           ))}
         </div>
       </div>
-      {index > 0 && ( // 시작점 이후부터
+      {index > 0 && ( //시작점 이후부터
         <button
           onClick={() => settingIndex('back')}
           className={`${styles['carousel__direction-button']} ${styles.back}`}
         ></button>
       )}
-      {recipients.length > 4 &&
-        index !== 4 && ( // 캐러셀 끝에 도달하기 전까지
+      {recipients.length > 4 && // 캐러셀 끝에 도달하기 전까지
+        index !== 4 && (
           <button
             onClick={() => settingIndex('next')}
             className={`${styles['carousel__direction-button']}`}
