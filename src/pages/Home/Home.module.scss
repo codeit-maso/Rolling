@@ -1,104 +1,207 @@
+body {
+  overflow-x: hidden;
+}
+
 .homeWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.sectionBoxes {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 50px 0;
+  margin: 0px;
+}
+
+.sectionBoxes:first-of-type {
+  margin-top: 42px;
 }
 
 .sectionBox {
   display: flex;
-  align-items: center;
-  background-color: #f6f8ff;
-  border-radius: 16px;
-  width: 1200px;
-  height: 324px;
-  padding: 40px 60px;
-  box-sizing: border-box;
-}
 
-.leftImage {
-  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  height: 324px;
+
+  margin: 0 auto;
+  padding: 60px 0 60px 60px;
+  box-sizing: border-box;
+
+  border-radius: 16px;
+  background-color: #f6f8ff;
 }
 
 .rightImage {
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.leftImage {
   flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-bottom: 48px;
+}
+
+.sectionBox.leftImage {
+  padding-left: 30px;
 }
 
 .sectionImage {
-  width: 720px;
+  max-width: 720px;
   height: 204px;
-  object-fit: contain;
-}
-
-.textBox {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 360px;
 }
 
 .pointBadge {
-  background-color: #9935ff;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 80px;
+  height: 32px;
+
+  margin: 0 0 16px 0;
   padding: 6px 12px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+  color: #fff;
+  background-color: #9935ff;
   border-radius: 50px;
-  width: fit-content;
 }
 
 .title {
   font-size: 24px;
   font-weight: 700;
   line-height: 36px;
+  letter-spacing: -0.24px;
+
+  margin-bottom: 8px;
   color: #181818;
+}
+
+.title > span {
+  display: block;
 }
 
 .subtext {
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
+  letter-spacing: -0.18px;
   color: #555;
 }
 
-.buttonWrapper {
-  margin-top: 40px;
-}
-
-@media (max-width: 1247px) {
-  .sectionBox {
+@media (min-width: 768px) and (max-width: 1247px) {
+  .sectionBoxes {
     width: 100%;
-    padding: 40px 32px;
-  }
-  .homeWrapper {
-    padding: 60px 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .homeWrapper {
-    padding: 40px 0;
+    margin: 0 auto;
     padding-inline: 24px;
+    max-width: 960px;
+    box-sizing: border-box;
   }
 
   .sectionBox {
-    flex-direction: column;
+    width: 100%;
+    margin: 0;
     height: auto;
-    padding: 32px 24px;
-    gap: 24px;
+    align-items: center;
+    gap: 36px;
+    padding: 40px;
   }
 
-  .sectionImage {
-    width: 100%;
-    height: auto;
+  .rightImage,
+  .leftImage {
+    flex-direction: column;
+  }
+
+  .rightImage {
+    margin-bottom: 30px;
+  }
+
+  .leftImage {
+    margin-bottom: 48px;
   }
 
   .textBox {
     width: 100%;
   }
 
-  .buttonWrapper {
+  .pointBadge {
+    margin: 0 0 16px 0;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > span {
+      display: inline;
+    }
+  }
+
+  .subtext {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sectionBoxes {
+    padding-inline: 20px;
+    box-sizing: border-box;
     width: 100%;
+    margin: 0;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sectionBox {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 50px;
+  }
+
+  .rightImage,
+  .leftImage {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .sectionImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+  }
+
+  .textBox {
+    width: 100%;
+  }
+
+  .pointBadge {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    overflow: visible;
+    text-overflow: unset;
+
+    > span {
+      display: block;
+    }
+  }
+
+  .subtext {
   }
 }
