@@ -166,13 +166,15 @@ export default function CreateRecipient() {
           </ul>
         )}
       </div>
-      <Button
-        type="create"
-        onClick={handleButtonClick}
-        disabled={!value.trim()}
-      >
-        생성하기
-      </Button>
+      <div className={styles['create-page__create-button']}>
+        <Button
+          type="create"
+          onClick={handleButtonClick}
+          disabled={!value.trim()}
+        >
+          생성하기
+        </Button>
+      </div>
     </div>
   );
 }
