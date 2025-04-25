@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from './Editor.module.scss';
@@ -22,6 +22,8 @@ const fontFamilyMap = {
 };
 
 export default function Editor({ value, onChange, font }) {
+  const quillRef = useRef();
+
   const modules = useMemo(() => {
     return {
       toolbar: [
@@ -35,10 +37,10 @@ export default function Editor({ value, onChange, font }) {
   }, []);
 
   useEffect(() => {
-    const editorElement = document.querySelector('.ql-editor');
-    if (editorElement) {
-      editorElement.style.fontFamily = fontFamilyMap[font];
-      editorElement.style.fontSize = '18px';
+    const editorRoot = quillRef.current?.editor?.root;
+    if (editorRoot) {
+      editorRoot.style.fontFamily = fontFamilyMap[font];
+      editorRoot.style.fontSize = '18px';
     }
   }, [font]);
 
@@ -48,6 +50,7 @@ export default function Editor({ value, onChange, font }) {
 
       <div className={styled['editor__box']}>
         <ReactQuill
+          ref={quillRef}
           theme="snow"
           modules={modules}
           formats={formats}
