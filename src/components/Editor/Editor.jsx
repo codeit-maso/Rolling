@@ -27,9 +27,9 @@ export default function Editor({ value, onChange, font }) {
       toolbar: [
         ['bold', 'italic', 'underline'],
         [{ align: [] }],
+        [{ color: [] }, { background: [] }],
         [{ list: 'ordered' }, { list: 'bullet' }],
         ['link'],
-        [{ color: [] }, { background: [] }],
       ],
     };
   }, []);
