@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import fetchProfileImages from '../../api/fetchProfileImages.js';
+import getProfileImages from '../../api/getProfileImages.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
 import styles from './UserProfileSelector.module.scss';
 
@@ -11,7 +11,7 @@ export default function UserProfileSelector({
 
   useEffect(() => {
     const loadImages = async () => {
-      const images = await fetchProfileImages();
+      const images = await getProfileImages();
       setProfileImages(images);
     };
     loadImages();
