@@ -40,7 +40,7 @@ export default function Recipient() {
     setLoading(true);
     const fetchMessages = async () => {
       try {
-        const limit = offset === 0 ? 8 : 9;
+        const limit = offset === 0 ? 5 : 6;
         const newMessages = await getMessages(id, offset, limit);
         offset === 0
           ? setMessages(newMessages.results)
@@ -70,10 +70,10 @@ export default function Recipient() {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [observerRef.current, hasNextMessage, loading]);
+  }, [hasNextMessage, loading]);
 
   const loadMoreMessages = () => {
-    const limit = offset === 0 ? 8 : 9;
+    const limit = offset === 0 ? 5 : 6;
     setOffset((prev) => prev + limit);
   };
 
