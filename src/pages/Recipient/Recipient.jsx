@@ -166,6 +166,7 @@ export default function Recipient() {
               image={selectedCard.profileImageURL}
               sender={selectedCard.sender}
               relationship={selectedCard.relationship}
+              font={selectedCard.font}
               createdAt={selectedCard.createdAt
                 .slice(0, 10)
                 .split('-')
