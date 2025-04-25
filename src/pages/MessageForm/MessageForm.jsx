@@ -93,7 +93,7 @@ export default function MessageForm() {
 
     try {
       await postMessage({
-        team: '15-7',
+        team: import.meta.env.VITE_TEAM_ID,
         recipientId: Number(id),
         sender,
         profileImageURL: profileImage,
