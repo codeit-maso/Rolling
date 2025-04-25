@@ -1,12 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './HeaderService.module.scss';
 import emojiAdd from '../../../assets/images/emoji-add.svg';
-import shareIcon from '../../../assets/images/share.svg';
 import chevronDown from '../../../assets/images/chevron-down.svg';
-import fetchReactions from '../../../api/fetchReactions';
+import { fetchReactions, addReaction } from '../../../api/emojiReactions';
+import ShareButton from './Share/ShareButton';
 
 export default function HeaderService({ recipient }) {
   const [reactions, setReactions] = useState([]);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [showAllEmojisDropdown, setShowAllEmojisDropdown] = useState(false);
+  const emojiPickerRef = useRef(null);
+  const emojiMoreRef = useRef(null);
+
+  const commonEmojis = [
+    '😆',
+    '😉',
+    '😎',
+    '🥺',
+    '🤔',
+    '🤗',
+    '🤩',
+    '🤑',
+    '👍',
+    '❤️',
+    '🎉',
+    '👏',
+    '😊',
+    '🙌',
+    '💪',
+    '✨',
+    '👋',
+    '🤙',
+    '🙆',
+    '🙇',
+    '🙌',
+    '🙏',
+    '🤝',
+    '👀',
+  ];
 
   useEffect(() => {
     if (recipient?.id) {
@@ -19,6 +50,52 @@ export default function HeaderService({ recipient }) {
         });
     }
   }, [recipient?.id]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setShowEmojiPicker(false);
+      }
+
+      if (
+        emojiMoreRef.current &&
+        !emojiMoreRef.current.contains(event.target)
+      ) {
+        setShowAllEmojisDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleAllEmojisDropdown = () => {
+    setShowAllEmojisDropdown(!showAllEmojisDropdown);
+  };
+
+  const handleAddReaction = async (emoji) => {
+    if (!recipient?.id) return;
+
+    try {
+      await addReaction(recipient.id, emoji);
+
+      const updatedReactions = await fetchReactions(recipient.id);
+      setReactions(updatedReactions);
+      setShowEmojiPicker(false);
+      setShowAllEmojisDropdown(false);
+    } catch (error) {
+      console.error('이모지 추가 실패:', error);
+    }
+  };
+
+  const topReactions = [...reactions]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 3);
 
   return (
     <div className={styles['header-service']}>
@@ -55,33 +132,92 @@ export default function HeaderService({ recipient }) {
           <div className={styles['header-service__divider--left']}></div>
           <div className={styles['header-service__actions']}>
             <div className={styles['header-service__emojis']}>
-              {reactions.length > 0 ? (
-                [...reactions]
-                  .sort((a, b) => b.count - a.count)
-                  .slice(0, 3)
-                  .map((reaction) => (
-                    <div
-                      key={reaction.id}
-                      className={styles['header-service__emoji-item']}
-                    >
-                      {reaction.emoji} {reaction.count}
-                    </div>
-                  ))
+              {topReactions.length > 0 ? (
+                topReactions.map((reaction) => (
+                  <div
+                    key={reaction.id}
+                    className={styles['header-service__emoji-item']}
+                    onClick={() => handleAddReaction(reaction.emoji)}
+                  >
+                    {reaction.emoji} {reaction.count}
+                  </div>
+                ))
               ) : (
                 <span>아직 리액션이 없어요</span>
               )}
             </div>
-            <button className={styles['header-service__emoji-more']}>
-              <img src={chevronDown} alt="이모지 더보기" />
-            </button>
-            <button className={styles['header-service__add-button']}>
-              <img src={emojiAdd} alt="이모지 추가" />
-              추가
-            </button>
+            <div
+              className={styles['header-service__emoji-more-container']}
+              ref={emojiMoreRef}
+            >
+              <button
+                className={styles['header-service__emoji-more']}
+                onClick={toggleAllEmojisDropdown}
+              >
+                <img
+                  src={chevronDown}
+                  alt="이모지 더보기"
+                  style={{
+                    transform: showAllEmojisDropdown
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                  }}
+                />
+              </button>
+              {showAllEmojisDropdown && (
+                <div className={styles['header-service__emoji-dropdown']}>
+                  <div
+                    className={styles['header-service__emoji-dropdown-grid']}
+                  >
+                    {reactions.length > 0 ? (
+                      [...reactions]
+                        .sort((a, b) => b.count - a.count)
+                        .slice(0, 8)
+                        .map((reaction) => (
+                          <div
+                            key={reaction.id}
+                            className={
+                              styles['header-service__emoji-dropdown-item']
+                            }
+                            onClick={() => handleAddReaction(reaction.emoji)}
+                          >
+                            {reaction.emoji} {reaction.count}
+                          </div>
+                        ))
+                    ) : (
+                      <span>아직 리액션이 없어요</span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div
+              className={styles['header-service__emoji-picker-container']}
+              ref={emojiPickerRef}
+            >
+              <button
+                className={styles['header-service__add-button']}
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              >
+                <img src={emojiAdd} alt="이모지 추가" />
+                추가
+              </button>
+              {showEmojiPicker && (
+                <div className={styles['header-service__emoji-picker']}>
+                  {commonEmojis.map((emoji, index) => (
+                    <button
+                      key={index}
+                      className={styles['header-service__emoji-picker-item']}
+                      onClick={() => handleAddReaction(emoji)}
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className={styles['header-service__divider--right']}></div>
-            <button className={styles['header-service__share-button']}>
-              <img src={shareIcon} alt="공유" />
-            </button>
+            <ShareButton recipient={recipient} />
           </div>
         </div>
       </div>

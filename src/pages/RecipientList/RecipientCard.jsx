@@ -26,7 +26,7 @@ export default function RecipientCard({ Recipient }) {
             }
           : {}
       }
-      onClick={() => navigate(`{/post/${id}`)}
+      onClick={() => navigate(`/post/${id}`)}
     >
       {backgroundColor === 'blue' && <div className={styles.triangle} />}
       <h3 className={backgroundImageURL && styles.white}>{`To. ${name}`}</h3>

@@ -44,8 +44,11 @@ export default function Home() {
           />
         </article>
       </section>
-
-      <Button className="buttonWrapper" onClick={() => navigate('/list')}>
+      <Button
+        type="primary"
+        className="buttonWrapper"
+        onClick={() => navigate('/list')}
+      >
         구경해보기
       </Button>
     </div>
