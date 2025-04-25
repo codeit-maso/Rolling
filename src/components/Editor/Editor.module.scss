@@ -3,8 +3,9 @@
 .editor {
   display: flex;
   flex-direction: column;
-  width: 72rem;
-  height: 30.8rem;
+  max-width: 720px;
+  min-width: 320px;
+  width: 100%;
   gap: 12px;
 
   &__box {
@@ -14,6 +15,9 @@
   }
 
   :global(.ql-toolbar) {
+    display: flex;
+    align-items: center;
+    height: 49px;
     border: none;
     border-bottom: 1px;
     border-top-right-radius: 8px;
@@ -22,7 +26,10 @@
   }
 
   :global(.ql-container) {
-    height: 215px;
+    max-width: 688px;
+    min-width: 288px;
+    height: 178px;
+    margin: 16px;
     border: none;
   }
 
@@ -30,5 +37,20 @@
     margin: 0;
     @include font-24-bold;
     color: $gray-900;
+  }
+
+  @media (max-width: 767px) {
+    & {
+      max-width: 320px;
+    }
+    :global(.ql-toolbar button),
+    :global(.ql-toolbar .ql-picker) {
+      width: 24px;
+    }
+
+    :global(.ql-toolbar .ql-color-picker),
+    :global(.ql-toolbar .ql-icon-picker) {
+      width: 24px;
+    }
   }
 }
