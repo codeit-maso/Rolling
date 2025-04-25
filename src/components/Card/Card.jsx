@@ -28,7 +28,7 @@ export default function Card({
   function clickDelete(e) {
     e.stopPropagation();
     if (confirm('정말 삭제하시겠어요?')) {
-      onDelete?.(id);
+      onDelete?.(id, recipientId);
     }
   }
   const fontFamilyMap = {

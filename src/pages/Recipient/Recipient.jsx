@@ -77,12 +77,16 @@ export default function Recipient() {
     setOffset((prev) => prev + limit);
   };
 
-  async function handleDeleteMessage(id) {
+  async function handleDeleteMessage(messageId, recipientId) {
     try {
-      await deleteMessage(id);
-      setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== id),
-      );
+      await deleteMessage(messageId);
+      const newOffset = offset - 1 < 0 ? 0 : offset - 1;
+
+      const updatedMessages = await getMessages(recipientId, 0, newOffset);
+      setMessages(updatedMessages.results);
+      setHasNextMessage(updatedMessages.results.length < postData.messageCount);
+
+      setOffset(0);
     } catch (error) {
       console.error('삭제 실패:', error);
     }
@@ -141,6 +145,7 @@ export default function Recipient() {
             <Card
               key={msg.id}
               id={msg.id}
+              recipientId={id}
               image={msg.profileImageURL}
               sender={msg.sender}
               relationship={msg.relationship}
