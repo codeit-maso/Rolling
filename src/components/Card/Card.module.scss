@@ -53,9 +53,11 @@
       gap: 6px;
 
       .card__profile-name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
         @include font-20-regular;
 
         span {
@@ -79,7 +81,6 @@
 
   &__body {
     height: 280px;
-    padding: 16px 0;
 
     .card__content {
       display: -webkit-box;
