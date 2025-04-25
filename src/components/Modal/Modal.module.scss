@@ -81,8 +81,18 @@
   }
 
   &__body {
-    width: 500px;
+    width: 520px;
     height: 240px;
+    overflow-y: auto;
+  }
+
+  &__body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &__body::-webkit-scrollbar-thumb {
+    background-color: $gray-300;
+    border-radius: 4px;
   }
 
   &__content {
