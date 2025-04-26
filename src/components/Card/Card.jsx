@@ -42,11 +42,11 @@ export default function Card({
 
   return (
     <article
-      className={`${styles.card} ${empty ? styles['card--empty'] : ''}`}
-      onClick={() => !empty && onClick?.(id)}
+      className={`${styles.card} ${empty ? styles['card--empty'] : ''} ${showDelete ? styles['card--show'] : ''}`}
+      onClick={() => (empty ? clickPost() : onClick?.(id))}
     >
       {empty ? (
-        <div onClick={clickPost}>
+        <div>
           <img src={plus} alt="추가하기" />
         </div>
       ) : (
