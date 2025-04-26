@@ -13,7 +13,8 @@ import styles from './MessageForm.module.scss';
 export default function MessageForm() {
   const { id } = useParams();
   const [sender, setSender] = useState('');
-  const [isError, setIsError] = useState(false);
+  const [senderError, setSenderIsError] = useState(false);
+  const [messageError, setMessageIsError] = useState(false);
   const [profileImage, setProfileImage] = useState(DEFAULT_PROFILE_IMAGE);
   const [relationship, setRelationship] = useState('지인');
   const [message, setMessage] = useState('');
@@ -29,8 +30,12 @@ export default function MessageForm() {
     setSender(e.target.value);
   }
 
-  function handleBlur() {
-    setIsError(sender.trim() === '');
+  function handleSenderBlur() {
+    setSenderIsError(sender.trim() === '');
+  }
+
+  function handleMessageBlur() {
+    setMessageIsError(stripHtml(message) === '');
   }
 
   function resetForm() {
@@ -123,8 +128,8 @@ export default function MessageForm() {
             placeholder="이름을 입력해 주세요 (10자 이내)"
             value={sender}
             onChange={handleInputChange}
-            onBlur={handleBlur}
-            isError={isError}
+            onBlur={handleSenderBlur}
+            isError={senderError}
           />
         </div>
         <div className={styles['message-form__profile-selector']}>
@@ -137,7 +142,13 @@ export default function MessageForm() {
           <RelationshipSelect value={relationship} onChange={setRelationship} />
         </div>
         <div className={styles['message-form__editor']}>
-          <Editor value={message} onChange={setMessage} font={font} />
+          <Editor
+            value={message}
+            onChange={setMessage}
+            font={font}
+            onBlur={handleMessageBlur}
+            isError={messageError}
+          />
         </div>
         <div className={styles['message-form__font-select']}>
           <FontSelect value={font} onChange={setFont} />

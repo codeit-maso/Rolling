@@ -10,8 +10,14 @@
 
   &__box {
     height: 260px;
+    margin-bottom: 4px;
     border: 1px solid $gray-300;
     border-radius: 8px;
+
+    &--error {
+      border: 1px solid $error;
+      color: $gray-900;
+    }
   }
 
   :global(.ql-toolbar) {
@@ -37,6 +43,11 @@
     margin: 0;
     @include font-24-bold;
     color: $gray-900;
+  }
+
+  &__error-message {
+    @include font-12-regular;
+    color: $error;
   }
 
   @media (max-width: 767px) {
