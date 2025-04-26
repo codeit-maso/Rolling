@@ -11,14 +11,12 @@ const fontClassMap = {
   '나눔손글씨 손편지체': styles['font-naunm-hand'],
 };
 
-export default function FontSelect({ defaultValue = 'Noto Sans', onChange }) {
+export default function FontSelect({ value = 'Noto Sans', onChange }) {
   const dropdownRef = useRef(null);
   const id = useId();
-  const [selected, setSelected] = useState(defaultValue);
   const [isOpen, setIsOpen] = useDetectClose(dropdownRef);
 
   const handleSelect = (font) => {
-    setSelected(font);
     onChange?.(font);
     setIsOpen(false);
   };
@@ -32,10 +30,10 @@ export default function FontSelect({ defaultValue = 'Noto Sans', onChange }) {
         <button
           id={id}
           type="button"
-          className={`${styles['dropdown__button']} ${fontClassMap[selected]}`}
+          className={`${styles['dropdown__button']} ${fontClassMap[value]}`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          {selected}
+          {value}
           <span
             className={`${styles.dropdown__arrow} ${isOpen ? styles.open : ''}`}
           />

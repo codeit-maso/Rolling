@@ -4,17 +4,12 @@ import styles from './RelationshipSelect.module.scss';
 
 const OPTIONS = ['친구', '지인', '동료', '가족'];
 
-export default function RelationshipSelect({
-  defaultValue = '지인',
-  onChange,
-}) {
+export default function RelationshipSelect({ value = '지인', onChange }) {
   const dropdownRef = useRef(null);
   const id = useId();
-  const [selected, setSelected] = useState(defaultValue);
   const [isOpen, setIsOpen] = useDetectClose(dropdownRef);
 
   const handleSelect = (option) => {
-    setSelected(option);
     onChange?.(option);
     setIsOpen(false);
   };
@@ -31,7 +26,7 @@ export default function RelationshipSelect({
           className={styles['dropdown__button']}
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          {selected}
+          {value}
           <span
             className={`${styles.dropdown__arrow} ${isOpen ? styles.open : ''}`}
           />

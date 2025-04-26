@@ -167,7 +167,7 @@ export default function CreateRecipient() {
         )}
       </div>
       <Button
-        type="create"
+        type="button"
         onClick={handleButtonClick}
         disabled={!value.trim()}
       >
