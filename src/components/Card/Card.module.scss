@@ -101,6 +101,11 @@
       word-break: break-word;
       @include font-18-regular;
       color: $gray-600;
+      ul,
+      li,
+      a {
+        all: revert;
+      }
     }
   }
 
