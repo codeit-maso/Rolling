@@ -32,6 +32,10 @@
   background-color: $purple-200;
 }
 
+.background--gray {
+  background-color: $gray-200;
+}
+
 .card-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -44,7 +48,40 @@
   max-width: 1200px;
   margin: 0 auto 11px;
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $white;
+  transition: transform 0.3s ease;
+  @include font-18-bold;
+
+  &:hover {
+    animation: shake 0.5s ease;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 1248px) {
@@ -67,9 +104,22 @@
 
   .button-container {
     width: calc(100% - 48px);
+    display: block;
+    position: relative;
+  }
+
+  .back-button-wrapper {
+    position: static;
+    margin-bottom: 11px;
+  }
+
+  .action-button-wrapper {
     position: fixed;
     bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
+    width: calc(100% - 48px);
   }
 }
 

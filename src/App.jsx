@@ -15,7 +15,11 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<RecipientList />} />
         <Route path="/post" element={<CreateRecipient />} />
-        <Route path="/post/:id" element={<Recipient />} />
+        <Route path="/post/:id" element={<Recipient showDelete={false} />} />
+        <Route
+          path="/post/:id/edit"
+          element={<Recipient showDelete={true} />}
+        />
         <Route path="/post/:id/message" element={<MessageForm />} />
       </Routes>
     </>
