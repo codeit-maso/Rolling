@@ -27,7 +27,8 @@ export default function MessageForm() {
   const navigate = useNavigate();
 
   function handleInputChange(e) {
-    setSender(e.target.value);
+    const inputValue = e.target.value.slice(0, 10);
+    setSender(inputValue);
   }
 
   function handleSenderBlur() {

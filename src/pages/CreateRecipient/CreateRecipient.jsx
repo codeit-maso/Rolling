@@ -32,7 +32,8 @@ export default function CreateRecipient() {
   }, []);
 
   function handleInputChange(e) {
-    setValue(e.target.value);
+    const inputValue = e.target.value.slice(0, 10);
+    setValue(inputValue);
   }
 
   function handleBlur() {
@@ -74,7 +75,6 @@ export default function CreateRecipient() {
           value={value}
           onChange={handleInputChange}
           onBlur={handleBlur}
-          maxLength={40}
           isError={isError}
         />
       </div>
