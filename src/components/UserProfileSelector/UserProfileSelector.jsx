@@ -8,6 +8,7 @@ export default function UserProfileSelector({
   onSelect,
 }) {
   const [profileImages, setProfileImages] = useState([]);
+  const [loadedImages, setLoadedImages] = useState({});
 
   useEffect(() => {
     const loadImages = async () => {
@@ -16,6 +17,10 @@ export default function UserProfileSelector({
     };
     loadImages();
   }, []);
+
+  const handleImageLoad = (url) => {
+    setLoadedImages((prev) => ({ ...prev, [url]: true }));
+  };
 
   return (
     <div className={styles['profile-select']}>
@@ -38,8 +43,9 @@ export default function UserProfileSelector({
                 alt={`profile-${idx}`}
                 className={`${styles['profile-select__image']} ${
                   value === url ? styles['profile-select__image--selected'] : ''
-                }`}
+                } ${!loadedImages[url] ? styles['profile-select__image--loading'] : ''}`}
                 onClick={() => onSelect?.(url)}
+                onLoad={() => handleImageLoad(url)}
               />
             ))}
           </div>
