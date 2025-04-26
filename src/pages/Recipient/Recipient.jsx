@@ -150,26 +150,20 @@ export default function Recipient({ showDelete }) {
 
           <div className={styles['action-button-wrapper']}>
             {showDelete ? (
-              <Button
-                className={styles['delete-button']}
-                type="delete"
-                onClick={() => handleDeleteRecipient(id)}
-              >
+              <Button type="delete" onClick={() => handleDeleteRecipient(id)}>
                 삭제하기
               </Button>
             ) : (
-              <Button
-                className={styles['delete-button']}
-                type="delete"
-                onClick={() => handleEditClick(id)}
-              >
+              <Button type="delete" onClick={() => handleEditClick(id)}>
                 편집하기
               </Button>
             )}
           </div>
         </div>
         <div className={styles['card-container']}>
-          <Card recipientId={id} empty={true} />
+          {!showDelete && (
+            <Card recipientId={id} empty={true} showDelete={showDelete} />
+          )}
           {messages.map((msg) => (
             <Card
               key={msg.id}
