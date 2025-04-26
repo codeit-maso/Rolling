@@ -134,9 +134,9 @@ export default function Recipient({ showDelete }) {
     <>
       <HeaderService recipient={postData} />
       <div
-        className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''}`}
+        className={`${styles['post-container']} ${!postData.backgroundImageURL ? styles[`background--${postData.backgroundColor}`] : ''} ${showDelete ? styles[`background--gray`] : ''}`}
         style={
-          postData.backgroundImageURL
+          postData.backgroundImageURL && !showDelete
             ? { backgroundImage: `url(${postData.backgroundImageURL})` }
             : {}
         }
