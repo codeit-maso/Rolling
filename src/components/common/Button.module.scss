@@ -1,7 +1,6 @@
 @use '../../assets/styles/variables.scss' as *;
 
 .button {
-  max-width: 720px;
   width: 100%;
   height: 56px;
   padding: 14px 24px;
@@ -52,7 +51,7 @@
   }
 
   &--delete {
-    max-width: 92px;
+    width: inherit;
     height: 39px;
     padding: 7px 16px;
     border-radius: 6px;
@@ -62,7 +61,7 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     &--primary,
     &--delete {
-      max-width: 720px;
+      min-width: 720px;
     }
   }
 
@@ -70,7 +69,16 @@
     &,
     &--primary,
     &--delete {
-      max-width: 320px;
+      min-width: 320px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .button {
+    &--delete {
+      width: 100%;
+      height: 55px;
     }
   }
 }

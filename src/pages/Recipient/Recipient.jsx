@@ -40,7 +40,7 @@ export default function Recipient() {
     setLoading(true);
     const fetchMessages = async () => {
       try {
-        const limit = offset === 0 ? 8 : 9;
+        const limit = offset === 0 ? 5 : 6;
         const newMessages = await getMessages(id, offset, limit);
         offset === 0
           ? setMessages(newMessages.results)
@@ -70,19 +70,23 @@ export default function Recipient() {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [observerRef.current, hasNextMessage, loading]);
+  }, [hasNextMessage, loading]);
 
   const loadMoreMessages = () => {
-    const limit = offset === 0 ? 8 : 9;
+    const limit = offset === 0 ? 5 : 6;
     setOffset((prev) => prev + limit);
   };
 
-  async function handleDeleteMessage(id) {
+  async function handleDeleteMessage(messageId, recipientId) {
     try {
-      await deleteMessage(id);
-      setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== id),
-      );
+      await deleteMessage(messageId);
+      const newOffset = offset - 1 < 0 ? 0 : offset - 1;
+
+      const updatedMessages = await getMessages(recipientId, 0, newOffset);
+      setMessages(updatedMessages.results);
+      setHasNextMessage(updatedMessages.results.length < postData.messageCount);
+
+      setOffset(0);
     } catch (error) {
       console.error('삭제 실패:', error);
     }
@@ -113,7 +117,10 @@ export default function Recipient() {
 
   const selectedCard = messages.find((card) => card.id === selectedCardId);
 
-  if (!postData || messages.length < 0) return <div>Loading...</div>;
+  if (!postData || messages.length < 0)
+    return (
+      <div className={styles['loading-message']}>페이지를 불러오는 중..</div>
+    );
 
   return (
     <>
@@ -141,6 +148,7 @@ export default function Recipient() {
             <Card
               key={msg.id}
               id={msg.id}
+              recipientId={id}
               image={msg.profileImageURL}
               sender={msg.sender}
               relationship={msg.relationship}
@@ -158,6 +166,7 @@ export default function Recipient() {
               image={selectedCard.profileImageURL}
               sender={selectedCard.sender}
               relationship={selectedCard.relationship}
+              font={selectedCard.font}
               createdAt={selectedCard.createdAt
                 .slice(0, 10)
                 .split('-')

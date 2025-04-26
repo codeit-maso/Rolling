@@ -99,3 +99,30 @@
     color: $gray-400;
   }
 }
+
+@media (max-width: 1248px) {
+  .card {
+    width: inherit;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card {
+    height: 284px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 230px;
+
+    &__body {
+      .card__content {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        word-break: break-word;
+        @include font-15-regular;
+      }
+    }
+  }
+}
