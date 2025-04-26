@@ -126,7 +126,7 @@ export default function MessageForm() {
         <div className={styles['message-form__input']}>
           <FormInput
             label="From."
-            placeholder="이름을 입력해 주세요 (10자 이내)"
+            placeholder="이름을 입력해 주세요. (최대 10자)"
             value={sender}
             onChange={handleInputChange}
             onBlur={handleSenderBlur}
