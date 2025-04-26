@@ -10,7 +10,7 @@ import Button from '../../components/common/Button';
 import Modal from '../../components/Modal/Modal.jsx';
 import styles from './Recipient.module.scss';
 
-export default function Recipient() {
+export default function Recipient({ showDelete }) {
   const { id } = useParams();
   const [postData, setPostData] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -107,6 +107,14 @@ export default function Recipient() {
     }
   }
 
+  function handleGoBack() {
+    navigate(-1);
+  }
+
+  function handleEditClick(id) {
+    navigate(`/post/${id}/edit`);
+  }
+
   function handleOpenModal(id) {
     setSelectedCardId(id);
   }
@@ -134,13 +142,31 @@ export default function Recipient() {
         }
       >
         <div className={styles['button-container']}>
-          <Button
-            className={styles['delete-button']}
-            type="delete"
-            onClick={() => handleDeleteRecipient(id)}
-          >
-            삭제하기
-          </Button>
+          <div className={styles['back-button-wrapper']}>
+            <button className={styles['back-button']} onClick={handleGoBack}>
+              ← 뒤로가기
+            </button>
+          </div>
+
+          <div className={styles['action-button-wrapper']}>
+            {showDelete ? (
+              <Button
+                className={styles['delete-button']}
+                type="delete"
+                onClick={() => handleDeleteRecipient(id)}
+              >
+                삭제하기
+              </Button>
+            ) : (
+              <Button
+                className={styles['delete-button']}
+                type="delete"
+                onClick={() => handleEditClick(id)}
+              >
+                편집하기
+              </Button>
+            )}
+          </div>
         </div>
         <div className={styles['card-container']}>
           <Card recipientId={id} empty={true} />
@@ -156,6 +182,7 @@ export default function Recipient() {
               onDelete={handleDeleteMessage}
               onClick={() => handleOpenModal(msg.id)}
               font={msg.font}
+              showDelete={showDelete}
             >
               {msg.content}
             </Card>
