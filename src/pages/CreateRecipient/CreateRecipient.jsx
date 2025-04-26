@@ -16,6 +16,7 @@ export default function CreateRecipient() {
   const [selectedType, setSelectedType] = useState('color');
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(-1);
+  const [imageLoading, setImageLoading] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function CreateRecipient() {
       try {
         const result = await getBackgroundImage();
         setData(result);
+        setImageLoading(new Array(result.length).fill(true));
       } catch (error) {
         console.error('데이터 로딩 실패:', error);
       }
@@ -49,6 +51,14 @@ export default function CreateRecipient() {
 
   function handleImageClick(index) {
     setSelectedImage(index);
+  }
+
+  function handleImageLoad(index) {
+    setImageLoading((prev) => {
+      const updated = [...prev];
+      updated[index] = false;
+      return updated;
+    });
   }
 
   async function handleButtonClick() {
@@ -113,6 +123,7 @@ export default function CreateRecipient() {
             이미지
           </button>
         </div>
+
         {selectedType === 'color' && (
           <ul className={styles['create-page__color-list']}>
             {colors.map((color) => (
@@ -149,10 +160,17 @@ export default function CreateRecipient() {
                 }`}
                 onClick={() => handleImageClick(index)}
               >
+                {imageLoading[index] && (
+                  <div className={styles['create-page__skeleton']} />
+                )}
                 <img
                   src={url}
                   alt={`배경이미지${index + 1}`}
-                  className={styles['create-page__background-img']}
+                  className={`
+                    ${styles['create-page__background-img']} 
+                    ${imageLoading[index] ? styles['create-page__background-img--hidden'] : ''}
+                  `}
+                  onLoad={() => handleImageLoad(index)}
                 />
                 {selectedImage === index && (
                   <img
@@ -176,7 +194,6 @@ export default function CreateRecipient() {
           생성하기
         </Button>
       </div>
-
     </div>
   );
 }
