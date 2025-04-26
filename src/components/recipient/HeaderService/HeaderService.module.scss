@@ -126,6 +126,18 @@
     border-radius: 32px;
     @include font-16-regular;
     cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+
+    &:hover {
+      background-color: #5d5d5d;
+      transform: scale(1.05);
+    }
+  }
+
+  &__emoji-more-container {
+    position: relative;
   }
 
   &__emoji-more {
@@ -136,13 +148,59 @@
     border: none;
     cursor: pointer;
 
+    img {
+      transition: transform 0.3s ease;
+    }
+
     &:hover {
       opacity: 0.6;
     }
   }
 
-  &__add-button,
-  &__share-button {
+  &__emoji-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    z-index: 10;
+    min-width: 310px;
+  }
+
+  &__emoji-dropdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  &__emoji-dropdown-item {
+    width: 63px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+    background-color: #757575;
+    color: $white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 32px;
+    @include font-16-regular;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+
+    &:hover {
+      background-color: #5d5d5d;
+      transform: scale(1.05);
+    }
+  }
+
+  &__add-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,5 +219,42 @@
 
   &__add-button {
     gap: 4px;
+  }
+
+  &__emoji-picker-container {
+    position: relative;
+  }
+
+  &__emoji-picker {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    z-index: 10;
+    min-width: 200px;
+  }
+
+  &__emoji-picker-item {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $gray-100;
+    }
   }
 }
