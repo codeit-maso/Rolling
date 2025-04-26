@@ -30,7 +30,7 @@
     background-color: $purple-800;
   }
 
-  &:focus {
+  &:focus-visible {
     border: 2px solid $purple-900;
     background-color: $purple-800;
   }
