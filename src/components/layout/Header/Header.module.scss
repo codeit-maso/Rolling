@@ -26,6 +26,8 @@
   border: 1px solid $gray-300;
   border-radius: 6px;
   white-space: nowrap;
+  color: inherit;
+  text-decoration: none;
 }
 
 @media (min-width: 361px) and (max-width: 768px) {
