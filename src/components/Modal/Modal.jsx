@@ -4,11 +4,19 @@ import Badge from '../Badge/Badge';
 import Button from '../common/Button';
 import styles from './Modal.module.scss';
 
+const fontFamilyMap = {
+  'Noto Sans': '"Noto Sans", sans-serif',
+  Pretendard: '"Pretendard", sans-serif',
+  나눔명조: '"Nanum Myeongjo", serif',
+  '나눔손글씨 손편지체': '"Nanum Sonpyeonji Ce", cursive',
+};
+
 export default function Modal({
   image,
   sender,
   relationship,
   children,
+  font,
   createdAt,
   onClose,
 }) {
@@ -35,7 +43,10 @@ export default function Modal({
         </header>
         <div className={styles['modal__body']}>
           <div className={styles['modal__content']}>
-            <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
+            <div
+              style={{ fontFamily: fontFamilyMap[font] }}
+              dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+            />
           </div>
         </div>
         <div className={styles['modal__footer']}>
