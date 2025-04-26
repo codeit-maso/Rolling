@@ -64,6 +64,14 @@
       list-style: none;
       flex-shrink: 0;
       cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
     }
 
     .create-page__color--selected {
@@ -111,6 +119,14 @@
       overflow: hidden;
       flex-shrink: 0;
       cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
 
       .create-page__background-img {
         position: absolute;
