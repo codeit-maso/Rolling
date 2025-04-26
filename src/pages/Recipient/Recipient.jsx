@@ -151,7 +151,7 @@ export default function Recipient({ showDelete }) {
           <div className={styles['action-button-wrapper']}>
             {showDelete ? (
               <Button type="delete" onClick={() => handleDeleteRecipient(id)}>
-                삭제하기
+                페이지 삭제하기
               </Button>
             ) : (
               <Button type="delete" onClick={() => handleEditClick(id)}>
