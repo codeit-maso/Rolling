@@ -9,24 +9,31 @@
   background-color: $purple-600;
   @include font-18-bold;
   color: $white;
+  transition:
+    transform 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
 
   &:disabled {
     background-color: $gray-300;
     cursor: not-allowed;
+    filter: opacity(50%);
 
     &:hover,
     &:active,
     &:focus {
       background-color: $gray-300;
       border: $gray-300;
+      transform: none;
     }
   }
 
   &:hover {
+    transform: scale(1.05) translateZ(0);
     background-color: $purple-700;
   }
 
   &:active {
+    transform: scale(0.97) translateZ(0);
     background-color: $purple-800;
   }
 
