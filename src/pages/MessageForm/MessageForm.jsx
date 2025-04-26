@@ -86,8 +86,12 @@ export default function MessageForm() {
   }, [sender, profileImage, relationship, message, font]);
 
   async function handleSubmit() {
-    if (sender.trim() === '' || stripHtml(message) === '') {
-      alert('이름과 메시지를 모두 입력해주세요.');
+    if (
+      sender.trim() === '' ||
+      sender.trim().length > 10 ||
+      stripHtml(message) === ''
+    ) {
+      alert('이름은 최대 10자까지, 메시지를 모두 입력해주세요.');
       return;
     }
 
@@ -116,11 +120,10 @@ export default function MessageForm() {
         <div className={styles['message-form__input']}>
           <FormInput
             label="From."
-            placeholder="이름을 입력해 주세요."
+            placeholder="이름을 입력해 주세요 (10자 이내)"
             value={sender}
             onChange={handleInputChange}
             onBlur={handleBlur}
-            maxLength={40}
             isError={isError}
           />
         </div>
