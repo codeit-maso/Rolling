@@ -24,6 +24,7 @@ export default function Card({
   empty = false,
   onDelete,
   onClick,
+  showDelete,
 }) {
   const navigate = useNavigate();
   const sanitizedHTML = DOMPurify.sanitize(children);
@@ -64,11 +65,13 @@ export default function Card({
                 <Badge relation={relationship} />
               </div>
             </div>
-            <div className={styles['card__delete-button']}>
-              <button onClick={clickDelete}>
-                <img src={deleteIcon} alt="쓰레기통 아이콘" />
-              </button>
-            </div>
+            {showDelete && (
+              <div className={styles['card__delete-button']}>
+                <button onClick={clickDelete}>
+                  <img src={deleteIcon} alt="쓰레기통 아이콘" />
+                </button>
+              </div>
+            )}
           </header>
           <div className={styles['card__body']}>
             <div className={styles['card__content']}>
