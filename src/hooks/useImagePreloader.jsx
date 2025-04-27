@@ -25,15 +25,13 @@ export const useImagePreloader = (data) => {
           const img = new Image();
           img.src = imagePath;
           img.onload = () => {
-            console.log('✅ 이미지 로딩 완료:', imagePath);
+            // console.log('✅ 이미지 로딩 완료:', imagePath);
             resolve();
           };
           img.onerror = (err) => {
             console.warn('❌ 이미지 로딩 실패:', imagePath);
             reject(err);
           };
-          //   img.onload = resolve; //콘솔 생략
-          //   img.onerror = reject; //콘솔 생략
         });
       }),
     ).then(() => {

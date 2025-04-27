@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react';
-import { debounce } from 'lodash';
 import styles from './Carousel.module.scss';
 import RecipientCard from '../RecipientCard/RecipientCard';
 
 export default function Carousel({ recipients }) {
   const [index, setIndex] = useState(0);
   const [offsetX, setOffsetX] = useState({}); // x좌표
+  const [startX, setstartX] = useState(0); // 클릭 시작 좌표 - 터치 스크롤
+  const [isBouncing, setBouncing] = useState(false); // 캐러셀 끝이면 bouncing 모션
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isDesktop = windowWidth > 1023;
+  const isTablet = windowWidth > 767 && windowWidth < 1024;
+  const isMobile = windowWidth > 0 && windowWidth < 768;
 
-  // 작동과정: button onclick --> settingIndex() --> setIndex --> useEffect( setOffsetX(),[index] ): x좌표 상태 업데이트: 캐러셀 이동
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // 캐러셀 버튼 작동과정: button onclick --> settingIndex(), setIndex --> useEffect( setOffsetX(),[index] ): x좌표 상태 업데이트: 캐러셀 이동
   useEffect(() => {
     setOffsetX({
       transform: `translateX(-${index * 295}px)`,
@@ -15,44 +30,60 @@ export default function Carousel({ recipients }) {
   }, [index]);
 
   function settingIndex(direction) {
-    if (direction === 'next') {
-      setIndex((prev) => prev + 1);
-    } else if (direction === 'back') {
-      setIndex((prev) => prev - 1);
-    }
+    setIndex((prev) => (direction === 'next' ? prev + 1 : prev - 1)); // next? next index :  back index
   }
 
-  //resize에 따른, 캐러셀 시작점 리셋
-  // const [width, setWidth] = useState(0);
-  // const [prewidth, setPreWidth] = useState(window.innerWidth);
-  // const handleResize = debounce(() => {
-  //   setWidth(window.innerWidth);
-  // }, 200);
-  // useEffect(() => {
-  //   setWidth(window.innerWidth); //처음 로딩 상태 받아야, 첫 resize시 prewidth에 값을 넘길수 있음
-  //   window.addEventListener('resize', handleResize);
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   setPreWidth((prev) => width);
-  //   // console.log('prewidth:', prewidth);
-  //   // console.log('updated width:', width);
-  //   // if (width > 1023 && prewidth <= 1023 && offsetX % 295 !== 0) {
-  //   if (width > 1023 && 0 < prewidth <= 1023) {
-  //     console.log('prewidth:', prewidth);
-  //     console.log('updated width:', width);
-  //     setOffsetX({
-  //       transform: `translateX(0px)`,
-  //     });
-  //   }
-  // }, [width]);
+  // 터치, 마우스 드래그 감지 --> 캐러셀 한 칸 이동
+  function handleStart(e) {
+    if (isDesktop) return;
+    const touchStart =
+      e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    setstartX(touchStart);
+  }
+
+  function handleEnd(e) {
+    const touchEnd =
+      e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
+    const distance = Math.abs(touchEnd - startX); //드래그 한 거리
+    const isNext = startX > touchEnd; //방향이 next인지, back인지
+    const maxIndex = isTablet ? 5 : isMobile ? 7 : 4;
+    if (isDesktop || distance < 10) return;
+
+    if (!isNext) {
+      if (index === 0) {
+        setBouncing(true);
+        return;
+      } else if (index > 0) {
+        settingIndex('back');
+        return;
+      }
+    } else if (isNext) {
+      if (index === maxIndex) {
+        setBouncing(true);
+        return;
+      } else if (index < maxIndex) {
+        settingIndex('next');
+        return;
+      }
+    }
+  }
+  // Bouncing 리셋
+  useEffect(() => {
+    if (isBouncing) {
+      const timer = setTimeout(() => {
+        setBouncing(false);
+      }, 500);
+    }
+  }, [isBouncing]);
 
   return (
-    <div className={styles.carousel}>
-      {/* <div style={{ fontSize: '50px' }}>{prewidth}</div>
-      <div style={{ fontSize: '50px' }}>{width}</div> */}
+    <div
+      className={`${styles.carousel} ${isBouncing && styles['end-of-carousel']}`}
+      onMouseDown={handleStart}
+      onMouseUp={handleEnd}
+      onTouchStart={handleStart}
+      onTouchEnd={handleEnd}
+    >
       <div className={styles['carousel__cardset-wrapper']}>
         <div className={styles['carousel__cardset']} style={offsetX}>
           {recipients.map((it) => (
@@ -67,7 +98,7 @@ export default function Carousel({ recipients }) {
         ></button>
       )}
       {recipients.length > 4 && // 캐러셀 끝에 도달하기 전까지
-        index !== 4 && (
+        index < 4 && (
           <button
             onClick={() => settingIndex('next')}
             className={`${styles['carousel__direction-button']}`}
