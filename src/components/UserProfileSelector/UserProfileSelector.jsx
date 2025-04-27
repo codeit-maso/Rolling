@@ -52,7 +52,7 @@ export default function UserProfileSelector({
         />
         <input
           type="file"
-          accept="image/"
+          accept="image/*"
           onChange={handleUpload}
           ref={fileInput}
           style={{ display: 'none' }}
