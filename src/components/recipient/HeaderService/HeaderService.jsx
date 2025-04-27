@@ -11,6 +11,7 @@ export default function HeaderService({ recipient }) {
   const [showAllEmojisDropdown, setShowAllEmojisDropdown] = useState(false);
   const emojiPickerRef = useRef(null);
   const emojiMoreRef = useRef(null);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   const commonEmojis = [
     '😆',
@@ -97,6 +98,18 @@ export default function HeaderService({ recipient }) {
     .sort((a, b) => b.count - a.count)
     .slice(0, 3);
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth > 1024);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <div className={styles['header-service']}>
       <div className={styles['header-service__container']}>
@@ -173,7 +186,7 @@ export default function HeaderService({ recipient }) {
                       {reactions.length > 0 ? (
                         [...reactions]
                           .sort((a, b) => b.count - a.count)
-                          .slice(0, 8)
+                          .slice(0, isLargeScreen ? 8 : 6)
                           .map((reaction) => (
                             <div
                               key={reaction.id}
