@@ -10,6 +10,12 @@
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   background: $white;
   gap: 16px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.95);
+  }
 
   &.card--empty {
     display: flex;
@@ -21,6 +27,10 @@
       height: 56px;
       cursor: pointer;
     }
+  }
+
+  &.card--show {
+    cursor: default;
   }
 
   &__header {
@@ -53,9 +63,11 @@
       gap: 6px;
 
       .card__profile-name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
         @include font-20-regular;
 
         span {
@@ -79,7 +91,6 @@
 
   &__body {
     height: 280px;
-    padding: 16px 0;
 
     .card__content {
       display: -webkit-box;
@@ -90,11 +101,55 @@
       word-break: break-word;
       @include font-18-regular;
       color: $gray-600;
+      ul,
+      li,
+      a {
+        all: revert;
+      }
     }
   }
 
   &__footer {
     @include font-12-regular;
     color: $gray-400;
+  }
+}
+
+@keyframes click-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03); // 살짝 커졌다가
+  }
+  100% {
+    transform: scale(1); // 다시 원래대로
+  }
+}
+
+@media (max-width: 1248px) {
+  .card {
+    width: inherit;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card {
+    height: 284px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 230px;
+
+    &__body {
+      .card__content {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        word-break: break-word;
+        @include font-15-regular;
+      }
+    }
   }
 }

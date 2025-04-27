@@ -9,7 +9,8 @@ export default async function createMessage({
   content,
   font,
 }) {
-  const res = await api.post(`/${team}/recipients/${recipientId}/messages/`, {
+  const teamId = import.meta.env.VITE_TEAM_ID;
+  const res = await api.post(`/${teamId}/recipients/${recipientId}/messages/`, {
     team,
     recipientId,
     sender,

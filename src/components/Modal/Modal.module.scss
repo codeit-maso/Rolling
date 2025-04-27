@@ -1,0 +1,117 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.backdrop {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  width: 600px;
+  height: 476px;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
+  gap: 16px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  &__profile-img {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border: 1px solid $gray-200;
+    border-radius: 100px;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+  }
+
+  &__profile-name {
+    display: -webkit-box;
+    overflow: hidden;
+    @include font-20-regular;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+
+    span {
+      @include font-20-bold;
+    }
+  }
+
+  &__date {
+    @include font-14-regular;
+    color: $gray-400;
+  }
+
+  &__body {
+    height: 240px;
+    overflow-y: auto;
+  }
+
+  &__body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &__body::-webkit-scrollbar-thumb {
+    background-color: $gray-300;
+    border-radius: 4px;
+  }
+
+  &__content {
+    @include font-18-regular;
+    color: $gray-500;
+    word-break: break-word;
+  }
+
+  &__footer {
+    padding-top: 8px;
+    margin: 0 auto;
+  }
+
+  &__button {
+    align-self: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: calc(100% - 48px);
+  }
+}

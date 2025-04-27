@@ -7,17 +7,19 @@ import RelationshipSelect from '../../components/RelationshipSelect/Relationship
 import Editor from '../../components/Editor/Editor';
 import FontSelect from '../../components/FontSelect/FontSelect';
 import Button from '../../components/common/Button';
-import createMessage from '../../api/createMessage';
+import postMessage from '../../api/postMessage';
 import styles from './MessageForm.module.scss';
 
 export default function MessageForm() {
   const { id } = useParams();
   const [sender, setSender] = useState('');
-  const [isError, setIsError] = useState(false);
+  const [senderError, setSenderIsError] = useState(false);
+  const [messageError, setMessageIsError] = useState(false);
   const [profileImage, setProfileImage] = useState(DEFAULT_PROFILE_IMAGE);
   const [relationship, setRelationship] = useState('지인');
   const [message, setMessage] = useState('');
   const [font, setFont] = useState('Noto Sans');
+  const [isRestored, setIsRestored] = useState(false);
 
   const stripHtml = (html) => html.replace(/<[^>]+>/g, '').trim();
   const isValid = sender.trim() !== '' && stripHtml(message) !== '';
@@ -25,24 +27,49 @@ export default function MessageForm() {
   const navigate = useNavigate();
 
   function handleInputChange(e) {
-    setSender(e.target.value);
+    const inputValue = e.target.value.slice(0, 10);
+    setSender(inputValue);
   }
 
-  function handleBlur() {
-    setIsError(sender.trim() === '');
+  function handleSenderBlur() {
+    setSenderIsError(sender.trim() === '');
+  }
+
+  function handleMessageBlur() {
+    setMessageIsError(stripHtml(message) === '');
+  }
+
+  function resetForm() {
+    setSender('');
+    setProfileImage(DEFAULT_PROFILE_IMAGE);
+    setRelationship('지인');
+    setMessage('');
+    setFont('Noto Sans');
   }
 
   useEffect(() => {
-    const saved = localStorage.getItem('quill-content');
-    if (saved) {
-      setMessage(saved);
+    try {
+      const saved = localStorage.getItem('message-form');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setSender(parsed.sender || '');
+        setProfileImage(parsed.profileImage || DEFAULT_PROFILE_IMAGE);
+        setRelationship(parsed.relationship || '지인');
+        setMessage(parsed.message || '');
+        setFont(parsed.font || 'Noto Sans');
+      }
+    } catch (err) {
+      console.error('복원 중 에러 발생', err);
+      localStorage.removeItem('message-form');
+    } finally {
+      setIsRestored(true);
     }
   }, []);
 
   useEffect(() => {
     const timeout = setTimeout(
       () => {
-        localStorage.removeItem('quill-content');
+        localStorage.removeItem('message-form');
         console.log('하루 뒤 자동 삭제');
       },
       1000 * 60 * 60 * 24,
@@ -52,13 +79,31 @@ export default function MessageForm() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('quill-content', message);
-  }, [message]);
+    if (!isRestored) return;
+
+    const formData = {
+      sender,
+      profileImage,
+      relationship,
+      message,
+      font,
+    };
+    localStorage.setItem('message-form', JSON.stringify(formData));
+  }, [sender, profileImage, relationship, message, font]);
 
   async function handleSubmit() {
+    if (
+      sender.trim() === '' ||
+      sender.trim().length > 10 ||
+      stripHtml(message) === ''
+    ) {
+      alert('이름은 최대 10자까지, 메시지를 모두 입력해주세요.');
+      return;
+    }
+
     try {
-      const res = await createMessage({
-        team: '15-7',
+      await postMessage({
+        team: import.meta.env.VITE_TEAM_ID,
         recipientId: Number(id),
         sender,
         profileImageURL: profileImage,
@@ -67,8 +112,8 @@ export default function MessageForm() {
         font,
       });
 
-      localStorage.removeItem('quill-content');
-      setMessage('');
+      localStorage.removeItem('message-form');
+      resetForm();
       navigate(`/post/${id}`);
     } catch (error) {
       console.error('메세지 전송 실패', error);
@@ -80,31 +125,37 @@ export default function MessageForm() {
       <div className={styles['message-form__content']}>
         <div className={styles['message-form__input']}>
           <FormInput
-            label="Form."
-            placeholder="이름을 입력해 주세요."
+            label="From."
+            placeholder="이름을 입력해 주세요 (10자 이내)"
             value={sender}
             onChange={handleInputChange}
-            onBlur={handleBlur}
-            isError={isError}
+            onBlur={handleSenderBlur}
+            isError={senderError}
           />
         </div>
         <div className={styles['message-form__profile-selector']}>
-          <UserProfileSelector onSelect={setProfileImage} />
-        </div>
-        <div className={styles['message-form__relationship-select']}>
-          <RelationshipSelect
-            defaultValue={relationship}
-            onChange={setRelationship}
+          <UserProfileSelector
+            value={profileImage}
+            onSelect={setProfileImage}
           />
         </div>
+        <div className={styles['message-form__relationship-select']}>
+          <RelationshipSelect value={relationship} onChange={setRelationship} />
+        </div>
         <div className={styles['message-form__editor']}>
-          <Editor value={message} onChange={setMessage} font={font} />
+          <Editor
+            value={message}
+            onChange={setMessage}
+            font={font}
+            onBlur={handleMessageBlur}
+            isError={messageError}
+          />
         </div>
         <div className={styles['message-form__font-select']}>
           <FontSelect value={font} onChange={setFont} />
         </div>
       </div>
-      <Button type="create" onClick={handleSubmit} disabled={!isValid}>
+      <Button type="button" onClick={handleSubmit} disabled={!isValid}>
         생성하기
       </Button>
     </div>
