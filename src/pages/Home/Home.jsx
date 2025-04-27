@@ -44,18 +44,9 @@ export default function Home() {
           />
         </article>
       </section>
-<<<<<<< HEAD
       <Button type="primary" onClick={() => navigate('/list')}>
         구경해보기
       </Button>
-=======
-
-      <div className={styles.buttonWrapper}>
-        <Button type="primary" onClick={() => navigate('/list')}>
-          구경해보기
-        </Button>
-      </div>
->>>>>>> 42708747b01d15d8a72b6894ded29cc6ee050eb8
     </div>
   );
 }
