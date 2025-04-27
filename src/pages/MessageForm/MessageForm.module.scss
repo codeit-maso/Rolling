@@ -3,22 +3,22 @@
 .message-form {
   display: flex;
   flex-direction: column;
-  width: 72rem;
+  width: 100%;
+  max-width: 720px;
   margin: 40px auto 36px;
   gap: 62px;
 
   &__content {
     display: flex;
     flex-direction: column;
-    height: 94.4rem;
     gap: 50px;
   }
-
-  &__relationship-select {
-    z-index: 1;
-  }
-
-  &__font-select {
-    z-index: 1;
+  @media (max-width: 767px) {
+    & {
+      display: flex;
+      align-items: center;
+      max-width: 320px;
+      gap: 206px;
+    }
   }
 }

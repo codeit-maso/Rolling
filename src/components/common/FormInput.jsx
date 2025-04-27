@@ -8,7 +8,6 @@ export default function FormInput({
   onChange,
   onBlur,
   isError,
-  maxLength,
 }) {
   const id = useId();
   return (
@@ -23,7 +22,6 @@ export default function FormInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        maxLength={maxLength}
         className={`${styles['form-input__input']} ${isError ? styles['form-input__input--error'] : ''}`}
       />
       {isError && (
