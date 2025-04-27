@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import getProfileImages from '../../api/getProfileImages.js';
-import uploadImage from '../../api/postUpLoadImage.js';
+import uploadImage from '../../api/postUpload.js';
 import DEFAULT_PROFILE_IMAGE from '../../constants/image.js';
 import styles from './UserProfileSelector.module.scss';
 
