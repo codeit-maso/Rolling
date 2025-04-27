@@ -100,7 +100,7 @@ export default function HeaderService({ recipient }) {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth > 1024);
+      setIsLargeScreen(window.innerWidth > 975);
     };
 
     checkScreenSize();

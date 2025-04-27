@@ -232,7 +232,7 @@
     justify-content: center;
     align-items: center;
 
-    @media (max-width: 1024px) and (min-width: 768px) {
+    @media (max-width: 975px) and (min-width: 768px) {
       width: 280px;
       min-width: auto;
       box-sizing: border-box;
@@ -256,7 +256,7 @@
     justify-items: center;
     align-items: center;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 975px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
