@@ -19,6 +19,7 @@
   &__selected-image {
     width: 80px;
     border-radius: 100px;
+    cursor: pointer;
   }
 
   &__content {
@@ -52,6 +53,7 @@
     border: 1px solid $gray-200;
     border-radius: 100px;
     transition: transform 0.1s ease-in-out;
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.15) translateY(-6px) translateZ(0);
