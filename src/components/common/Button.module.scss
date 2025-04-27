@@ -58,13 +58,12 @@
     @include font-16-regular;
   }
 
-  // @media (min-width: 768px) and (max-width: 1023px) {
-  //   &--primary {
-  //     width: 100%;
-  //     max-width: 720px;
-  //   }
-  // }
-  //이 밑에가 광민님ㅇ ㅣ쓴거
+  @media (min-width: 768px) and (max-width: 1023px) {
+    &--primary,
+    &--delete {
+      max-width: 720px;
+    }
+  }
 
   @media (max-width: 767px) {
     &,
