@@ -1,6 +1,6 @@
 import styles from './Home.module.scss';
-import img01 from '../../assets/images/img_01.svg';
-import img02 from '../../assets/images/img_02.png';
+import img01 from '../../assets/images/img-01.svg';
+import img02 from '../../assets/images/img-02.png';
 import Button from '../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ export default function Home() {
           <img
             src={img01}
             alt="롤링페이퍼 이미지"
-            className={styles.sectionImage}
+            className={styles.sectionImagePaper}
           />
         </article>
       </section>
@@ -40,7 +40,7 @@ export default function Home() {
           <img
             src={img02}
             alt="이모지 이미지"
-            className={styles.sectionImage}
+            className={styles.sectionImageEmoji}
           />
         </article>
       </section>

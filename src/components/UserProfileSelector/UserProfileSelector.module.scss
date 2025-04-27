@@ -19,6 +19,7 @@
   &__selected-image {
     width: 80px;
     border-radius: 100px;
+    cursor: pointer;
   }
 
   &__content {
@@ -52,6 +53,7 @@
     border: 1px solid $gray-200;
     border-radius: 100px;
     transition: transform 0.1s ease-in-out;
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.15) translateY(-6px) translateZ(0);
@@ -64,7 +66,22 @@
 
   &__image--selected {
     transform: scale(1.2) translateY(-6px) translateZ(0);
-    box-shadow: 0 0 0 2px $gray-300;
+    box-shadow: 0 0 0 2px $gray-400;
+  }
+
+  &__image--loading {
+    background: linear-gradient(270deg, $gray-200, $gray-300, $gray-400);
+    background-size: 400% 400%;
+    animation: loadingSpin 1.2s infinite linear;
+  }
+
+  @keyframes loadingSpin {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
   }
 
   @media (max-width: 767px) {
@@ -83,8 +100,11 @@
       row-gap: 4px;
     }
 
-    &__image {
+    &__image,
+    &__image--loading {
       width: 40px;
+      height: 40px;
+      background-size: 400% 400%;
     }
   }
 }
