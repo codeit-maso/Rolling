@@ -79,7 +79,6 @@
     align-items: center;
     gap: 8px;
     white-space: nowrap;
-    min-width: 0;
 
     @media (max-width: 975px) {
       display: none;
@@ -122,9 +121,6 @@
   &__message-count {
     @include font-16-regular;
     color: $gray-500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   &__divider {
