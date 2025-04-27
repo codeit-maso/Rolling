@@ -2,11 +2,13 @@ import { api } from './api';
 
 export default async function uploadImage(file) {
   const formData = new FormData();
-  formData.append('image', file);
+  formData.append('file', file);
+  formData.append('upload_preset', 'profile_upload');
+  const cloudName = import.meta.env.VITE_CLOUD_NAME;
 
   try {
     const res = await api.post(
-      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY}`,
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       formData,
       {
         headers: {
@@ -14,7 +16,7 @@ export default async function uploadImage(file) {
         },
       },
     );
-    return res.data.data.url;
+    return res.data.secure_url;
   } catch (error) {
     console.error('이미지 업로드 실패', error);
     throw error;
