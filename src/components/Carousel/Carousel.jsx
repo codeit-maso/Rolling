@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { debounce } from 'lodash';
 import styles from './Carousel.module.scss';
 import RecipientCard from '../RecipientCard/RecipientCard';
 
@@ -21,8 +22,37 @@ export default function Carousel({ recipients }) {
     }
   }
 
+  //resize에 따른, 캐러셀 시작점 리셋
+  // const [width, setWidth] = useState(0);
+  // const [prewidth, setPreWidth] = useState(window.innerWidth);
+  // const handleResize = debounce(() => {
+  //   setWidth(window.innerWidth);
+  // }, 200);
+  // useEffect(() => {
+  //   setWidth(window.innerWidth); //처음 로딩 상태 받아야, 첫 resize시 prewidth에 값을 넘길수 있음
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   setPreWidth((prev) => width);
+  //   // console.log('prewidth:', prewidth);
+  //   // console.log('updated width:', width);
+  //   // if (width > 1023 && prewidth <= 1023 && offsetX % 295 !== 0) {
+  //   if (width > 1023 && 0 < prewidth <= 1023) {
+  //     console.log('prewidth:', prewidth);
+  //     console.log('updated width:', width);
+  //     setOffsetX({
+  //       transform: `translateX(0px)`,
+  //     });
+  //   }
+  // }, [width]);
+
   return (
     <div className={styles.carousel}>
+      {/* <div style={{ fontSize: '50px' }}>{prewidth}</div>
+      <div style={{ fontSize: '50px' }}>{width}</div> */}
       <div className={styles['carousel__cardset-wrapper']}>
         <div className={styles['carousel__cardset']} style={offsetX}>
           {recipients.map((it) => (

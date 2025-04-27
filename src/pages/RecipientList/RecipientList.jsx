@@ -35,25 +35,27 @@ export default function RecipientList() {
 
   return (
     <>
-      <div className={styles['section-group']}>
-        <section className={styles['section-listpage']}>
-          <h2 className={styles['section__h2']}>인기 롤링 페이퍼 🔥</h2>
-          {isLoadingImages ? (
-            <CarouselSkeleton className={styles['skeleton-liked']} />
-          ) : (
-            <Carousel recipients={popularity} />
-          )}
-        </section>
-        <section className={styles['section-listpage']}>
-          <h2 className={styles['section__h2']}>최근에 만든 롤링 페이퍼 ⭐️</h2>
-          {isLoadingImages ? (
-            <CarouselSkeleton className={styles['skeleton-recently']} />
-          ) : (
-            <Carousel recipients={recently} />
-          )}
-        </section>
+      <section className={styles['section-listpage']}>
+        <h2 className={styles['section__h2']}>인기 롤링 페이퍼 🔥</h2>
+        {isLoadingImages ? (
+          <CarouselSkeleton className={styles['skeleton-liked']} />
+        ) : (
+          <Carousel recipients={popularity} />
+        )}
+      </section>
+      <section
+        className={`${styles['section-listpage']} ${styles['section--mobile-gap']}`}
+      >
+        <h2 className={styles['section__h2']}>최근에 만든 롤링 페이퍼 ⭐️</h2>
+        {isLoadingImages ? (
+          <CarouselSkeleton className={styles['skeleton-recently']} />
+        ) : (
+          <Carousel recipients={recently} />
+        )}
+      </section>
+      <div className={styles['button-listpage']}>
+        <Button children="나도 만들어보기" onClick={() => navigate('/post')} />
       </div>
-      <Button children="나도 만들어보기" onClick={() => navigate('/post')} />
     </>
   );
 }

@@ -15,7 +15,11 @@
   z-index: 1;
 }
 @media (max-width: 767px) {
+  .card__reactions {
+    gap: 4px;
+  }
   .card__reactions__reaction {
     @include font-14-regular;
+    padding: 5px 8px;
   }
 }

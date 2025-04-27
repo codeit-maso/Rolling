@@ -43,6 +43,7 @@
   animation: shimmer 1.2s infinite;
 }
 
+//모바일,태블릿 공통 적용
 @media (max-width: 1023px) {
   .section--sk {
     max-width: 100%;
@@ -50,7 +51,8 @@
     padding: 0 20px;
   }
 }
-@media (max-width: 768px) {
+//모바일
+@media (max-width: 767px) {
   .card--sk {
     min-width: 208px;
     height: 232px;

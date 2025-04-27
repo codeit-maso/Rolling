@@ -1,13 +1,5 @@
 @use '../../assets/styles/variables.scss' as *;
 
-// .skeleton-group {
-//   // position: absolute;
-//   // top: 52px;
-//   z-index: 1;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 102px;
-// }
 .skeleton-liked {
   margin-bottom: 102px;
 }
@@ -21,38 +13,43 @@
   margin: 50px auto;
   padding: 0 12px;
 }
+.button-listpage {
+  margin-top: 64px;
+  margin-bottom: 218px;
+}
 .section__h2 {
   @include font-24-bold;
   width: 1160px;
   margin-bottom: 16px;
-}
-.section-group {
-  margin-bottom: 64px;
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .section-listpage {
     padding: 0 24px;
   }
-  .section-group {
-    margin-bottom: 156px;
-    background-color: aqua;
+  .button-listpage {
+    margin-top: 156px;
+    margin-bottom: 24px;
   }
+
   .section__h2 {
     max-width: 100%;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .section-listpage {
     padding: 0 20px;
     margin: 40px auto;
   }
-  .section-group {
-    gap: 34px;
-    margin-bottom: 66px;
-    background-color: blueviolet;
+  .button-listpage {
+    margin-top: 66px;
+    margin-bottom: 24px;
   }
+
   .section__h2 {
     width: 100%;
+  }
+  .section--mobile-gap {
+    margin-bottom: 74px;
   }
 }

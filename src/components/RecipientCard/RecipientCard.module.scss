@@ -13,7 +13,7 @@
 }
 .card__centerline {
   height: 1px;
-  margin: 43px 0px 16px 0px;
+  margin: 41px 0px 16px 0px;
   background-color: rgba(0, 0, 0, 0.12);
 }
 .white {
@@ -114,15 +114,25 @@
     height: 232px;
   }
   .card__centerline {
-    margin-top: 33px;
+    margin-top: 30px;
   }
-  h3 {
+  .card__h3 {
     @include font-18-bold;
   }
-  .writer-count {
+  .card__writer-count {
     @include font-14-regular;
   }
-  .count {
+  .card__count {
     font-size: 1.4rem;
+  }
+  .card.purple::after,
+  .card.green::after,
+  .card.beige::after {
+    top: 124px;
+    left: 100px;
+  }
+  .card .triangle {
+    top: 90px;
+    left: 52px;
   }
 }
