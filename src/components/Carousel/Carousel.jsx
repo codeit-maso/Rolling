@@ -9,8 +9,6 @@ export default function Carousel({ recipients }) {
   const [isBouncing, setBouncing] = useState(false); // 캐러셀 끝이면 bouncing 모션
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const isDesktop = windowWidth > 1023;
-  const isTablet = windowWidth > 767 && windowWidth < 1024;
-  const isMobile = windowWidth > 0 && windowWidth < 768;
 
   useEffect(() => {
     function handleResize() {
@@ -44,34 +42,32 @@ export default function Carousel({ recipients }) {
   function handleEnd(e) {
     const touchEnd =
       e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
-    const distance = Math.abs(touchEnd - startX); //드래그 한 거리
-    const isNext = startX > touchEnd; //방향이 next인지, back인지
-    const maxIndex = isTablet ? 5 : isMobile ? 7 : 4;
+    const distance = Math.abs(touchEnd - startX); //드래그 거리
+    const isNext = startX > touchEnd; // direction(next,back) 결정
     if (isDesktop || distance < 10) return;
 
     if (!isNext) {
       if (index === 0) {
-        setBouncing(true);
+        setBouncing(true); //캐러셀 끝 -> setBounce(띠용)
         return;
       } else if (index > 0) {
         settingIndex('back');
         return;
       }
     } else if (isNext) {
-      if (index === maxIndex) {
+      if (index === 5) {
         setBouncing(true);
         return;
-      } else if (index < maxIndex) {
+      } else if (index < 5) {
         settingIndex('next');
         return;
       }
     }
   }
-  // Bouncing 리셋
   useEffect(() => {
     if (isBouncing) {
       const timer = setTimeout(() => {
-        setBouncing(false);
+        setBouncing(false); // Bouncing 모션 끝나고 바로 리셋
       }, 500);
     }
   }, [isBouncing]);

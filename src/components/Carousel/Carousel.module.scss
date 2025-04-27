@@ -73,6 +73,10 @@
     transform: scaleX(-1) translateY(-50%);
     left: 40px;
   }
+
+  &:active {
+    border: solid 2px $purple-200;
+  }
 }
 
 // 반응형
@@ -106,7 +110,7 @@
   }
 }
 
-// 캐러셀 끝에서 바운스
+// 캐러셀 끝 - 바운스 애니메이션
 @-webkit-keyframes bounce-horizontal {
   0% {
     transform: translateX(0);
