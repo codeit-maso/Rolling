@@ -252,6 +252,12 @@
       padding: 2px 6px;
       font-size: 13px;
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 
   &__emoji-more-container {
@@ -365,6 +371,12 @@
       height: 28px;
       padding: 2px 6px;
       font-size: 13px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 

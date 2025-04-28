@@ -9,6 +9,8 @@ export default function HeaderService({ recipient }) {
   const [reactions, setReactions] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showAllEmojisDropdown, setShowAllEmojisDropdown] = useState(false);
+  const pendingEmojisRef = useRef([]);
+  const [pendingEmojis, setPendingEmojis] = useState([]);
   const emojiPickerRef = useRef(null);
   const emojiMoreRef = useRef(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
@@ -81,16 +83,45 @@ export default function HeaderService({ recipient }) {
 
   const handleAddReaction = async (emoji) => {
     if (!recipient?.id) return;
+    if (pendingEmojisRef.current.includes(emoji)) return;
+
+    pendingEmojisRef.current = [...pendingEmojisRef.current, emoji];
+    setPendingEmojis(pendingEmojisRef.current);
+
+    setReactions((prev) => {
+      const found = prev.find((r) => r.emoji === emoji);
+      if (found) {
+        return prev.map((r) =>
+          r.emoji === emoji ? { ...r, count: r.count + 1 } : r,
+        );
+      } else {
+        return [...prev, { id: `optimistic-${emoji}`, emoji, count: 1 }];
+      }
+    });
 
     try {
       await addReaction(recipient.id, emoji);
-
       const updatedReactions = await fetchReactions(recipient.id);
       setReactions(updatedReactions);
+    } catch (error) {
+      console.error(error);
+      setReactions((prev) => {
+        const found = prev.find((r) => r.emoji === emoji);
+        if (found && found.count === 1 && found.id?.startsWith('optimistic-')) {
+          return prev.filter((r) => r.emoji !== emoji);
+        } else {
+          return prev.map((r) =>
+            r.emoji === emoji ? { ...r, count: r.count - 1 } : r,
+          );
+        }
+      });
+    } finally {
+      pendingEmojisRef.current = pendingEmojisRef.current.filter(
+        (e) => e !== emoji,
+      );
+      setPendingEmojis(pendingEmojisRef.current);
       setShowEmojiPicker(false);
       setShowAllEmojisDropdown(false);
-    } catch (error) {
-      console.error('이모지 추가 실패:', error);
     }
   };
 
@@ -148,13 +179,19 @@ export default function HeaderService({ recipient }) {
               <div className={styles['header-service__emojis']}>
                 {topReactions.length > 0 ? (
                   topReactions.map((reaction) => (
-                    <div
+                    <button
                       key={reaction.id}
                       className={styles['header-service__emoji-item']}
                       onClick={() => handleAddReaction(reaction.emoji)}
+                      disabled={pendingEmojis.includes(reaction.emoji)}
                     >
-                      {reaction.emoji} {reaction.count}
-                    </div>
+                      <span className={styles['header-service__emoji']}>
+                        {reaction.emoji}
+                      </span>{' '}
+                      <span className={styles['header-service__count']}>
+                        {reaction.count}
+                      </span>
+                    </button>
                   ))
                 ) : (
                   <span>아직 리액션이 없어요</span>
@@ -188,15 +225,21 @@ export default function HeaderService({ recipient }) {
                           .sort((a, b) => b.count - a.count)
                           .slice(0, isLargeScreen ? 8 : 6)
                           .map((reaction) => (
-                            <div
+                            <button
                               key={reaction.id}
                               className={
                                 styles['header-service__emoji-dropdown-item']
                               }
                               onClick={() => handleAddReaction(reaction.emoji)}
+                              disabled={pendingEmojis.includes(reaction.emoji)}
                             >
-                              {reaction.emoji} {reaction.count}
-                            </div>
+                              <span className={styles['header-service__emoji']}>
+                                {reaction.emoji}
+                              </span>{' '}
+                              <span className={styles['header-service__count']}>
+                                {reaction.count}
+                              </span>
+                            </button>
                           ))
                       ) : (
                         <span>아직 리액션이 없어요</span>
