@@ -17,13 +17,14 @@ export default function CreateRecipient() {
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(-1);
   const [imageLoading, setImageLoading] = useState([]);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const result = await getBackgroundImage();
-        setData(result);
+        setData(result.slice(0, 3));
         setImageLoading(new Array(result.length).fill(true));
       } catch (error) {
         console.error('데이터 로딩 실패:', error);
@@ -68,13 +69,18 @@ export default function CreateRecipient() {
         team: '15-7',
         name: value,
         backgroundColor: selectedColor,
-        backgroundImageURL: data[selectedImage] ?? null,
+        backgroundImageURL: uploadedImageUrl || (data[selectedImage] ?? null),
       });
       navigate(`/post/${id}`);
     } catch (error) {
       console.error('페이지 생성 중 오류:', error.response.data);
     }
   }
+
+  const handleUploadImage = (url) => {
+    setUploadedImageUrl(url);
+    setSelectedImage(data.length + 1);
+  };
 
   return (
     <div className={styles['create-page']}>
@@ -152,6 +158,12 @@ export default function CreateRecipient() {
                 onLoad={() => handleImageLoad(index)}
               />
             ))}
+            <BackgroundCard
+              type="upload"
+              onClick={() => handleImageClick(data.length + 1)}
+              isSelected={selectedImage === data.length + 1}
+              onSelect={handleUploadImage}
+            />
           </ul>
         )}
       </div>
