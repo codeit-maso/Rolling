@@ -37,7 +37,8 @@ export default function Editor({ value, onChange, font, onBlur, isError }) {
   useEffect(() => {
     const editorRoot = quillRef.current?.editor?.root;
     if (editorRoot) {
-      editorRoot.style.fontFamily = fontFamilyMap[font];
+      editorRoot.style.fontFamily =
+        fontFamilyMap[font] || '"Noto Sans", sans-serif';
       editorRoot.style.fontSize = '18px';
     }
   }, [font]);
