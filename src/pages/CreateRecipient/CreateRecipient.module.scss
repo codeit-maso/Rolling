@@ -40,6 +40,7 @@
 
     .create-page__select-color--active,
     .create-page__select-image--active {
+      padding: 6px 14px;
       border: 2px solid $purple-600;
       background-color: $white;
       @include font-16-bold;
@@ -51,130 +52,13 @@
     display: flex;
     margin: 20px 0;
     gap: 16px;
-
-    .create-page__color--beige,
-    .create-page__color--purple,
-    .create-page__color--blue,
-    .create-page__color--green {
-      position: relative;
-      width: 168px;
-      aspect-ratio: 1 / 1;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 16px;
-      list-style: none;
-      flex-shrink: 0;
-      cursor: pointer;
-      transition:
-        transform 0.3s ease-in-out,
-        box-shadow 0.3s ease-in-out;
-
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-    }
-
-    .create-page__color--selected {
-      cursor: default;
-    }
-
-    .create-page__color--beige {
-      background-color: $beige-200;
-    }
-    .create-page__color--purple {
-      background-color: $purple-200;
-    }
-    .create-page__color--blue {
-      background-color: $blue-200;
-    }
-    .create-page__color--green {
-      background-color: $green-200;
-    }
-
-    .create-page__check-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 44px;
-      height: 44px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
   }
 
   &__image-list {
     display: flex;
     margin: 20px 0;
     gap: 16px;
-
-    .create-page__image--1,
-    .create-page__image--2,
-    .create-page__image--3,
-    .create-page__image--4 {
-      position: relative;
-      width: 168px;
-      aspect-ratio: 1 / 1;
-      border-radius: 16px;
-      list-style: none;
-      overflow: hidden;
-      flex-shrink: 0;
-      cursor: pointer;
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-
-      &:hover {
-        transform: scale(1.05) translateZ(0);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-
-      .create-page__background-img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    .create-page__image--selected .create-page__background-img {
-      opacity: 0.5;
-      cursor: default;
-    }
-
-    .create-page__check-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 44px;
-      height: 44px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
   }
-}
-
-.create-page__skeleton {
-  width: 100%;
-  height: 100%;
-  background-color: #e0e0e0;
-  animation: skeleton-loading 1.2s infinite ease-in-out;
-  border-radius: 8px;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-color: #e0e0e0;
-  }
-  50% {
-    background-color: #f0f0f0;
-  }
-  100% {
-    background-color: #e0e0e0;
-  }
-}
-
-.create-page__background-img--hidden {
-  display: none;
 }
 
 @media (max-width: 1023px) {
@@ -202,17 +86,6 @@
       justify-content: center;
       gap: 12px;
       padding-bottom: calc(82px + 56px);
-
-      .create-page__color--beige,
-      .create-page__color--purple,
-      .create-page__color--blue,
-      .create-page__color--green,
-      .create-page__image--1,
-      .create-page__image--2,
-      .create-page__image--3,
-      .create-page__image--4 {
-        width: calc((100% - 12px) / 2);
-      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import DOMPurify from 'dompurify';
 import ReactDOM from 'react-dom';
 import Badge from '../Badge/Badge';
@@ -20,11 +21,19 @@ export default function Modal({
   createdAt,
   onClose,
 }) {
+  const [isClosing, setIsClosing] = useState(false);
   const sanitizedHTML = DOMPurify.sanitize(children);
+
+  const handleCloseModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  };
 
   return ReactDOM.createPortal(
     <div className={styles.backdrop}>
-      <article className={styles.modal}>
+      <article className={`${styles.modal} ${isClosing ? styles.closing : ''}`}>
         <header className={styles['modal__header']}>
           <div className={styles['modal__profile-img']}>
             <img src={image} alt="프로필 이미지" />
@@ -53,7 +62,7 @@ export default function Modal({
           <Button
             className={styles['modal__button']}
             type="confirm"
-            onClick={onClose}
+            onClick={handleCloseModal}
           >
             확인
           </Button>
