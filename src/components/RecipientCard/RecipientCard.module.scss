@@ -1,19 +1,19 @@
 @use '../../assets/styles/variables.scss' as *;
 
-h3 {
+.card__h3 {
   @include font-24-bold;
   color: $gray-900;
 }
-.writer-count {
+.card__writer-count {
   @include font-16-regular;
   color: $gray-700;
 }
-.count {
+.card__count {
   @include font-16-bold;
 }
 .card__centerline {
   height: 1px;
-  margin: 43px 0px 16px 0px;
+  margin: 41px 0px 16px 0px;
   background-color: rgba(0, 0, 0, 0.12);
 }
 .white {
@@ -21,6 +21,7 @@ h3 {
 }
 
 .card {
+  position: relative;
   overflow: hidden; // ::after 도형 잘리게
   min-width: 275px;
   height: 260px;
@@ -31,10 +32,17 @@ h3 {
   background-repeat: no-repeat;
   -webkit-filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 1));
   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.08));
+  transition: transform 0.25s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   &::after {
     content: '';
     position: absolute;
+    z-index: -1;
   }
   &.purple {
     background: $purple-200;
@@ -106,23 +114,36 @@ h3 {
     border-radius: 90.5px;
     background: #9be2824d;
   }
-}
 
-@media (min-width: 0px) and (max-width: 360px) {
+  &:hover {
+    transform: scale(0.96) translateZ(0);
+  }
+}
+@media (max-width: 767px) {
   .card {
     min-width: 208px;
     height: 232px;
   }
   .card__centerline {
-    margin-top: 33px;
+    margin-top: 30px;
   }
-  h3 {
+  .card__h3 {
     @include font-18-bold;
   }
-  .writer-count {
+  .card__writer-count {
     @include font-14-regular;
   }
-  .count {
+  .card__count {
     font-size: 1.4rem;
+  }
+  .card.purple::after,
+  .card.green::after,
+  .card.beige::after {
+    top: 124px;
+    left: 100px;
+  }
+  .card .triangle {
+    top: 90px;
+    left: 52px;
   }
 }

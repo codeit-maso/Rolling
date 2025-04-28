@@ -36,3 +36,19 @@ h2,
 h3 {
   all: unset;
 }
+
+@font-face {
+  font-display: swap;
+  font-family: '나눔명조';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/NanumMyeongjoOTF00.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: '나눔손글씨 손편지체';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/NanumSonPyeonJiCe.woff2') format('woff2');
+}

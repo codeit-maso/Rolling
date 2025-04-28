@@ -1,33 +1,61 @@
 @use '../../assets/styles/variables.scss' as *;
 
-section {
+.skeleton-liked {
+  margin-bottom: 102px;
+}
+
+.section-listpage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 20px 0px 20px;
+  position: relative;
+  width: 100%;
+  margin: 50px auto;
+  padding: 0 24px;
 }
-h2 {
+.button-listpage {
+  margin-top: 64px;
+}
+.section__h2 {
   @include font-24-bold;
+  width: 1160px;
   margin: 0 auto;
   margin-bottom: 16px;
-}
-.section-group {
-  margin-bottom: 64px;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-@media (min-width: 361px) and (max-width: 768px) {
-  .section-group {
-    margin-bottom: 156px;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-listpage {
+    padding: 0 24px;
+  }
+  .button-listpage {
+    margin-top: 156px;
+    margin-bottom: 24px;
+  }
+
+  .section__h2 {
+    max-width: 100%;
   }
 }
-@media (min-width: 0px) and (max-width: 360px) {
-  section {
-    margin-top: 40px;
+@media (max-width: 767px) {
+  .section-listpage {
+    padding: 0 20px;
+    margin: 40px auto;
   }
-  .section-group {
-    display: flex;
-    flex-direction: column;
-    gap: 34px;
-    margin-bottom: 66px;
+  .button-listpage {
+    margin-top: 66px;
+    margin-bottom: 24px;
+  }
+
+  .section__h2 {
+    width: 100%;
+  }
+  .section--mobile-gap {
+    margin-bottom: 74px;
   }
 }

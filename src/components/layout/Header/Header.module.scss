@@ -4,10 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   max-width: 1207px;
+  height: 64px;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 0 24px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .underline {
@@ -28,14 +33,19 @@
   white-space: nowrap;
   color: inherit;
   text-decoration: none;
+  &:hover {
+    background-color: $purple-100;
+    border: solid 1px $purple-300;
+  }
+  transition: 0.2s ease-in-out;
 }
 
-@media (min-width: 361px) and (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .header {
     padding: 0 24px;
   }
 }
-@media (min-width: 0px) and (max-width: 360px) {
+@media (max-width: 767px) {
   .header {
     padding: 0 16px;
   }

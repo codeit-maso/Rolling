@@ -25,6 +25,11 @@
     height: 32px;
     padding: 4px;
   }
+
+  @media (max-width: 375px) {
+    width: 32px;
+    height: 28px;
+  }
 }
 
 .share-options {
