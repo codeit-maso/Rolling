@@ -22,7 +22,6 @@ export default function FormInput({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        maxLength={10}
         className={`${styles['form-input__input']} ${isError ? styles['form-input__input--error'] : ''}`}
       />
       {isError && (

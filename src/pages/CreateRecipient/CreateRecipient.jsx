@@ -34,7 +34,8 @@ export default function CreateRecipient() {
   }, []);
 
   function handleInputChange(e) {
-    setValue(e.target.value);
+    const inputValue = e.target.value.slice(0, 10);
+    setValue(inputValue);
   }
 
   function handleBlur() {
@@ -80,11 +81,10 @@ export default function CreateRecipient() {
       <div className={styles['create-page__input-section']}>
         <FormInput
           label="To."
-          placeholder="받는 사람 이름을 입력해 주세요"
+          placeholder="받는 사람 이름을 입력해 주세요. (최대 10자)"
           value={value}
           onChange={handleInputChange}
           onBlur={handleBlur}
-          maxLength={40}
           isError={isError}
         />
       </div>
