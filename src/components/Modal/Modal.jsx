@@ -53,7 +53,7 @@ export default function Modal({
         <div className={styles['modal__body']}>
           <div className={styles['modal__content']}>
             <div
-              style={{ fontFamily: fontFamilyMap[font] }}
+              className={`${styles['card__content']} font-${font.replace(/\s/g, '')}`}
               dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
             />
           </div>
