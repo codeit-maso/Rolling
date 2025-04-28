@@ -40,6 +40,7 @@
 
     .create-page__select-color--active,
     .create-page__select-image--active {
+      padding: 6px 14px;
       border: 2px solid $purple-600;
       background-color: $white;
       @include font-16-bold;
