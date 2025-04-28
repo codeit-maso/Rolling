@@ -56,13 +56,24 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: $white;
+  color: $black;
   transition: transform 0.3s ease;
+  animation: color-change 2s infinite alternate;
   @include font-18-bold;
 
   &:hover {
-    animation: shake 0.5s ease;
-    animation-iteration-count: 1;
+    animation:
+      shake 0.5s ease,
+      color-change 2s infinite alternate;
+  }
+}
+
+@keyframes color-change {
+  0% {
+    color: $black;
+  }
+  100% {
+    color: $white;
   }
 }
 
