@@ -42,7 +42,7 @@ export default function Card({
 
   return (
     <article
-      className={`${styles.card} ${empty ? styles['card--empty'] : ''} ${showDelete ? styles['card--show'] : ''}`}
+      className={`${styles.card} ${empty ? styles['card--empty'] : ''} ${showDelete ? styles['card--show'] : styles['card--unshow']}`}
       onClick={() => (empty ? clickPost() : onClick?.(id))}
     >
       {empty ? (

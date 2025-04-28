@@ -13,7 +13,8 @@
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
 
-  &:hover {
+  &--unshow:hover,
+  &--empty:hover {
     transform: scale(0.95) translateZ(0);
   }
 
@@ -22,6 +23,9 @@
     justify-content: center;
     align-items: center;
 
+    &:hover img {
+      animation: bounce 0.5s 2 ease;
+    }
     img {
       width: 56px;
       height: 56px;
@@ -85,7 +89,46 @@
         border: 1px solid $gray-300;
         border-radius: 6px;
         background-color: $white;
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+
+        &:hover {
+          background-color: $error;
+          border-color: $gray-400;
+          &:hover img {
+            animation: shake 0.5s ease-in-out;
+          }
+        }
       }
+    }
+  }
+
+  @keyframes shake {
+    0% {
+      transform: rotate(0deg) translateX(0) translateY(0);
+    }
+    25% {
+      transform: rotate(-5deg) translateX(-3px) translateY(3px);
+    }
+    50% {
+      transform: rotate(5deg) translateX(3px) translateY(-3px);
+    }
+    75% {
+      transform: rotate(-3deg) translateX(-2px) translateY(2px);
+    }
+    100% {
+      transform: rotate(0deg) translateX(0) translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
     }
   }
 
@@ -112,18 +155,6 @@
   &__footer {
     @include font-12-regular;
     color: $gray-400;
-  }
-}
-
-@keyframes click-pop {
-  0% {
-    transform: scale(1) translateZ(0);
-  }
-  50% {
-    transform: scale(1.03) translateZ(0); // 살짝 커졌다가
-  }
-  100% {
-    transform: scale(1) translateZ(0); // 다시 원래대로
   }
 }
 
