@@ -17,9 +17,6 @@
 }
 
 .section--sk {
-  // position: absolute;
-  // top: 52px;
-  // z-index: 1;
   display: flex;
   gap: 20px;
 }
@@ -42,17 +39,19 @@
   -webkit-animation: shimmer 1.2s infinite;
   animation: shimmer 1.2s infinite;
 }
-
-//모바일,태블릿 공통 적용
-@media (max-width: 1023px) {
+@media (max-width: 1200px) {
+  //안밀리도록 추가함(캐러셀보다 화면 사이즈가 작아질때부터 적용해야함..)
   .section--sk {
-    max-width: 100%;
+    width: 100vw;
+    padding: 0 24px;
     overflow: hidden;
-    padding: 0 20px;
   }
 }
 //모바일
 @media (max-width: 767px) {
+  .section--sk {
+    padding: 0 20px;
+  }
   .card--sk {
     min-width: 208px;
     height: 232px;

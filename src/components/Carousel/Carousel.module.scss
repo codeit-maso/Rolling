@@ -84,6 +84,7 @@
   //캐러셀 안밀리도록 추가함
   .carousel__cardset-wrapper {
     width: 100vw;
+    padding: 0 24px;
   }
 }
 // 태블릿
@@ -102,6 +103,9 @@
 
 //모바일
 @media (max-width: 767px) {
+  .carousel__cardset-wrapper {
+    padding: 0 20px;
+  }
   h2 {
     margin-bottom: 12px;
   }
