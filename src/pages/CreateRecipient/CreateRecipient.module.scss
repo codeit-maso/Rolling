@@ -177,7 +177,7 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .create-page {
     position: relative;
     min-height: calc(100vh - 57px - 65px);
@@ -189,8 +189,7 @@
   }
 }
 
-// 모바일 (768px 이하)
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .create-page {
     margin: 50px 20px 0;
 
