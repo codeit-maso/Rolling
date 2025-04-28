@@ -5,13 +5,6 @@ import Badge from '../Badge/Badge';
 import Button from '../common/Button';
 import styles from './Modal.module.scss';
 
-const fontFamilyMap = {
-  'Noto Sans': '"Noto Sans", sans-serif',
-  Pretendard: '"Pretendard", sans-serif',
-  나눔명조: '"Nanum Myeongjo", serif',
-  '나눔손글씨 손편지체': '"Nanum Sonpyeonji Ce", cursive',
-};
-
 export default function Modal({
   image,
   sender,
@@ -53,7 +46,7 @@ export default function Modal({
         <div className={styles['modal__body']}>
           <div className={styles['modal__content']}>
             <div
-              className={`${styles['card__content']} font-${font.replace(/\s/g, '')}`}
+              className={`${styles['modal__content']} font-${font.replace(/\s/g, '')}`}
               dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
             />
           </div>
