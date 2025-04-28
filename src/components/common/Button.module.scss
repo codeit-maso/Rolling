@@ -46,7 +46,7 @@
     display: block;
     max-width: 280px;
     min-width: 320px;
-    margin: 0 auto;
+    margin: 0 auto 24px;
   }
 
   &--confirm {
@@ -77,23 +77,15 @@
   }
 
   @media (max-width: 767px) {
-    &,
-    &--primary,
-    &--delete {
-      min-width: 320px;
-    }
-
     &--primary {
       margin-bottom: 24px;
     }
   }
 
-  @media (max-width: 1024px) {
-    .button {
-      &--delete {
-        width: 100%;
-        height: 55px;
-      }
+  @media (max-width: 1023px) {
+    &--delete {
+      width: 100%;
+      height: 55px;
     }
   }
 }
