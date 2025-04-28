@@ -29,6 +29,11 @@
   transform: translate(-50%, -50%);
   box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
   gap: 16px;
+  animation: scaleIn 0.5s ease-out;
+
+  &.closing {
+    animation: scaleOut 0.5s forwards;
+  }
 
   &__header {
     display: flex;
@@ -107,6 +112,28 @@
 
   &__button {
     align-self: center;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: translate(0%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, -50%) scale(0.5);
+    opacity: 0;
   }
 }
 
