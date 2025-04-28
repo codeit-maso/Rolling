@@ -19,6 +19,12 @@
   &:hover {
     background-color: $gray-100;
   }
+
+  @media (max-width: 480px) {
+    width: 36px;
+    height: 32px;
+    padding: 4px;
+  }
 }
 
 .share-options {

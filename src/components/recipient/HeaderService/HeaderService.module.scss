@@ -6,6 +6,11 @@
   border-bottom: 1px solid $gray-200;
   padding: 13px 0;
 
+  @media (max-width: 767px) {
+    padding: 0;
+    border-bottom: none;
+  }
+
   &__container {
     width: 100%;
     max-width: 1200px;
@@ -17,23 +22,67 @@
     @media (max-width: 1248px) {
       padding: 0 24px;
     }
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 0;
+    }
   }
 
   &__right-content {
     display: flex;
     align-items: center;
     margin-left: 263px;
+
+    @media (max-width: 1248px) {
+      margin-left: 24px;
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-left: 0;
+      padding: 16px;
+    }
+  }
+
+  &__name-section {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      padding: 16px;
+      border-bottom: 1px solid $gray-200;
+    }
   }
 
   &__recipient-name {
     @include font-28-bold;
     color: $gray-800;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 767px) {
+      font-size: 24px;
+      font-weight: bold;
+    }
   }
 
   &__profile-section {
     display: flex;
     align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+
+    @media (max-width: 975px) {
+      display: none;
+    }
   }
 
   &__profile-images {
@@ -69,12 +118,6 @@
     @include font-12-regular;
   }
 
-  &__profile-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
   &__message-count {
     @include font-16-regular;
     color: $gray-500;
@@ -86,6 +129,10 @@
       height: 28px;
       background-color: $gray-200;
       margin: 0 28px;
+
+      @media (max-width: 975px) {
+        display: none;
+      }
     }
 
     &--right {
@@ -97,6 +144,20 @@
   }
 
   &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__emojis-left-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__emojis-right-group {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -167,12 +228,37 @@
     padding: 12px;
     z-index: 10;
     min-width: 310px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 975px) and (min-width: 768px) {
+      width: 280px;
+      min-width: auto;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 767px) {
+      width: 240px;
+      min-width: auto;
+      box-sizing: border-box;
+    }
   }
 
   &__emoji-dropdown-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+
+    @media (max-width: 975px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &__emoji-dropdown-item {
@@ -193,6 +279,7 @@
     transition:
       transform 0.2s ease,
       background-color 0.2s ease;
+    text-align: center;
 
     &:hover {
       background-color: #5d5d5d;
@@ -211,14 +298,22 @@
     background-color: $white;
     @include font-16-regular;
     cursor: pointer;
+    gap: 4px;
+    white-space: nowrap;
 
     &:hover {
       background-color: $gray-100;
     }
-  }
 
-  &__add-button {
-    gap: 4px;
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 32px;
+      padding: 4px;
+
+      span {
+        display: none;
+      }
+    }
   }
 
   &__emoji-picker-container {
