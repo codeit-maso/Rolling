@@ -76,7 +76,7 @@ export default function Card({
           <div className={styles['card__body']}>
             <div className={styles['card__content']}>
               <div
-                style={{ fontFamily: fontFamilyMap[font] }}
+                className={`${styles['card__content']} font-${font.replace(/\s/g, '')}`}
                 dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
               />
             </div>
