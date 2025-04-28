@@ -68,7 +68,7 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     &--primary,
     &--delete {
-      min-width: 720px;
+      max-width: 720px;
     }
 
     &--primary {
