@@ -65,3 +65,24 @@
     }
   }
 }
+
+:global(.ql-editor) {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.8rem;
+}
+
+:global(.ql-editor.font-나눔명조) {
+  font-family: '나눔명조', serif;
+}
+
+:global(.ql-editor.font-나눔손글씨손편지체) {
+  font-family: '나눔손글씨 손편지체', cursive;
+}
+
+:global(.ql-editor.font-Pretendard) {
+  font-family: 'Pretendard', sans-serif;
+}
+
+:global(.ql-editor.font-NotoSans) {
+  font-family: 'Noto Sans', sans-serif;
+}
