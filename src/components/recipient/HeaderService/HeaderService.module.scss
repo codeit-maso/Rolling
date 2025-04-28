@@ -45,6 +45,10 @@
       margin-left: 0;
       padding: 16px;
     }
+
+    @media (max-width: 420px) {
+      padding: 12px;
+    }
   }
 
   &__name-section {
@@ -57,6 +61,10 @@
       width: 100%;
       padding: 16px;
       border-bottom: 1px solid $gray-200;
+    }
+
+    @media (max-width: 420px) {
+      padding: 12px 16px;
     }
   }
 
@@ -71,6 +79,10 @@
     @media (max-width: 767px) {
       font-size: 24px;
       font-weight: bold;
+    }
+
+    @media (max-width: 420px) {
+      font-size: 22px;
     }
   }
 
@@ -140,6 +152,10 @@
       height: 28px;
       background-color: $gray-200;
       margin: 0 13px;
+
+      @media (max-width: 360px) {
+        display: none;
+      }
     }
   }
 
@@ -149,6 +165,14 @@
     gap: 8px;
     justify-content: space-between;
     width: 100%;
+
+    @media (max-width: 420px) {
+      gap: 4px;
+    }
+
+    @media (max-width: 360px) {
+      gap: 3px;
+    }
   }
 
   &__emojis-left-group {
@@ -161,6 +185,14 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @media (max-width: 420px) {
+      gap: 6px;
+    }
+
+    @media (max-width: 360px) {
+      gap: 4px;
+    }
   }
 
   &__emojis {
@@ -170,6 +202,16 @@
     border-radius: 32px;
     padding: 8px 0;
     @include font-16-regular;
+
+    @media (max-width: 767px) {
+      gap: 6px;
+      padding: 6px 0;
+    }
+
+    @media (max-width: 420px) {
+      gap: 4px;
+      padding: 4px 0;
+    }
   }
 
   &__emoji-item {
@@ -194,6 +236,21 @@
     &:hover {
       background-color: #5d5d5d;
       transform: scale(1.05);
+    }
+
+    @media (max-width: 767px) {
+      width: 52px;
+      height: 32px;
+      padding: 4px 8px;
+      font-size: 14px;
+      gap: 2px;
+    }
+
+    @media (max-width: 420px) {
+      width: 44px;
+      height: 28px;
+      padding: 2px 6px;
+      font-size: 13px;
     }
   }
 
@@ -243,6 +300,12 @@
       min-width: auto;
       box-sizing: border-box;
     }
+
+    @media (max-width: 420px) {
+      width: 220px;
+      padding: 8px;
+      top: 35px;
+    }
   }
 
   &__emoji-dropdown-grid {
@@ -258,6 +321,10 @@
 
     @media (max-width: 975px) {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 420px) {
+      gap: 6px;
     }
   }
 
@@ -284,6 +351,20 @@
     &:hover {
       background-color: #5d5d5d;
       transform: scale(1.05);
+    }
+
+    @media (max-width: 767px) {
+      width: 52px;
+      height: 32px;
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 420px) {
+      width: 44px;
+      height: 28px;
+      padding: 2px 6px;
+      font-size: 13px;
     }
   }
 
@@ -313,6 +394,11 @@
       span {
         display: none;
       }
+    }
+
+    @media (max-width: 375px) {
+      width: 32px;
+      height: 28px;
     }
   }
 
