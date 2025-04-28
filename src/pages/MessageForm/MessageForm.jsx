@@ -103,6 +103,7 @@ export default function MessageForm() {
       alert('이름은 최대 10자까지, 메시지를 모두 입력해주세요.');
       return;
     }
+
     setIsCreating(true);
 
     try {

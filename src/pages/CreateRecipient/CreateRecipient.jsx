@@ -66,6 +66,12 @@ export default function CreateRecipient() {
 
   async function handleButtonClick() {
     if (isCreating) return;
+
+    if (value.trim() === '' || value.trim().length > 10) {
+      alert('이름은 공백이 아니어야 하며, 최대 10자까지 입력할 수 있습니다.');
+      return;
+    }
+
     setIsCreating(true);
 
     try {
