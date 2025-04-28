@@ -1,6 +1,6 @@
 import styles from './RecipientCard.module.scss';
-import RecentMessages from './RecentMessages';
-import TopReactions from './TopReactions';
+import RecentMessages from '../RecentMessages/RecentMessages';
+import TopReactions from '../TopReactions/TopReactions';
 import { useNavigate } from 'react-router-dom';
 
 //캐러셀 내부 요소 - 카드 컴포넌트
@@ -29,15 +29,17 @@ export default function RecipientCard({ Recipient }) {
       onClick={() => navigate(`/post/${id}`)}
     >
       {backgroundColor === 'blue' && <div className={styles.triangle} />}
-      <h3 className={backgroundImageURL && styles.white}>{`To. ${name}`}</h3>
+      <h3
+        className={`${styles['card__h3']} ${backgroundImageURL ? styles.white : ''}`}
+      >{`To. ${name}`}</h3>
       <RecentMessages
         messages={recentMessages}
         count={messageCount}
       ></RecentMessages>
       <div
-        className={`${styles['writer-count']} ${backgroundImageURL && styles.white}`}
+        className={`${styles['card__writer-count']} ${backgroundImageURL && styles.white}`}
       >
-        <span className={styles.count}>{messageCount}</span>
+        <span className={styles['card__count']}>{messageCount}</span>
         <span>명이 작성했어요!</span>
       </div>
       <div className={styles['card__centerline']}></div>
