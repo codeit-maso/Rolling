@@ -65,8 +65,8 @@
       flex-shrink: 0;
       cursor: pointer;
       transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+        transform 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
 
       &:hover {
         transform: scale(1.05);
@@ -124,7 +124,7 @@
         box-shadow 0.3s ease;
 
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) translateZ(0);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
 
@@ -177,7 +177,7 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .create-page {
     position: relative;
     min-height: calc(100vh - 57px - 65px);
@@ -189,8 +189,7 @@
   }
 }
 
-// 모바일 (768px 이하)
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .create-page {
     margin: 50px 20px 0;
 

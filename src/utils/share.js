@@ -21,20 +21,22 @@ export const shareKakao = (recipient, url) => {
     return;
   }
 
-  const title = `${recipient?.name || '누군가'}에게 롤링페이퍼 보내기`;
-  const description = `${recipient?.messageCount || 0}명이 작성한 롤링페이퍼입니다. 지금 확인 해보세요!`;
+  const title = `Rolling - 마음을 실은 종이비행기`;
+  const description = `마음을 종이비행기에 담아 전하세요. 부담 없이, 따뜻하게.`;
+  const imageUrl = `${window.location.origin}/rolling-meta.png`;
 
   window.Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
       title: title,
       description: description,
-      imageUrl: `${window.location.origin}/rolling-logo.svg`,
+      imageUrl: imageUrl,
       link: {
         mobileWebUrl: url,
         webUrl: url,
       },
     },
+
     buttons: [
       {
         title: '롤링페이퍼 작성하기',
