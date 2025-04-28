@@ -13,13 +13,21 @@ import styles from './Recipient.module.scss';
 export default function Recipient({ showDelete }) {
   const { id } = useParams();
   const [postData, setPostData] = useState(null);
+  const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasNextMessage, setHasNextMessage] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState(null);
+  const [userScrolled, setUserScrolled] = useState(false);
   const observerRef = useRef();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setUserScrolled(true);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const fetchRecipient = async () => {
@@ -37,14 +45,70 @@ export default function Recipient({ showDelete }) {
   }, [id]);
 
   useEffect(() => {
+    const fetchInitialMessages = async () => {
+      setLoading(true);
+      try {
+        const limit = 6;
+        const initialMessages = await getMessages(id, 0, limit);
+
+        setAllMessages(initialMessages.results);
+
+        if (showDelete) {
+          setMessages(initialMessages.results);
+        } else {
+          if (initialMessages.results.length % 6 === 0) {
+            setMessages(
+              initialMessages.results.slice(
+                0,
+                initialMessages.results.length - 1,
+              ),
+            );
+          } else {
+            setMessages(initialMessages.results);
+          }
+        }
+
+        if (postData) {
+          setHasNextMessage(limit < postData.messageCount);
+        }
+      } catch (error) {
+        console.error('초기 메시지 로딩 실패:', error);
+      }
+      setLoading(false);
+    };
+
+    fetchInitialMessages();
+  }, [id, postData]);
+
+  useEffect(() => {
     setLoading(true);
     const fetchMessages = async () => {
       try {
-        const limit = offset === 0 ? 5 : 6;
+        const limit = 6;
         const newMessages = await getMessages(id, offset, limit);
-        offset === 0
-          ? setMessages(newMessages.results)
-          : setMessages((prev) => [...prev, ...newMessages.results]);
+        console.log('offset', offset, 'limit', limit);
+        setAllMessages((prev) => {
+          const combined = [...prev, ...newMessages.results];
+
+          const uniqueMessages = Array.from(
+            new Map(combined.map((message) => [message.id, message])).values(),
+          );
+
+          return uniqueMessages;
+        });
+
+        if (showDelete) {
+          setMessages(allMessages);
+        } else {
+          if (
+            allMessages.length % 6 === 0 &&
+            allMessages.length !== newMessages.count
+          ) {
+            setMessages(allMessages.slice(0, allMessages.length - 1));
+          } else {
+            setMessages(allMessages);
+          }
+        }
         if (!postData) return;
         setHasNextMessage(offset < postData.messageCount);
         setLoading(false);
@@ -57,10 +121,11 @@ export default function Recipient({ showDelete }) {
     };
 
     fetchMessages();
-  }, [id, offset]);
+  }, [id, offset, showDelete]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
+      if (!userScrolled) return;
       const firstEntry = entries[0];
       if (firstEntry.isIntersecting && hasNextMessage && !loading) {
         loadMoreMessages();
@@ -70,23 +135,21 @@ export default function Recipient({ showDelete }) {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [hasNextMessage, loading]);
+  }, [userScrolled, hasNextMessage, loading, offset]);
 
   const loadMoreMessages = () => {
-    const limit = offset === 0 ? 5 : 6;
+    if (loading || !hasNextMessage) return;
+    setLoading(true);
+    const limit = 6;
     setOffset((prev) => prev + limit);
   };
 
   async function handleDeleteMessage(messageId, recipientId) {
     try {
       await deleteMessage(messageId);
-      const newOffset = offset - 1 < 0 ? 0 : offset - 1;
-
-      const updatedMessages = await getMessages(recipientId, 0, newOffset);
-      setMessages(updatedMessages.results);
-      setHasNextMessage(updatedMessages.results.length < postData.messageCount);
-
-      setOffset(0);
+      const updatedAllMessages = await getMessages(recipientId, 0, offset);
+      setAllMessages(updatedAllMessages.results);
+      setOffset((prev) => prev - 6);
     } catch (error) {
       console.error('삭제 실패:', error);
     }
