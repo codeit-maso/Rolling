@@ -68,7 +68,7 @@
 
 :global(.ql-editor) {
   font-family: 'Noto Sans', sans-serif;
-  font-size: 1.8rem;
+  @include font-18-regular;
 }
 
 :global(.ql-editor.font-나눔명조) {
