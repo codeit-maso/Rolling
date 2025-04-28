@@ -28,7 +28,11 @@
   -ms-user-select: none;
   user-select: none;
 }
-
+@media (max-width: 1200px) {
+  .section__h2 {
+    width: 100%;
+  }
+}
 @media (min-width: 768px) and (max-width: 1023px) {
   .section-listpage {
     padding: 0 24px;
@@ -36,10 +40,6 @@
   .button-listpage {
     margin-top: 156px;
     margin-bottom: 24px;
-  }
-
-  .section__h2 {
-    max-width: 100%;
   }
 }
 @media (max-width: 767px) {
@@ -50,10 +50,6 @@
   .button-listpage {
     margin-top: 66px;
     margin-bottom: 24px;
-  }
-
-  .section__h2 {
-    width: 100%;
   }
   .section--mobile-gap {
     margin-bottom: 74px;
