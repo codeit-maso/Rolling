@@ -21,6 +21,7 @@
 }
 
 .card {
+  position: relative;
   overflow: hidden; // ::after 도형 잘리게
   min-width: 275px;
   height: 260px;
@@ -41,6 +42,7 @@
   &::after {
     content: '';
     position: absolute;
+    z-index: -1;
   }
   &.purple {
     background: $purple-200;
@@ -114,7 +116,7 @@
   }
 
   &:hover {
-    transform: scale(0.96);
+    transform: scale(0.96) translateZ(0);
   }
 }
 @media (max-width: 767px) {
