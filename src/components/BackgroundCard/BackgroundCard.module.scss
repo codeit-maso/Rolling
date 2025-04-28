@@ -1,13 +1,5 @@
 @use '../../assets/styles/variables.scss' as *;
 
-.background-card__select-color--active,
-.background-card__select-image--active {
-  border: 2px solid $purple-600;
-  background-color: $white;
-  @include font-16-bold;
-  color: $purple-700;
-}
-
 .background-card__color--beige,
 .background-card__color--purple,
 .background-card__color--blue,

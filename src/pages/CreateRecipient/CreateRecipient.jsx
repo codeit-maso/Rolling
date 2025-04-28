@@ -4,7 +4,7 @@ import styles from './CreateRecipient.module.scss';
 import FormInput from '../../components/common/FormInput';
 import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
-import BackgroundCard from './BackgroundCard';
+import BackgroundCard from '../../components/BackgroundCard/BackgroundCard';
 import postRecipient from '../../api/postRecipient';
 
 const colors = ['beige', 'purple', 'blue', 'green'];
