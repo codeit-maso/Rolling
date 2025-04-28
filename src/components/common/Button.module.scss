@@ -77,11 +77,6 @@
   }
 
   @media (max-width: 767px) {
-    &--primary,
-    &--delete {
-      min-width: 320px;
-    }
-
     &--primary {
       margin-bottom: 24px;
     }
