@@ -4,7 +4,7 @@ import styles from './CreateRecipient.module.scss';
 import FormInput from '../../components/common/FormInput';
 import Button from '../../components/common/Button';
 import getBackgroundImage from '../../api/getBackgroundImage';
-import checked from '../../assets/images/checked.svg';
+import BackgroundCard from './BackgroundCard';
 import postRecipient from '../../api/postRecipient';
 
 const colors = ['beige', 'purple', 'blue', 'green'];
@@ -127,23 +127,13 @@ export default function CreateRecipient() {
         {selectedType === 'color' && (
           <ul className={styles['create-page__color-list']}>
             {colors.map((color) => (
-              <li
+              <BackgroundCard
                 key={color}
-                className={`${styles[`create-page__color--${color}`]} ${
-                  selectedColor === color
-                    ? styles['create-page__color--selected']
-                    : ''
-                }`}
+                type="color"
+                color={color}
+                isSelected={selectedColor === color}
                 onClick={() => handleColorClick(color)}
-              >
-                {selectedColor === color && (
-                  <img
-                    src={checked}
-                    alt="선택됨"
-                    className={styles['create-page__check-icon']}
-                  />
-                )}
-              </li>
+              />
             ))}
           </ul>
         )}
@@ -151,35 +141,16 @@ export default function CreateRecipient() {
         {selectedType === 'image' && (
           <ul className={styles['create-page__image-list']}>
             {data.map((url, index) => (
-              <li
+              <BackgroundCard
                 key={index}
-                className={`${styles[`create-page__image--${index + 1}`]} ${
-                  selectedImage === index
-                    ? styles['create-page__image--selected']
-                    : ''
-                }`}
+                type="image"
+                color={index + 1}
+                url={url}
+                isSelected={selectedImage === index}
                 onClick={() => handleImageClick(index)}
-              >
-                {imageLoading[index] && (
-                  <div className={styles['create-page__skeleton']} />
-                )}
-                <img
-                  src={url}
-                  alt={`배경이미지${index + 1}`}
-                  className={`
-                    ${styles['create-page__background-img']} 
-                    ${imageLoading[index] ? styles['create-page__background-img--hidden'] : ''}
-                  `}
-                  onLoad={() => handleImageLoad(index)}
-                />
-                {selectedImage === index && (
-                  <img
-                    src={checked}
-                    alt="선택됨"
-                    className={styles['create-page__check-icon']}
-                  />
-                )}
-              </li>
+                isLoading={imageLoading[index]}
+                onLoad={() => handleImageLoad(index)}
+              />
             ))}
           </ul>
         )}
