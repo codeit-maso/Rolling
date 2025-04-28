@@ -13,13 +13,6 @@ const formats = [
   'background',
 ];
 
-const fontFamilyMap = {
-  나눔명조: '"Nanum Myeongjo", serif',
-  '나눔손글씨 손편지체': '"Nanum Sonpyeonji Ce", cursive',
-  Pretendard: '"Pretendard", sans-serif',
-  'Noto Sans': '"Noto Sans", sans-serif',
-};
-
 export default function Editor({ value, onChange, font, onBlur, isError }) {
   const quillRef = useRef();
 
@@ -36,10 +29,18 @@ export default function Editor({ value, onChange, font, onBlur, isError }) {
 
   useEffect(() => {
     const editorRoot = quillRef.current?.editor?.root;
-    if (editorRoot) {
-      editorRoot.style.fontFamily =
-        fontFamilyMap[font] || '"Noto Sans", sans-serif';
-      editorRoot.style.fontSize = '18px';
+    if (!editorRoot) return;
+
+    editorRoot.classList.remove(
+      'font-나눔명조',
+      'font-나눔손글씨손편지체',
+      'font-Pretendard',
+      'font-NotoSans',
+    );
+
+    if (font) {
+      const fontClassName = `font-${font.replace(/\s/g, '')}`;
+      editorRoot.classList.add(fontClassName);
     }
   }, [font]);
 
