@@ -304,13 +304,15 @@
     }
 
     @media (max-width: 767px) {
+      right: -24px;
       width: 240px;
       min-width: auto;
       box-sizing: border-box;
     }
 
     @media (max-width: 420px) {
-      width: 220px;
+      right: -12px;
+      width: 200px;
       padding: 8px;
       top: 35px;
     }
