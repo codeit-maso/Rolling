@@ -20,6 +20,7 @@ export default function MessageForm() {
   const [message, setMessage] = useState('');
   const [font, setFont] = useState('Noto Sans');
   const [isRestored, setIsRestored] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
 
   const stripHtml = (html) => html.replace(/<[^>]+>/g, '').trim();
   const isValid = sender.trim() !== '' && stripHtml(message) !== '';
@@ -92,6 +93,8 @@ export default function MessageForm() {
   }, [sender, profileImage, relationship, message, font]);
 
   async function handleSubmit() {
+    if (isCreating) return;
+
     if (
       sender.trim() === '' ||
       sender.trim().length > 10 ||
@@ -100,6 +103,7 @@ export default function MessageForm() {
       alert('이름은 최대 10자까지, 메시지를 모두 입력해주세요.');
       return;
     }
+    setIsCreating(true);
 
     try {
       await postMessage({
@@ -117,6 +121,8 @@ export default function MessageForm() {
       navigate(`/post/${id}`);
     } catch (error) {
       console.error('메세지 전송 실패', error);
+    } finally {
+      setIsCreating(false);
     }
   }
 
@@ -155,7 +161,11 @@ export default function MessageForm() {
           <FontSelect value={font} onChange={setFont} />
         </div>
       </div>
-      <Button type="button" onClick={handleSubmit} disabled={!isValid}>
+      <Button
+        type="button"
+        onClick={handleSubmit}
+        disabled={!isValid || isCreating}
+      >
         생성하기
       </Button>
     </div>
