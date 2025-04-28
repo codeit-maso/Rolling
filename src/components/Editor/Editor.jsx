@@ -9,7 +9,6 @@ const formats = [
   'underline',
   'list',
   'link',
-  'align',
   'color',
   'background',
 ];
@@ -28,7 +27,6 @@ export default function Editor({ value, onChange, font, onBlur, isError }) {
     return {
       toolbar: [
         ['bold', 'italic', 'underline'],
-        [{ align: [] }],
         [{ color: [] }, { background: [] }],
         [{ list: 'ordered' }, { list: 'bullet' }],
         ['link'],
