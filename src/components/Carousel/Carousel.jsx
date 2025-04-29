@@ -1,24 +1,14 @@
 import { useState, useEffect } from 'react';
 import styles from './Carousel.module.scss';
 import RecipientCard from '../RecipientCard/RecipientCard';
+import useWindowWidth from '../../hooks/useWindowWidth';
 
 export default function Carousel({ recipients }) {
   const [index, setIndex] = useState(0);
-  const [offsetX, setOffsetX] = useState({}); // x좌표
-  const [startX, setstartX] = useState(0); // 클릭 시작 좌표 - 터치 스크롤
+  const [offsetX, setOffsetX] = useState({}); // 캐러셀 x좌표
+  const [startX, setstartX] = useState(0); // 터치 스크롤 시작 x좌표
   const [isBouncing, setBouncing] = useState(false); // 캐러셀 끝이면 bouncing 모션
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const isDesktop = windowWidth > 1200;
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const isDesktop = useWindowWidth() > 1200;
 
   // 캐러셀 버튼 작동과정: button onclick --> settingIndex(), setIndex --> useEffect( setOffsetX(),[index] ): x좌표 상태 업데이트: 캐러셀 이동
   useEffect(() => {
@@ -48,7 +38,7 @@ export default function Carousel({ recipients }) {
 
     if (!isNext) {
       if (index === 0) {
-        setBouncing(true); //캐러셀 끝 -> setBounce(띠용)
+        setBouncing(true);
         return;
       } else if (index > 0) {
         settingIndex('back');
