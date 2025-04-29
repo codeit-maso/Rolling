@@ -132,7 +132,7 @@ export default function Recipient({ showDelete }) {
   }
 
   function handleGoBack() {
-    navigate(-1);
+    showDelete ? navigate(`/post/${id}/`) : navigate('/list');
   }
 
   function handleEditClick(id) {
