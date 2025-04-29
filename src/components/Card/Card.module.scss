@@ -102,6 +102,15 @@
             }
           }
         }
+        @media (max-width: 1023px) {
+          &:active {
+            background-color: $error;
+            border-color: $gray-400;
+            &:hover img {
+              animation: shake 0.5s ease-in-out;
+            }
+          }
+        }
       }
     }
   }
