@@ -20,6 +20,7 @@ export default function Recipient({ showDelete }) {
   const [hasNextMessage, setHasNextMessage] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState(null);
   const observerRef = useRef();
+  const hasInitialized = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,21 +51,21 @@ export default function Recipient({ showDelete }) {
             new Map(combined.map((message) => [message.id, message])).values(),
           );
 
+          if (showDelete) {
+            setMessages(uniqueMessages);
+          } else {
+            if (
+              uniqueMessages.length % 6 === 0 &&
+              uniqueMessages.length !== newMessages.count
+            ) {
+              setMessages(uniqueMessages.slice(0, uniqueMessages.length - 1));
+            } else {
+              setMessages(uniqueMessages);
+            }
+          }
+
           return uniqueMessages;
         });
-
-        if (showDelete) {
-          setMessages(allMessages);
-        } else {
-          if (
-            allMessages.length % 6 === 0 &&
-            allMessages.length !== newMessages.count
-          ) {
-            setMessages(allMessages.slice(0, allMessages.length - 1));
-          } else {
-            setMessages(allMessages);
-          }
-        }
         if (!postData) return;
         setHasNextMessage(offset < postData.messageCount);
         setLoading(false);
@@ -82,6 +83,10 @@ export default function Recipient({ showDelete }) {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const firstEntry = entries[0];
+      if (!hasInitialized.current) {
+        hasInitialized.current = true;
+        return; // 첫 실행은 무시
+      }
       if (firstEntry.isIntersecting && hasNextMessage && !loading) {
         loadMoreMessages();
       }
@@ -96,6 +101,7 @@ export default function Recipient({ showDelete }) {
     if (loading || !hasNextMessage) return;
     setLoading(true);
     const limit = 6;
+    console.log('load');
     setOffset((prev) => prev + limit);
   };
 
