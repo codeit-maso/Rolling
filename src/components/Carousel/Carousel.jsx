@@ -8,7 +8,7 @@ export default function Carousel({ recipients }) {
   const [startX, setstartX] = useState(0); // 클릭 시작 좌표 - 터치 스크롤
   const [isBouncing, setBouncing] = useState(false); // 캐러셀 끝이면 bouncing 모션
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const isDesktop = windowWidth > 1023;
+  const isDesktop = windowWidth > 1200;
 
   useEffect(() => {
     function handleResize() {
