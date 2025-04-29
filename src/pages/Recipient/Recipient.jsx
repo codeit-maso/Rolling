@@ -50,21 +50,21 @@ export default function Recipient({ showDelete }) {
             new Map(combined.map((message) => [message.id, message])).values(),
           );
 
+          if (showDelete) {
+            setMessages(uniqueMessages);
+          } else {
+            if (
+              uniqueMessages.length % 6 === 0 &&
+              uniqueMessages.length !== newMessages.count
+            ) {
+              setMessages(uniqueMessages.slice(0, uniqueMessages.length - 1));
+            } else {
+              setMessages(uniqueMessages);
+            }
+          }
+
           return uniqueMessages;
         });
-
-        if (showDelete) {
-          setMessages(allMessages);
-        } else {
-          if (
-            allMessages.length % 6 === 0 &&
-            allMessages.length !== newMessages.count
-          ) {
-            setMessages(allMessages.slice(0, allMessages.length - 1));
-          } else {
-            setMessages(allMessages);
-          }
-        }
         if (!postData) return;
         setHasNextMessage(offset < postData.messageCount);
         setLoading(false);
@@ -82,6 +82,7 @@ export default function Recipient({ showDelete }) {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const firstEntry = entries[0];
+
       if (firstEntry.isIntersecting && hasNextMessage && !loading) {
         loadMoreMessages();
       }
@@ -126,7 +127,7 @@ export default function Recipient({ showDelete }) {
   }
 
   function handleGoBack() {
-    navigate(-1);
+    showDelete ? navigate(`/post/${id}/`) : navigate('/list');
   }
 
   function handleEditClick(id) {
