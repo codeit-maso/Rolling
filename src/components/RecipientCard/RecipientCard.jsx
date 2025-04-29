@@ -54,7 +54,9 @@ export default function RecipientCard({ Recipient }) {
       onMouseMove={handleMove}
       onTouchMove={handleMove}
     >
-      {backgroundColor === 'blue' && <div className={styles.triangle} />}
+      {!backgroundImageURL && backgroundColor === 'blue' && (
+        <div className={styles.triangle} />
+      )}
       <h3
         className={`${styles['card__h3']} ${backgroundImageURL ? styles.white : ''}`}
       >
