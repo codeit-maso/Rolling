@@ -102,13 +102,6 @@
             }
           }
         }
-        @media (max-width: 1023px) {
-          transition: none;
-          &:active {
-            background-color: $error;
-            border-color: $gray-400;
-          }
-        }
       }
     }
   }
