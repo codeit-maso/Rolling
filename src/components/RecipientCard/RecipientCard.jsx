@@ -16,10 +16,25 @@ export default function RecipientCard({ Recipient }) {
   } = Recipient;
   const navigate = useNavigate();
   const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(null);
 
   function handleCardClick() {
     if (!isDragging) {
       navigate(`/post/${id}`);
+    }
+  }
+  function handleStart(e) {
+    const x = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    setStartX(x);
+    setIsDragging(false);
+  }
+
+  function handleMove(e) {
+    if (startX === null) return;
+    const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const distance = Math.abs(x - startX);
+    if (distance >= 10) {
+      setIsDragging(true);
     }
   }
 
@@ -34,10 +49,10 @@ export default function RecipientCard({ Recipient }) {
           : {}
       }
       onClick={handleCardClick}
-      onMouseDown={() => setIsDragging(false)}
-      onTouchStart={() => setIsDragging(false)}
-      onMouseMove={() => setIsDragging(true)}
-      onTouchMove={() => setIsDragging(true)}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
+      onMouseMove={handleMove}
+      onTouchMove={handleMove}
     >
       {backgroundColor === 'blue' && <div className={styles.triangle} />}
       <h3
