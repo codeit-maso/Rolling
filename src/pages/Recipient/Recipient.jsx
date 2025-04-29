@@ -19,15 +19,8 @@ export default function Recipient({ showDelete }) {
   const [loading, setLoading] = useState(false);
   const [hasNextMessage, setHasNextMessage] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState(null);
-  const [userScrolled, setUserScrolled] = useState(false);
   const observerRef = useRef();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => setUserScrolled(true);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const fetchRecipient = async () => {
@@ -45,48 +38,11 @@ export default function Recipient({ showDelete }) {
   }, [id]);
 
   useEffect(() => {
-    const fetchInitialMessages = async () => {
-      setLoading(true);
-      try {
-        const limit = 6;
-        const initialMessages = await getMessages(id, 0, limit);
-
-        setAllMessages(initialMessages.results);
-
-        if (showDelete) {
-          setMessages(initialMessages.results);
-        } else {
-          if (initialMessages.results.length % 6 === 0) {
-            setMessages(
-              initialMessages.results.slice(
-                0,
-                initialMessages.results.length - 1,
-              ),
-            );
-          } else {
-            setMessages(initialMessages.results);
-          }
-        }
-
-        if (postData) {
-          setHasNextMessage(limit < postData.messageCount);
-        }
-      } catch (error) {
-        console.error('초기 메시지 로딩 실패:', error);
-      }
-      setLoading(false);
-    };
-
-    fetchInitialMessages();
-  }, [id, postData]);
-
-  useEffect(() => {
     setLoading(true);
     const fetchMessages = async () => {
       try {
         const limit = 6;
         const newMessages = await getMessages(id, offset, limit);
-        console.log('offset', offset, 'limit', limit);
         setAllMessages((prev) => {
           const combined = [...prev, ...newMessages.results];
 
@@ -125,7 +81,6 @@ export default function Recipient({ showDelete }) {
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (!userScrolled) return;
       const firstEntry = entries[0];
       if (firstEntry.isIntersecting && hasNextMessage && !loading) {
         loadMoreMessages();
@@ -135,7 +90,7 @@ export default function Recipient({ showDelete }) {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, [userScrolled, hasNextMessage, loading, offset]);
+  }, [hasNextMessage, loading, offset]);
 
   const loadMoreMessages = () => {
     if (loading || !hasNextMessage) return;
