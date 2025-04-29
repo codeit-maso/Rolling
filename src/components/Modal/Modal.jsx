@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import DOMPurify from 'dompurify';
 import ReactDOM from 'react-dom';
 import Badge from '../Badge/Badge';
 import Button from '../common/Button';
+import useModalClose from '../../hooks/useModalClose'; // 경로에 맞게 수정
 import styles from './Modal.module.scss';
 
 export default function Modal({
@@ -14,19 +15,27 @@ export default function Modal({
   createdAt,
   onClose,
 }) {
+  const modalRef = useRef(null);
   const [isClosing, setIsClosing] = useState(false);
   const sanitizedHTML = DOMPurify.sanitize(children);
 
-  const handleCloseModal = () => {
+  // 닫기 로직 (애니메이션 포함)
+  const handleCloseModal = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
     }, 300);
-  };
+  }, [onClose]);
+
+  // 외부 클릭 감지하여 닫기
+  useModalClose(modalRef, handleCloseModal);
 
   return ReactDOM.createPortal(
     <div className={styles.backdrop}>
-      <article className={`${styles.modal} ${isClosing ? styles.closing : ''}`}>
+      <article
+        ref={modalRef}
+        className={`${styles.modal} ${isClosing ? styles.closing : ''}`}
+      >
         <header className={styles['modal__header']}>
           <div className={styles['modal__profile-img']}>
             <img src={image} alt="프로필 이미지" />
