@@ -1,4 +1,4 @@
-import { useState, useRef, useId } from 'react';
+import { useRef, useId } from 'react';
 import useDetectClose from '../../hooks/useDetectClose';
 import styles from './FontSelect.module.scss';
 

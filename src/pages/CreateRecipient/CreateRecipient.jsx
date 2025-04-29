@@ -18,6 +18,7 @@ export default function CreateRecipient() {
   const [selectedImage, setSelectedImage] = useState(-1);
   const [imageLoading, setImageLoading] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,6 +65,15 @@ export default function CreateRecipient() {
   }
 
   async function handleButtonClick() {
+    if (isCreating) return;
+
+    if (value.trim() === '' || value.trim().length > 10) {
+      alert('이름은 공백이 아니어야 하며, 최대 10자까지 입력할 수 있습니다.');
+      return;
+    }
+
+    setIsCreating(true);
+
     try {
       const id = await postRecipient({
         team: '15-7',
@@ -74,6 +84,8 @@ export default function CreateRecipient() {
       navigate(`/post/${id}`);
     } catch (error) {
       console.error('페이지 생성 중 오류:', error.response.data);
+    } finally {
+      setIsCreating(false);
     }
   }
 
@@ -172,7 +184,7 @@ export default function CreateRecipient() {
         <Button
           type="button"
           onClick={handleButtonClick}
-          disabled={!value.trim()}
+          disabled={!value.trim() || isCreating}
         >
           생성하기
         </Button>
