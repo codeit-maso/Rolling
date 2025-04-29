@@ -1,25 +1,62 @@
 import { useState, useEffect } from 'react';
 import styles from './Carousel.module.scss';
 import RecipientCard from '../RecipientCard/RecipientCard';
-import useWindowWidth from '../../hooks/useWindowWidth';
 
 export default function Carousel({ recipients }) {
   const [index, setIndex] = useState(0);
   const [offsetX, setOffsetX] = useState({}); // 캐러셀 x좌표
   const [startX, setstartX] = useState(0); // 터치 스크롤 시작 x좌표
   const [isBouncing, setBouncing] = useState(false); // 캐러셀 끝이면 bouncing 모션
-  const isDesktop = useWindowWidth() > 1200;
+  const [deviceType, setDeviceType] = useState(getDeviceType());
+  const windowSize = getDeviceType();
+  const isDesktop = windowSize === 'desktop';
+  const isMobile = windowSize === 'mobile';
 
   // 캐러셀 버튼 작동과정: button onclick --> settingIndex(), setIndex --> useEffect( setOffsetX(),[index] ): x좌표 상태 업데이트: 캐러셀 이동
   useEffect(() => {
-    setOffsetX({
-      transform: `translateX(-${index * 295}px)`,
-    });
+    if (isMobile) {
+      setOffsetX({
+        transform: `translateX(-${index * 228}px)`,
+      });
+    } else {
+      setOffsetX({
+        transform: `translateX(-${index * 295}px)`,
+      });
+    }
   }, [index]);
 
   function settingIndex(direction) {
     setIndex((prev) => (direction === 'next' ? prev + 1 : prev - 1)); // next? next index :  back index
   }
+
+  // 화면 리사이즈 감지
+  function getDeviceType() {
+    const width = window.innerWidth;
+    if (width < 768) return 'mobile';
+    if (width <= 1200) return 'bigTablet';
+    if (width <= 1023) return 'tablet';
+    return 'desktop';
+  }
+
+  useEffect(() => {
+    function handleResize() {
+      const newType = getDeviceType();
+      const isMobile = deviceType === 'mobile';
+      const willBeMobile = newType === 'mobile';
+
+      // mobile → non-mobile 또는 non-mobile → mobile 로 변경될 때만
+      const crossedMobileBoundary = isMobile !== willBeMobile;
+      if (crossedMobileBoundary) {
+        setIndex(0);
+      }
+      if (newType !== deviceType) {
+        setDeviceType(newType);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [deviceType]);
 
   // 터치, 마우스 드래그 감지 --> 캐러셀 한 칸 이동
   function handleStart(e) {
@@ -45,12 +82,22 @@ export default function Carousel({ recipients }) {
         return;
       }
     } else if (isNext) {
-      if (index === 5) {
-        setBouncing(true);
-        return;
-      } else if (index < 5) {
-        settingIndex('next');
-        return;
+      if (isMobile) {
+        if (index === 6) {
+          setBouncing(true);
+          return;
+        } else if (index < 6) {
+          settingIndex('next');
+          return;
+        }
+      } else {
+        if (index === 5) {
+          setBouncing(true);
+          return;
+        } else if (index < 5) {
+          settingIndex('next');
+          return;
+        }
       }
     }
   }
