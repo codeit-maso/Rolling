@@ -20,7 +20,6 @@ export default function Recipient({ showDelete }) {
   const [hasNextMessage, setHasNextMessage] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState(null);
   const observerRef = useRef();
-  const hasInitialized = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,10 +82,7 @@ export default function Recipient({ showDelete }) {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const firstEntry = entries[0];
-      if (!hasInitialized.current) {
-        hasInitialized.current = true;
-        return; // 첫 실행은 무시
-      }
+
       if (firstEntry.isIntersecting && hasNextMessage && !loading) {
         loadMoreMessages();
       }
@@ -101,7 +97,6 @@ export default function Recipient({ showDelete }) {
     if (loading || !hasNextMessage) return;
     setLoading(true);
     const limit = 6;
-    console.log('load');
     setOffset((prev) => prev + limit);
   };
 
