@@ -1,7 +1,7 @@
 import './assets/styles/base.scss';
 import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import UploadProgressBar from './components/common/UploadProgressBar';
+import LoadingSpinner from './components/common/LoadingSpinner';
 import Header from './components/layout/Header/Header';
 
 const RecipientList = lazy(() => import('./pages/RecipientList/RecipientList'));
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <Suspense fallback={<UploadProgressBar progress={80} />}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/list" element={<RecipientList />} />
