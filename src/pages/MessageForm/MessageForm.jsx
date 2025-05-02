@@ -21,6 +21,7 @@ export default function MessageForm() {
   const [font, setFont] = useState('Noto Sans');
   const [isRestored, setIsRestored] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const stripHtml = (html) => html.replace(/<[^>]+>/g, '').trim();
   const isValid = sender.trim() !== '' && stripHtml(message) !== '';
@@ -144,6 +145,8 @@ export default function MessageForm() {
           <UserProfileSelector
             value={profileImage}
             onSelect={setProfileImage}
+            isUploading={isUploading}
+            setIsUploading={setIsUploading}
           />
         </div>
         <div className={styles['message-form__relationship-select']}>
@@ -165,7 +168,7 @@ export default function MessageForm() {
       <Button
         type="button"
         onClick={handleSubmit}
-        disabled={!isValid || isCreating}
+        disabled={!isValid || isCreating || isUploading}
       >
         생성하기
       </Button>

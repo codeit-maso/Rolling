@@ -144,10 +144,7 @@ export default function Recipient({ showDelete }) {
 
   const selectedCard = messages.find((card) => card.id === selectedCardId);
 
-  if (!postData || messages.length < 0)
-    return (
-      <div className={styles['loading-message']}>페이지를 불러오는 중..</div>
-    );
+  if (!postData || messages.length < 0) return;
 
   return (
     <>

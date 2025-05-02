@@ -23,6 +23,10 @@
     cursor: pointer;
   }
 
+  &__selected-wrapper {
+    position: relative;
+  }
+
   &__content {
     display: flex;
     align-items: center;
@@ -47,6 +51,12 @@
     display: flex;
     width: 100%;
     gap: 4px;
+  }
+
+  &__image--disabled {
+    pointer-events: none;
+    opacity: 0.4;
+    filter: grayscale(60%);
   }
 
   &__image {

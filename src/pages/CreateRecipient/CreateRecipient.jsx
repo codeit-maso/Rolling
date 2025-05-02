@@ -19,6 +19,8 @@ export default function CreateRecipient() {
   const [imageLoading, setImageLoading] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -175,6 +177,8 @@ export default function CreateRecipient() {
               onClick={() => handleImageClick(data.length + 1)}
               isSelected={selectedImage === data.length + 1}
               onSelect={handleUploadImage}
+              isUploading={isUploading}
+              setIsUploading={setIsUploading}
             />
           </ul>
         )}
@@ -184,7 +188,7 @@ export default function CreateRecipient() {
         <Button
           type="button"
           onClick={handleButtonClick}
-          disabled={!value.trim() || isCreating}
+          disabled={!value.trim() || isCreating || isUploading}
         >
           생성하기
         </Button>
