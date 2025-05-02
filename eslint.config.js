@@ -2,19 +2,23 @@ import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+
 import prettier from 'eslint-plugin-prettier';
 import importPlugin from 'eslint-plugin-import';
 
 const config = [
   { ignores: ['dist', 'eslint.config.js'] },
+
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
+
       globals: {
         ...globals.browser,
         ...globals.node,
       },
+
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -24,21 +28,26 @@ const config = [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+
       prettier: prettier,
       import: importPlugin,
+
     },
     rules: {
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
 
+
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
       'no-console': 'warn',
       'prefer-const': 'warn',
+
 
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+
       'react-hooks/rules-of-hooks': 'warn',
 
       'prettier/prettier': ['warn', {}, { usePrettierrc: true }],
