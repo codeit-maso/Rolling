@@ -33,7 +33,7 @@ Rolling은 소중한 사람들에게 마음을 전할 수 있는 롤링 페이�
 <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"><img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white">
 
 
-## 👥 팀원 소개 및 역할 분담
+## 👥 팀원 소개
 <table width="100%">
   <tr align="center" bgcolor="#f8f8f8">
     <th width="20%">박광민</th>
