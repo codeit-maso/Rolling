@@ -3,6 +3,7 @@ import styles from './BackgroundCard.module.scss';
 import uploadImage from '../../api/postUpload';
 import checked from '../../assets/images/checked.svg';
 import upload from '../../assets/images/upload.svg';
+import UploadProgressBar from '../common/UploadProgressBar';
 
 export default function BackgroundCard({
   type, // 'color' 또는 'image' 또는 'upload'
@@ -13,7 +14,10 @@ export default function BackgroundCard({
   isLoading,
   onLoad,
   onSelect,
+  isUploading,
+  setIsUploading,
 }) {
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUrl, setImageUrl] = useState(url);
 
   const getClassName = () => {
@@ -33,12 +37,21 @@ export default function BackgroundCard({
     const file = e.target.files[0];
     if (!file) return;
 
+    e.target.value = null;
+
+    setIsUploading(true);
+
     try {
-      const uploadedUrl = await uploadImage(file);
+      const uploadedUrl = await uploadImage(file, (percent) => {
+        setUploadProgress(percent);
+      });
       setImageUrl(uploadedUrl);
       onSelect?.(uploadedUrl);
     } catch {
       alert('이미지 업로드 실패했습니다.');
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -115,6 +128,7 @@ export default function BackgroundCard({
           className={styles['background-card__check-icon']}
         />
       )}
+      {isUploading && <UploadProgressBar progress={uploadProgress} />}
     </li>
   );
 }
