@@ -1,0 +1,27 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.bar {
+  overflow: hidden;
+  width: 60%;
+  height: 8px;
+  border-radius: 5px;
+  background-color: $gray-200;
+}
+
+.fill {
+  width: 0%;
+  height: 100%;
+  background-color: $purple-700;
+  transition: width 0.3s ease;
+}
