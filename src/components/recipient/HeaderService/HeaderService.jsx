@@ -4,6 +4,12 @@ import emojiAdd from '../../../assets/images/emoji-add.svg';
 import chevronDown from '../../../assets/images/chevron-down.svg';
 import { fetchReactions, addReaction } from '../../../api/emojiReactions';
 import ShareButton from './Share/ShareButton';
+import { formatCount } from '../../../utils/numberFormat';
+
+function getProfileExtraCount(count) {
+  if (count > 99) return '99';
+  return count;
+}
 
 export default function HeaderService({ recipient }) {
   const [reactions, setReactions] = useState([]);
@@ -164,7 +170,7 @@ export default function HeaderService({ recipient }) {
               ))}
               {recipient?.messageCount > 3 && (
                 <div className={styles['header-service__additional-count']}>
-                  +{recipient.messageCount - 3}
+                  +{getProfileExtraCount(recipient.messageCount - 3)}
                 </div>
               )}
             </div>
@@ -187,9 +193,9 @@ export default function HeaderService({ recipient }) {
                     >
                       <span className={styles['header-service__emoji']}>
                         {reaction.emoji}
-                      </span>{' '}
+                      </span>
                       <span className={styles['header-service__count']}>
-                        {reaction.count}
+                        {formatCount(reaction.count)}
                       </span>
                     </button>
                   ))
@@ -235,9 +241,9 @@ export default function HeaderService({ recipient }) {
                             >
                               <span className={styles['header-service__emoji']}>
                                 {reaction.emoji}
-                              </span>{' '}
+                              </span>
                               <span className={styles['header-service__count']}>
-                                {reaction.count}
+                                {formatCount(reaction.count)}
                               </span>
                             </button>
                           ))
