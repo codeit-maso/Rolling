@@ -1,0 +1,121 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.profile-select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 717px;
+  min-width: 320px;
+  gap: 12px;
+
+  &__title {
+    max-width: 129px;
+    margin: 0;
+    @include font-24-bold;
+    color: $gray-900;
+    white-space: nowrap;
+  }
+
+  &__selected-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+
+  &__selected-wrapper {
+    position: relative;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    width: 605px;
+    gap: 12px;
+  }
+
+  &__description {
+    width: 190px;
+    @include font-16-regular;
+    color: $gray-500;
+
+    white-space: nowrap;
+  }
+  &__image-list {
+    display: flex;
+    width: 100%;
+    gap: 4px;
+  }
+
+  &__image--disabled {
+    pointer-events: none;
+    opacity: 0.4;
+    filter: grayscale(60%);
+  }
+
+  &__image {
+    width: 56px;
+    border: 1px solid $gray-200;
+    border-radius: 100px;
+    transition: transform 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.15) translateY(-6px) translateZ(0);
+    }
+
+    &:active {
+      transform: scale(1) translateY(0) translateZ(0);
+    }
+  }
+
+  &__image--selected {
+    transform: scale(1.2) translateY(-6px) translateZ(0);
+    box-shadow: 0 0 0 2px $gray-400;
+  }
+
+  &__image--loading {
+    background: linear-gradient(270deg, $gray-200, $gray-300, $gray-400);
+    background-size: 400% 400%;
+    animation: loadingSpin 1.2s infinite linear;
+  }
+
+  @keyframes loadingSpin {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    & {
+      max-width: 320px;
+    }
+
+    &__right {
+      max-width: 208px;
+    }
+
+    &__image-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      column-gap: 2px;
+      row-gap: 4px;
+    }
+
+    &__image,
+    &__image--loading {
+      width: 40px;
+      height: 40px;
+      background-size: 400% 400%;
+    }
+  }
+}

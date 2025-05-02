@@ -1,0 +1,91 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.create-page {
+  display: flex;
+  flex-direction: column;
+  margin: 57px auto 0;
+  max-width: 720px;
+  gap: 50px;
+
+  &__background-select {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  &__text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    p {
+      @include font-16-regular;
+
+      span {
+        @include font-24-bold;
+      }
+    }
+  }
+
+  &__toggle-button {
+    button {
+      width: 122px;
+      height: 40px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      @include font-16-regular;
+      color: $gray-900;
+    }
+
+    .create-page__select-color--active,
+    .create-page__select-image--active {
+      padding: 6px 14px;
+      border: 2px solid $purple-600;
+      background-color: $white;
+      @include font-16-bold;
+      color: $purple-700;
+    }
+  }
+
+  &__color-list {
+    display: flex;
+    margin: 20px 0;
+    gap: 16px;
+  }
+
+  &__image-list {
+    display: flex;
+    margin: 20px 0;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .create-page {
+    position: relative;
+    min-height: calc(100vh - 57px - 65px);
+    &__create-button {
+      width: 100%;
+      position: absolute;
+      bottom: 24px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .create-page {
+    margin: 50px 20px 0;
+
+    &__input-section {
+      width: 100%;
+    }
+    &__color-list,
+    &__image-list {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding-bottom: calc(82px + 56px);
+    }
+  }
+}

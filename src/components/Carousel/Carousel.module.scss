@@ -1,0 +1,144 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.carousel {
+  position: relative;
+}
+.carousel__cardset-wrapper {
+  overflow: hidden;
+  width: 1200px;
+  padding: 0 20px;
+}
+.carousel__cardset {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.45s ease-in-out;
+}
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 18px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.carousel::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0px,
+    rgba(255, 255, 255, 0.8) 5px,
+    transparent
+  );
+}
+.carousel::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0px,
+    rgba(255, 255, 255, 0.8) 5px,
+    transparent
+  );
+}
+
+//캐러셀 버튼
+.carousel__direction-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 1120px;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 40px;
+  height: 40px;
+  margin-left: -40px;
+  z-index: 9999;
+  border: solid 1px $gray-300;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-image: url(../../assets/images/next.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40% 40%;
+  transform: translateY(-50%);
+
+  -webkit-filter: drop-shadow(0px 4px 8px #00000014);
+  filter: drop-shadow(0px 4px 8px #00000014);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+
+  &.back {
+    transform: scaleX(-1) translateY(-50%);
+    left: 40px;
+  }
+
+  &:active {
+    border: solid 2px $purple-200;
+  }
+}
+
+// 반응형
+@media (max-width: 1200px) {
+  //캐러셀 안밀리도록 추가함
+  .carousel__cardset-wrapper {
+    width: 100vw;
+    padding: 0 24px;
+  }
+  .carousel::before,
+  .carousel::after {
+    display: none;
+  }
+  .carousel__direction-button {
+    display: none;
+  }
+}
+
+//모바일
+@media (max-width: 767px) {
+  .carousel__cardset-wrapper {
+    padding: 0 20px;
+  }
+  h2 {
+    margin-bottom: 12px;
+  }
+  section {
+    margin-left: 40px 20px 0px 20px;
+  }
+}
+
+// 캐러셀 끝 - 바운스 애니메이션
+@-webkit-keyframes bounce-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-20px);
+  }
+  60% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes bounce-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-20px);
+  }
+  60% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.end-of-carousel {
+  -webkit-animation: bounce-horizontal 0.5s ease;
+  animation: bounce-horizontal 0.5s ease;
+}

@@ -1,9 +1,34 @@
-function App() {
+import './assets/styles/base.scss';
+import { Route, Routes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import LoadingSpinner from './components/common/LoadingSpinner';
+import Header from './components/layout/Header/Header';
+
+const RecipientList = lazy(() => import('./pages/RecipientList/RecipientList'));
+const Home = lazy(() => import('./pages/Home/Home'));
+const CreateRecipient = lazy(
+  () => import('./pages/CreateRecipient/CreateRecipient'),
+);
+const Recipient = lazy(() => import('./pages/Recipient/Recipient'));
+const MessageForm = lazy(() => import('./pages/MessageForm/MessageForm'));
+
+export default function App() {
   return (
-    <div className="app">
-      <h1>롤링 페이퍼 프로젝트</h1>
-    </div>
+    <>
+      <Header />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/list" element={<RecipientList />} />
+          <Route path="/post" element={<CreateRecipient />} />
+          <Route path="/post/:id" element={<Recipient showDelete={false} />} />
+          <Route
+            path="/post/:id/edit"
+            element={<Recipient showDelete={true} />}
+          />
+          <Route path="/post/:id/message" element={<MessageForm />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
-
-export default App;

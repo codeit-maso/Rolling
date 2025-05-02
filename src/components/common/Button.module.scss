@@ -1,0 +1,91 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.button {
+  width: 100%;
+  height: 56px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: $purple-600;
+  @include font-18-bold;
+  color: $white;
+  transition:
+    transform 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: $gray-300;
+    cursor: not-allowed;
+    filter: opacity(50%);
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $gray-300;
+      border: $gray-300;
+      transform: none;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05) translateZ(0);
+    background-color: $purple-700;
+  }
+
+  &:active {
+    transform: scale(0.97) translateZ(0);
+    background-color: $purple-800;
+  }
+
+  &:focus-visible {
+    border: 2px solid $purple-900;
+    background-color: $purple-800;
+  }
+
+  &--primary {
+    display: block;
+    max-width: 280px;
+    min-width: 320px;
+    margin: 0 auto 24px;
+  }
+
+  &--confirm {
+    width: 120px;
+    height: 40px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    @include font-16-regular;
+  }
+
+  &--delete {
+    width: inherit;
+    height: 39px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    @include font-16-regular;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    &--primary,
+    &--delete {
+      min-width: 720px;
+    }
+
+    &--primary {
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &--primary {
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &--delete {
+      width: 100%;
+      height: 55px;
+    }
+  }
+}

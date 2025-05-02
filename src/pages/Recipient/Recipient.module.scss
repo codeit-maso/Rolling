@@ -1,0 +1,143 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.loading-message {
+  @include font-20-regular;
+}
+
+.post-container {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 63px 0;
+}
+
+.with-image {
+  background-repeat: no-repeat;
+}
+
+.background--beige {
+  background-color: $beige-200;
+}
+
+.background--blue {
+  background-color: $blue-200;
+}
+
+.background--green {
+  background-color: $green-200;
+}
+
+.background--purple {
+  background-color: $purple-200;
+}
+
+.background--gray {
+  background-color: $gray-200;
+}
+
+.card-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 24px;
+}
+
+.button-container {
+  max-width: 1200px;
+  margin: 0 auto 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $black;
+  transition: transform 0.3s ease;
+  animation: color-change 2s infinite alternate;
+  @include font-18-bold;
+
+  &:hover {
+    animation:
+      shake 0.5s ease,
+      color-change 2s infinite alternate;
+  }
+}
+
+@keyframes color-change {
+  0% {
+    color: $black;
+  }
+  100% {
+    color: $white;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1248px) {
+  .card-container {
+    margin: 0 24px;
+    grid-template-columns: repeat(3, calc((100% - 48px) / 3));
+  }
+
+  .button-container {
+    margin: 0 24px 11px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .card-container {
+    grid-template-columns: repeat(2, calc((100% - 16px) / 2));
+    gap: 16px;
+    padding-bottom: 61px;
+  }
+
+  .button-container {
+    width: calc(100% - 48px);
+    display: block;
+    position: relative;
+  }
+
+  .back-button-wrapper {
+    position: static;
+    margin-bottom: 11px;
+  }
+
+  .action-button-wrapper {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 767px) {
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+    padding-bottom: 61px;
+  }
+}

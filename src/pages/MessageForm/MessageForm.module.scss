@@ -1,0 +1,24 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  margin: 40px auto 36px;
+  gap: 62px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  @media (max-width: 767px) {
+    & {
+      display: flex;
+      align-items: center;
+      max-width: 320px;
+      gap: 206px;
+    }
+  }
+}
