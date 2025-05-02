@@ -11,7 +11,9 @@ export default function RecentMessages({ messages, count }) {
           key={message.id}
         />
       ))}
-      {count > 3 ? <div className={styles.count}>+{count - 3}</div> : null}
+      {count > 3 ? (
+        <div className={styles.count}>+{count > 102 ? 99 : count - 3}</div>
+      ) : null}
     </div>
   );
 }
