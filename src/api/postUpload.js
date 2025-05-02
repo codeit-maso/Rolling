@@ -1,6 +1,6 @@
 import { api } from './api';
 
-export default async function uploadImage(file) {
+export default async function uploadImage(file, onProgress) {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', 'profile_upload');
@@ -13,6 +13,12 @@ export default async function uploadImage(file) {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (e) => {
+          if (onProgress) {
+            const percent = Math.round((e.loaded * 100) / e.total);
+            onProgress(percent);
+          }
         },
       },
     );
